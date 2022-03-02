@@ -9,6 +9,21 @@ export default NextAuth({
       clientSecret: process.env.CLIENT_PW || "",
     }),
   ],
+  callbacks: {
+    async signIn({ user, account, profile, email, credentials }) {
+      console.log(user, account, profile, email, credentials);
+      const idToken = {
+        sub: profile.sub,
+        email: profile.email,
+        name: profile.name,
+        picture: profile.picture,
+        given_name: profile.given_name,
+        iat: profile.iat,
+        exp: profile.exp,
+      };
+      return true;
+    },
+  },
   secret: process.env.JWT_SECRET,
   pages: {
     signIn: "/",
@@ -16,5 +31,4 @@ export default NextAuth({
   session: {
     strategy: "jwt",
   },
-  debug: true,
 });

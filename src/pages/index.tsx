@@ -1,8 +1,12 @@
 import type { NextPage } from "next";
+import LoginPage from "../components/LoginPage";
+import { signOut, useSession } from "next-auth/react";
 import MainPage from "../components/MainPage";
 
 const Home: NextPage = () => {
-  return <MainPage />;
+  const { data } = useSession();
+
+  return <>{data?.user?.name ? <MainPage /> : <LoginPage />}</>;
 };
 
 export default Home;
