@@ -59,10 +59,3 @@ export const AllViewLink = styled.a`
     text-decoration: underline;
   }
 `;
-
-export const Card = styled.div`
-  width: 20rem;
-  min-width: 20rem;
-  height: 15rem;
-  background: #fff;
-`;

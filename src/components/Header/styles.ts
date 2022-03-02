@@ -3,9 +3,13 @@ import styled from "@emotion/styled";
 export const Wrapper = styled.div`
   padding: 0 2rem;
   height: 4rem;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background: #1e1e1c;
+  position: fixed;
+  top: 0;
 `;
 
 export const Logo = styled.h1`

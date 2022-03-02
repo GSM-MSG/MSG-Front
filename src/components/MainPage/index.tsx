@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/link-passhref */
 import Link from "next/link";
 import Header from "../Header";
+import Card from "../Card";
 
 import * as S from "./styles";
 
@@ -19,11 +20,11 @@ export default function MainPage() {
           </Link>
         </S.Group>
         <S.Cards>
-          <S.Card></S.Card>
-          <S.Card></S.Card>
-          <S.Card></S.Card>
-          <S.Card></S.Card>
-          <S.Card></S.Card>
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
         </S.Cards>
         <S.Group>
           <S.GroupInfo>
@@ -35,11 +36,11 @@ export default function MainPage() {
           </Link>
         </S.Group>
         <S.Cards>
-          <S.Card></S.Card>
-          <S.Card></S.Card>
-          <S.Card></S.Card>
-          <S.Card></S.Card>
-          <S.Card></S.Card>
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
         </S.Cards>
         <S.Group>
           <S.GroupInfo>
@@ -51,11 +52,11 @@ export default function MainPage() {
           </Link>
         </S.Group>
         <S.Cards>
-          <S.Card></S.Card>
-          <S.Card></S.Card>
-          <S.Card></S.Card>
-          <S.Card></S.Card>
-          <S.Card></S.Card>
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
         </S.Cards>
       </S.Wrapper>
     </>
