@@ -96,11 +96,24 @@ export const Img = styled.img`
 
 export const Context = styled.div`
   height: 10rem;
+  width: 100%;
+  margin-left: 7rem;
 `;
 
 export const ContextUser = styled.div`
-  position: relative;
-  text-align: center;
+  display: flex;
+  margin-bottom: 1rem;
 `;
 
-export const ContextInfo = styled.div;
+export const ContextUserInfo = styled.div`
+  position: relative;
+`;
+
+export const ContextInfo = styled.div`
+  padding: 0 2rem;
+`;
+
+export const Info = styled.p`
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+`;
