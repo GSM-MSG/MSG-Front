@@ -26,3 +26,13 @@ export const UserImg = styled.img`
   height: 10rem;
   border-radius: 100%;
 `;
+
+export const ClubsKinds = styled.div`
+  display: flex;
+  justify-content: space-around;
+`;
+
+export const Clubs = styled.div`
+  display: flex;
+  gap: 2rem;
+`;

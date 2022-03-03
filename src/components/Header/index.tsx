@@ -16,7 +16,11 @@ export default function Header() {
         <Plus />
         <Speaker />
         <Alarm />
-        <S.UserImage src={data?.user?.image || ""} />
+        <Link href={`/user/${data?.user?.name}`}>
+          <a>
+            <S.UserImage src={data?.user?.image || ""} />
+          </a>
+        </Link>
       </S.Icons>
     </S.Wrapper>
   );
