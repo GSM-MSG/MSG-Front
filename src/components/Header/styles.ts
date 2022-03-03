@@ -12,10 +12,13 @@ export const Wrapper = styled.div`
   top: 0;
 `;
 
-export const Logo = styled.h1`
+export const Logo = styled.a`
+  font-size: 2rem;
   padding: 0;
   margin: 0;
   color: #fff;
+  cursor: pointer;
+  font-weight: bold;
 `;
 
 export const Icons = styled.div`

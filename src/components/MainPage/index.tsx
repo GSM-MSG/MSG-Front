@@ -31,7 +31,7 @@ export default function MainPage() {
             <S.GroupName>자율 동아리</S.GroupName>
             <S.GroupAllNumber>총 30개</S.GroupAllNumber>
           </S.GroupInfo>
-          <Link href="/major">
+          <Link href="/autonomous">
             <S.AllViewLink>모두 보기</S.AllViewLink>
           </Link>
         </S.Group>
@@ -47,7 +47,7 @@ export default function MainPage() {
             <S.GroupName>사설 동아리</S.GroupName>
             <S.GroupAllNumber>총 30개</S.GroupAllNumber>
           </S.GroupInfo>
-          <Link href="/major">
+          <Link href="/private">
             <S.AllViewLink>모두 보기</S.AllViewLink>
           </Link>
         </S.Group>
