@@ -26,7 +26,14 @@ export const Icons = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
-  width: 13rem;
+  width: 15rem;
+
+  svg {
+    width: 2rem;
+    height: 2rem;
+    color: #fff;
+    cursor: pointer;
+  }
 `;
 
 export const Icon = styled.div`
@@ -40,4 +47,5 @@ export const UserImage = styled.img`
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 100%;
+  cursor: pointer;
 `;

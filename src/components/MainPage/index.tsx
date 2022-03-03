@@ -20,11 +20,11 @@ export default function MainPage() {
           </Link>
         </S.Group>
         <S.Cards>
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          <Card link={`/major/라이엇`} />
+          <Card link={`/major/라이엇`} />
+          <Card link={`/major/라이엇`} />
+          <Card link={`/major/라이엇`} />
+          <Card link={`/major/라이엇`} />
         </S.Cards>
         <S.Group>
           <S.GroupInfo>
@@ -36,11 +36,11 @@ export default function MainPage() {
           </Link>
         </S.Group>
         <S.Cards>
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          <Card link={`/autonomous/라이엇`} />
+          <Card link={`/autonomous/라이엇`} />
+          <Card link={`/autonomous/라이엇`} />
+          <Card link={`/autonomous/라이엇`} />
+          <Card link={`/autonomous/라이엇`} />
         </S.Cards>
         <S.Group>
           <S.GroupInfo>
@@ -52,11 +52,11 @@ export default function MainPage() {
           </Link>
         </S.Group>
         <S.Cards>
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          <Card link={`/private/라이엇`} />
+          <Card link={`/private/라이엇`} />
+          <Card link={`/private/라이엇`} />
+          <Card link={`/private/라이엇`} />
+          <Card link={`/private/라이엇`} />
         </S.Cards>
       </S.Wrapper>
     </>

@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import LoginPage from "../components/LoginPage";
-import { signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import MainPage from "../components/MainPage";
 
 const Home: NextPage = () => {

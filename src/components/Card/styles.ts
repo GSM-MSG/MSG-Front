@@ -1,12 +1,14 @@
 import styled from "@emotion/styled";
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.a`
   width: 20rem;
   min-width: 20rem;
   height: 15rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  text-decoration: none;
+  cursor: pointer;
 `;
 
 export const Picture = styled.img`
@@ -20,7 +22,6 @@ export const Name = styled.h3`
   width: 100%;
   border-radius: 10px;
   background: #5169e8;
-  color: #fff;
   height: 17%;
   margin: 0;
   display: flex;

@@ -1,10 +1,18 @@
+/* eslint-disable @next/next/link-passhref */
+import Link from "next/link";
 import * as S from "./styles";
 
-export default function Card() {
+interface CardProps {
+  link: string;
+}
+
+export default function Card({ link }: CardProps) {
   return (
-    <S.Wrapper>
-      <S.Picture />
-      <S.Name>라이엇</S.Name>
-    </S.Wrapper>
+    <Link href={link}>
+      <S.Wrapper>
+        <S.Picture />
+        <S.Name>라이엇</S.Name>
+      </S.Wrapper>
+    </Link>
   );
 }

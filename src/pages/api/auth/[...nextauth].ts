@@ -11,7 +11,6 @@ export default NextAuth({
   ],
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
-      console.log(user, account, profile, email, credentials);
       const idToken = {
         sub: profile.sub,
         email: profile.email,
