@@ -10,6 +10,7 @@ export const Wrapper = styled.div`
   background: #1e1e1c;
   position: fixed;
   top: 0;
+  z-index: 100;
 `;
 
 export const Logo = styled.a`
@@ -48,4 +49,18 @@ export const UserImage = styled.img`
   height: 2.5rem;
   border-radius: 100%;
   cursor: pointer;
+`;
+
+export const LoginButton = styled.button`
+  border-radius: 10px;
+  border: 2px solid #5169e8;
+  background: #fff;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  gap: 1rem;
 `;

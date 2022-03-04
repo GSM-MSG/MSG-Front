@@ -22,10 +22,13 @@ export default NextAuth({
       };
       return true;
     },
+    async redirect({ baseUrl, url }) {
+      return "/";
+    },
   },
   secret: process.env.JWT_SECRET,
   pages: {
-    signIn: "/",
+    signIn: "/login",
   },
   session: {
     strategy: "jwt",
