@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
 
 export const CoverImg = styled.img`
   width: 100%;
-  max-height: 30rem;
+  height: 200px;
   object-fit: cover;
 `;
 

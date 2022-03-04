@@ -19,7 +19,11 @@ export default function Header() {
       </Link>
       {data?.user?.name ? (
         <S.Icons>
-          <Plus />
+          <Link href="/register">
+            <a>
+              <Plus />
+            </a>
+          </Link>
           <Speaker />
           <Alarm />
           <Link href={`/user/${data?.user?.name}`}>
