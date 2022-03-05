@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 export const Wrapper = styled.div`
-  margin-top: 4rem;
+  margin: 4rem 0 4rem;
 `;
 
 export const CoverImg = styled.div`
@@ -28,9 +28,16 @@ export const CoverImgInfo = styled.div`
   }
 `;
 
-export const Constents = styled.div`
+export const Contents = styled.div`
   padding: 5rem 10rem;
   display: flex;
+
+  @media (max-width: 1225px) {
+    flex-wrap: wrap;
+    gap: 5rem;
+    padding: 5rem 0;
+    justify-content: center;
+  }
 `;
 
 export const Article = styled.div`
@@ -38,9 +45,11 @@ export const Article = styled.div`
   gap: 5rem;
   display: flex;
   flex-direction: column;
-`;
 
-export const Section = styled.div``;
+  @media (max-width: 1225px) {
+    width: auto;
+  }
+`;
 
 export const NameInput = styled.input`
   border: 2px solid #fff;
@@ -99,4 +108,117 @@ export const ClubIntroduce = styled.textarea`
   border: 3px solid #fff;
   border-radius: 10px;
   height: 10rem;
+`;
+
+export const GrayBg = styled.div`
+  background: #c4c4c4;
+  width: 10rem;
+  height: 10rem;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  div {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    p {
+      margin-bottom: 0;
+      color: #00a8fe;
+    }
+  }
+`;
+
+export const Context = styled.div`
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+`;
+
+export const ContextInput = styled.input`
+  width: 5rem;
+  border: none;
+  border-bottom: 2px solid #fff;
+  outline: none;
+  background: none;
+  color: #fff;
+  font-size: 1rem;
+  font-family: inherit;
+  text-align: center;
+`;
+
+export const SelectWrapper = styled.div`
+  width: 20rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  background: #d2d2d2;
+  position: relative;
+
+  ::after {
+    content: "\\25BC";
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0 0.7rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    background: #646464;
+    border-top-right-radius: 9px;
+    border-bottom-right-radius: 9px;
+    pointer-events: none;
+  }
+`;
+
+export const SelectKind = styled.select`
+  font-size: 1rem;
+  padding: 0 1rem;
+  outline: none;
+  font-family: inherit;
+  height: 100%;
+  width: 100%;
+  background: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  border: none;
+  color: #646464;
+  cursor: pointer;
+
+  option[value="hide"] {
+    display: none;
+  }
+
+  option:not([value="hide"]) {
+    background: #d2d2d2;
+    color: #000;
+    font-weight: bold;
+    text-align: center;
+  }
+`;
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+export const SubmitButton = styled.button`
+  width: 80%;
+  max-width: 30rem;
+  padding: 0.7rem 0;
+  border: none;
+  outline: none;
+  border-radius: 1.5rem;
+  font-size: 1.3rem;
+  font-weight: bold;
+  background: #4c53ff;
+  color: #fff;
+  box-shadow: -2px 10px 10px rgba(76, 83, 255, 0.3);
+  cursor: pointer;
 `;

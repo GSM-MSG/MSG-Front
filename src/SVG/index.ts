@@ -3,3 +3,4 @@ export * from "./Speaker";
 export * from "./Alarm";
 export * from "./AddImg";
 export * from "./PlusUser";
+export * from "./ImgIcon";
