@@ -1,6 +1,6 @@
 export interface CreateClub {
   photo: string;
-  type: "editorial" | "freedom" | "major" | "";
+  type: string;
   name: string;
   description: string;
   teacher: string;

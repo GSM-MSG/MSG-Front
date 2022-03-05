@@ -3,11 +3,12 @@ import { AddImg, ImgIcon, PlusUser } from "../../SVG";
 import { ChangeEvent, useRef, useState } from "react";
 import { CreateClub } from "../../types";
 import { useSession } from "next-auth/react";
-import { getURL } from "next/dist/shared/lib/utils";
+import produce from "immer";
 
 export default function RegisterPage() {
   const { data } = useSession();
   const CoverImgRef = useRef<HTMLInputElement>(null);
+  const IntroImgRef = useRef<HTMLInputElement>(null);
   const [contects, setContects] = useState({
     contect1: "",
     contect2: "",
@@ -27,6 +28,12 @@ export default function RegisterPage() {
 
   const ChangeContect = (e: ChangeEvent<HTMLInputElement>) =>
     setContects({ ...contects, [e.target.name]: e.target.value });
+
+  const ChangeType = (e: ChangeEvent<HTMLSelectElement>) =>
+    setValue({ ...value, type: e.target.value });
+
+  const ChangeDescription = (e: ChangeEvent<HTMLTextAreaElement>) =>
+    setValue({ ...value, description: e.target.value });
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     switch (e.target.name) {
@@ -53,9 +60,29 @@ export default function RegisterPage() {
         setValue({ ...value, discord: `${discords[0]}#${e.target.value}` });
         return;
 
+      case "clubphoto":
+        if (!e.target.files || !e.target.files[0]) return;
+        const imgReader = new FileReader();
+        imgReader.onload = () => {
+          setValue(
+            produce(value, (draft) => {
+              draft.clubphoto.push(`${imgReader.result}`);
+            })
+          );
+        };
+        imgReader.readAsDataURL(e.target.files[0]);
       default:
         return;
     }
+  };
+
+  const deleteImg = (i: number) => {
+    if (!confirm("정말 지우시겠습니까?")) return;
+    setValue(
+      produce(value, (draft) => {
+        draft.clubphoto = draft.clubphoto.filter((_, index) => index !== i);
+      })
+    );
   };
 
   return (
@@ -95,8 +122,8 @@ export default function RegisterPage() {
             <h2>동아리 구성원</h2>
             <S.UserList>
               <S.User>
-                <S.UserImg />
-                <S.UserName>이름</S.UserName>
+                <S.UserImg src={data?.user?.image || ""} />
+                <S.UserName>{data?.user?.name}</S.UserName>
               </S.User>
               <S.User>
                 <S.UserImg />
@@ -112,18 +139,43 @@ export default function RegisterPage() {
           </div>
           <div>
             <h2>동아리 소개</h2>
-            <S.ClubIntroduce placeholder="동아리 소개를 입력해 주세요"></S.ClubIntroduce>
+            <S.ClubIntroduce
+              value={value.description}
+              onChange={ChangeDescription}
+              placeholder="동아리 소개를 입력해 주세요"
+            ></S.ClubIntroduce>
           </div>
         </S.Article>
         <S.Article>
           <div>
             <h2>동아리 홍보사진</h2>
-            <S.GrayBg>
-              <div>
-                <ImgIcon />
-                <p>추가하기</p>
-              </div>
-            </S.GrayBg>
+            <S.ImagesWrapper>
+              {value?.clubphoto.map((photo, i) => (
+                <S.IntroImage
+                  src={photo}
+                  onClick={() => deleteImg(i)}
+                  key={i}
+                />
+              ))}
+              {value.clubphoto.length < 6 && (
+                <>
+                  <input
+                    type="file"
+                    accept="image/gif,image/jpeg,image/png"
+                    ref={IntroImgRef}
+                    name="clubphoto"
+                    onChange={onChange}
+                    style={{ display: "none" }}
+                  />
+                  <S.GrayBg onClick={() => IntroImgRef.current?.click()}>
+                    <div>
+                      <ImgIcon />
+                      <p>추가하기</p>
+                    </div>
+                  </S.GrayBg>
+                </>
+              )}
+            </S.ImagesWrapper>
           </div>
           <div>
             <h2>연락처</h2>
@@ -161,8 +213,8 @@ export default function RegisterPage() {
           <div>
             <h2>동아리 종류</h2>
             <S.SelectWrapper>
-              <S.SelectKind>
-                <option value="hide">동아리 종류를 선택해 주세요</option>
+              <S.SelectKind value={value.type} onChange={ChangeType}>
+                <option value="">동아리 종류를 선택해 주세요</option>
                 <option value="editorial">사설 동아리</option>
                 <option value="freedom">자율 동아리</option>
                 <option value="major">전공 동아리</option>

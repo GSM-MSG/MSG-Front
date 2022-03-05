@@ -141,6 +141,18 @@ export const GrayBg = styled.div`
   }
 `;
 
+export const ImagesWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+`;
+
+export const IntroImage = styled.img`
+  width: 10rem;
+  height: 10rem;
+  border-radius: 10px;
+`;
+
 export const Contect = styled.div`
   display: flex;
   gap: 0.5rem;
@@ -199,11 +211,11 @@ export const SelectKind = styled.select`
   color: #646464;
   cursor: pointer;
 
-  option[value="hide"] {
+  option[value=""] {
     display: none;
   }
 
-  option:not([value="hide"]) {
+  option:not([value=""]) {
     background: #d2d2d2;
     color: #000;
     font-weight: bold;
