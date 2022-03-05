@@ -4,11 +4,19 @@ export const Wrapper = styled.div`
   margin: 4rem 0 4rem;
 `;
 
+export const Img = styled.img`
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  cursor: pointer;
+`;
+
 export const CoverImg = styled.div`
   position: relative;
   background: rgba(225, 225, 225, 0.8);
   height: 200px;
   width: 100%;
+  cursor: pointer;
 `;
 
 export const CoverImgInfo = styled.div`
@@ -133,13 +141,13 @@ export const GrayBg = styled.div`
   }
 `;
 
-export const Context = styled.div`
+export const Contect = styled.div`
   display: flex;
   gap: 0.5rem;
   align-items: center;
 `;
 
-export const ContextInput = styled.input`
+export const ContectInput = styled.input`
   width: 5rem;
   border: none;
   border-bottom: 2px solid #fff;

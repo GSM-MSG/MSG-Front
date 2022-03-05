@@ -94,22 +94,22 @@ export const Img = styled.img`
   border-radius: 10px;
 `;
 
-export const Context = styled.div`
+export const Contect = styled.div`
   height: 10rem;
   width: 100%;
   margin-left: 7rem;
 `;
 
-export const ContextUser = styled.div`
+export const ContectUser = styled.div`
   display: flex;
   margin-bottom: 1rem;
 `;
 
-export const ContextUserInfo = styled.div`
+export const ContectUserInfo = styled.div`
   position: relative;
 `;
 
-export const ContextInfo = styled.div`
+export const ContectInfo = styled.div`
   padding: 0 2rem;
 `;
 

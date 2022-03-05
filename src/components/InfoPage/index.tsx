@@ -57,33 +57,33 @@ export default function InfoPage({ clubName }: InfoPageProps) {
               <S.Img />
             </S.Imgs>
           </S.Promotion>
-          <S.Context>
+          <S.Contect>
             <h1>연락처</h1>
-            <S.ContextUser>
-              <S.ContextUserInfo>
+            <S.ContectUser>
+              <S.ContectUserInfo>
                 <S.UserImg src="https://bit.ly/3sD3hKh" />
                 <S.Badge>선생님</S.Badge>
                 <S.UserName>Teemo</S.UserName>
-              </S.ContextUserInfo>
-              <S.ContextInfo>
+              </S.ContectUserInfo>
+              <S.ContectInfo>
                 <S.Info>전화번호 : 010 - ****-****</S.Info>
                 <S.Info>디스코드 : 선생님#14213</S.Info>
                 <S.Info>위치 : 2학년 교무실</S.Info>
-              </S.ContextInfo>
-            </S.ContextUser>
-            <S.ContextUser>
-              <S.ContextUserInfo>
+              </S.ContectInfo>
+            </S.ContectUser>
+            <S.ContectUser>
+              <S.ContectUserInfo>
                 <S.UserImg src="https://bit.ly/3sD3hKh" />
                 <S.Badge>선생님</S.Badge>
                 <S.UserName>Teemo</S.UserName>
-              </S.ContextUserInfo>
-              <S.ContextInfo>
+              </S.ContectUserInfo>
+              <S.ContectInfo>
                 <S.Info>전화번호 : 010 - ****-****</S.Info>
                 <S.Info>디스코드 : 선생님#14213</S.Info>
                 <S.Info>위치 : 2학년 교무실</S.Info>
-              </S.ContextInfo>
-            </S.ContextUser>
-          </S.Context>
+              </S.ContectInfo>
+            </S.ContectUser>
+          </S.Contect>
         </S.Footer>
       </S.Contents>
     </S.Wrapper>
