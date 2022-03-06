@@ -4,12 +4,19 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../modules";
+import { toggle_popup } from "../../modules/popup";
 import { Alarm, Plus, Speaker } from "../../SVG";
 import Popup from "../Popup";
 
 import * as S from "./styles";
 
 export default function Header() {
+  const { popup } = useSelector((state: RootState) => ({
+    popup: state.popup,
+  }));
+  const dispatch = useDispatch();
   const { data } = useSession();
   const router = useRouter();
 
@@ -26,7 +33,9 @@ export default function Header() {
             </a>
           </Link>
           <Speaker />
-          <Alarm />
+          <span onClick={() => dispatch(toggle_popup())}>
+            <Alarm />
+          </span>
           <Link href={`/user/${data?.user?.name}`}>
             <a>
               <S.UserImage src={data?.user?.image || ""} />
@@ -39,7 +48,7 @@ export default function Header() {
           <div>Google Login</div>
         </S.LoginButton>
       )}
-      <Popup />
+      {popup && <Popup />}
     </S.Wrapper>
   );
 }
