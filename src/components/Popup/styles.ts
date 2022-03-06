@@ -11,6 +11,7 @@ export const Wrapper = styled.div`
   border-radius: 10px;
   padding: 1rem;
   box-sizing: border-box;
+  color: #000;
 
   ::after {
     border-left: 10px solid transparent;
@@ -24,7 +25,6 @@ export const Wrapper = styled.div`
 `;
 
 export const Title = styled.h2`
-  color: #000;
   text-align: center;
   margin-top: 0;
 `;
@@ -32,4 +32,33 @@ export const Title = styled.h2`
 export const Alarms = styled.div`
   display: flex;
   flex-direction: column;
+  overflow: auto;
+
+  height: 20rem;
+
+  ::-webkit-scrollbar {
+    width: 0;
+  }
+`;
+
+export const Notice = styled.div``;
+
+export const NoticeTitle = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 0 0.5rem;
+`;
+
+export const GroupName = styled.h3`
+  margin: 0;
+`;
+
+export const NoticeDate = styled.p`
+  margin: 0;
+  color: #00a8fe;
+`;
+
+export const NoticeInfo = styled.p`
+  margin: 0;
 `;
