@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Alarm, Plus, Speaker } from "../../SVG";
+import Popup from "../Popup";
 
 import * as S from "./styles";
 
@@ -38,6 +39,7 @@ export default function Header() {
           <div>Google Login</div>
         </S.LoginButton>
       )}
+      <Popup />
     </S.Wrapper>
   );
 }
