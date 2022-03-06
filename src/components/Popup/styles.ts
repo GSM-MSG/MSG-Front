@@ -33,7 +33,6 @@ export const Alarms = styled.div`
   display: flex;
   flex-direction: column;
   overflow: auto;
-
   height: 20rem;
 
   ::-webkit-scrollbar {
