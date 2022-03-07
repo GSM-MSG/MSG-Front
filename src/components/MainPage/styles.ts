@@ -24,6 +24,9 @@ export const Cards = styled.div`
   gap: 30px;
   margin-bottom: 10rem;
   overflow: auto;
+  height: 20rem;
+  align-items: center;
+
   ::-webkit-scrollbar {
     width: 0;
   }

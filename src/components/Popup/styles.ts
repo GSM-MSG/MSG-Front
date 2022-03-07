@@ -10,6 +10,7 @@ export const Wrapper = styled.div`
   right: 6.4rem;
   border-radius: 10px;
   padding: 1rem;
+  z-index: 100;
   box-sizing: border-box;
   color: #000;
 
@@ -60,4 +61,13 @@ export const NoticeDate = styled.p`
 
 export const NoticeInfo = styled.p`
   margin: 0;
+`;
+
+export const Background = styled.div`
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 90;
 `;
