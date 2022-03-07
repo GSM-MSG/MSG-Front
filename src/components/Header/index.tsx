@@ -13,19 +13,21 @@ import Popup from "../Popup";
 import * as S from "./styles";
 
 export default function Header() {
-  const { popup } = useSelector((state: RootState) => ({
+  const { popup, user } = useSelector((state: RootState) => ({
     popup: state.popup,
+    user: state.user,
   }));
   const dispatch = useDispatch();
-  const { data } = useSession();
   const router = useRouter();
+
+  console.log(user);
 
   return (
     <S.Wrapper>
       <Link href="/">
         <S.Logo>GCMS</S.Logo>
       </Link>
-      {data?.user?.name ? (
+      {user.email === "authenticated" ? (
         <S.Icons>
           <Link href="/register">
             <a>
@@ -36,9 +38,9 @@ export default function Header() {
           <span onClick={() => dispatch(toggle_popup())}>
             <Alarm />
           </span>
-          <Link href={`/user/${data?.user?.name}`}>
+          <Link href={`/user/${user?.name}`}>
             <a>
-              <S.UserImage src={data?.user?.image || ""} />
+              <S.UserImage src={user?.image || ""} />
             </a>
           </Link>
         </S.Icons>

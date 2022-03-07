@@ -1,10 +1,12 @@
 import popup from "./popup";
+import user from "./user";
 import { createWrapper } from "next-redux-wrapper";
 import { createStore, applyMiddleware, combineReducers } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 const rootReducer = combineReducers({
   popup,
+  user,
 });
 
 const configureSotre = () => {
