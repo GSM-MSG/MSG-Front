@@ -2,11 +2,9 @@ import * as S from "./styles";
 import { AddImg, ImgIcon, PlusUser } from "../../SVG";
 import { ChangeEvent, useRef, useState } from "react";
 import { CreateClub } from "../../types";
-import { useSession } from "next-auth/react";
 import produce from "immer";
 
 export default function RegisterPage() {
-  const { data } = useSession();
   const CoverImgRef = useRef<HTMLInputElement>(null);
   const IntroImgRef = useRef<HTMLInputElement>(null);
   const [contects, setContects] = useState({
@@ -16,7 +14,7 @@ export default function RegisterPage() {
   });
   const [value, setValue] = useState<CreateClub>({
     name: "",
-    clubmember: [data?.user?.name || ""],
+    clubmember: [""],
     description: "",
     clubphoto: [],
     discord: "#",
@@ -122,8 +120,8 @@ export default function RegisterPage() {
             <h2>동아리 구성원</h2>
             <S.UserList>
               <S.User>
-                <S.UserImg src={data?.user?.image || ""} />
-                <S.UserName>{data?.user?.name}</S.UserName>
+                <S.UserImg />
+                <S.UserName></S.UserName>
               </S.User>
               <S.User>
                 <S.UserImg />
