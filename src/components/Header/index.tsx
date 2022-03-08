@@ -8,8 +8,10 @@ import { RootState } from "../../modules";
 import { toggle_popup } from "../../modules/popup";
 import { Alarm, Plus, Speaker } from "../../SVG";
 import Popup from "../Popup";
+import useSwr from "swr";
 
 import * as S from "./styles";
+import fetcher from "../../lib/fetcher";
 
 export default function Header() {
   const { popup } = useSelector((state: RootState) => ({
@@ -18,32 +20,36 @@ export default function Header() {
   const dispatch = useDispatch();
   const router = useRouter();
 
+  const { data } = useSwr("/", fetcher);
+
   return (
     <S.Wrapper>
       <Link href="/">
         <S.Logo>GCMS</S.Logo>
       </Link>
-      {/* {( */}
-      <S.Icons>
-        <Link href="/register">
-          <a>
-            <Plus />
-          </a>
-        </Link>
-        <Speaker />
-        <span onClick={() => dispatch(toggle_popup())}>
-          <Alarm />
-        </span>
-        {/* <Link href={`/user/${user?.name}`}> */}
-        <a>{/* <S.UserImage src={user?.image || ""} /> */}</a>
-        {/* </Link> */}
-      </S.Icons>
-      {/* // ) : (
-      //   <S.LoginButton onClick={() => router.push("/login")}>
-      //     <Image src="/png/GoogleLogo.png" width={25} height={25} />
-      //     <div>Google Login</div>
-      //   </S.LoginButton>
-      // )} */}
+      {data && data.name ? (
+        <S.Icons>
+          <Link href="/register">
+            <a>
+              <Plus />
+            </a>
+          </Link>
+          <Speaker />
+          <span onClick={() => dispatch(toggle_popup())}>
+            <Alarm />
+          </span>
+          <Link href={`/user/${data.name}`}>
+            <a>
+              <S.UserImage src={data.picture} />
+            </a>
+          </Link>
+        </S.Icons>
+      ) : (
+        <S.LoginButton onClick={() => router.push("/login")}>
+          <Image src="/png/GoogleLogo.png" width={25} height={25} />
+          <div>Google Login</div>
+        </S.LoginButton>
+      )}
       {popup && <Popup />}
     </S.Wrapper>
   );
