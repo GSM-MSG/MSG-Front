@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/link-passhref */
 import Image from "next/image";
@@ -9,9 +10,11 @@ import { toggle_popup } from "../../modules/popup";
 import { Alarm, Plus, Speaker } from "../../SVG";
 import Popup from "../Popup";
 import useSwr from "swr";
+import fetcher from "../../lib/fetcher";
 
 import * as S from "./styles";
-import fetcher from "../../lib/fetcher";
+import { ServerUrl } from "../../config/config";
+import { useEffect } from "react";
 
 export default function Header() {
   const { popup } = useSelector((state: RootState) => ({
@@ -20,7 +23,11 @@ export default function Header() {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const { data } = useSwr("/", fetcher);
+  const { data } = useSwr(`${ServerUrl}/user`, fetcher);
+
+  useEffect(() => {
+    if (!data && router.pathname === "/register") router.push("/login");
+  }, []);
 
   return (
     <S.Wrapper>

@@ -2,7 +2,6 @@ const CREATE = "user/CREATE" as const;
 const CLEAR = "user/CLEAR" as const;
 
 interface initialStateType {
-  email?: string | null | undefined;
   image?: string | null | undefined;
   name?: string | null | undefined;
 }

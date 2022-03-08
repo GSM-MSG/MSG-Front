@@ -12,6 +12,7 @@ export default function LoginPage() {
     clientId: client_id,
     onSuccess: async (result: any) => {
       // result.tokenId
+      console.log(result);
       router.push("/");
     },
   });
