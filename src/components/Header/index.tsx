@@ -41,7 +41,6 @@ export default function Header() {
               <Plus />
             </a>
           </Link>
-          <Speaker />
           <span onClick={() => dispatch(toggle_popup())}>
             <Alarm />
           </span>

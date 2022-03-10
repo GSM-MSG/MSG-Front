@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 export const Wrapper = styled.div`
-  margin-top: 4rem;
+  margin: 4rem 0;
 `;
 
 export const CoverImg = styled.img`
@@ -116,4 +116,32 @@ export const ContectInfo = styled.div`
 export const Info = styled.p`
   font-size: 1.2rem;
   margin: 0.5rem 0;
+`;
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const Button = styled.button`
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-family: inherit;
+  border-radius: 1rem;
+  outline: none;
+  border: none;
+  color: #fff;
+  padding: 1rem 10rem;
+  transition: 0.2s;
+  ${(props: { isDeadline?: boolean }) =>
+    props.isDeadline
+      ? `background: #646464;`
+      : `box-shadow: -4px 10px 10px rgba(76, 83, 255, 0.5);
+background: #4c53ff;
+cursor: pointer;
+:hover {
+    transform: scale(1.1);
+  }
+`}
 `;

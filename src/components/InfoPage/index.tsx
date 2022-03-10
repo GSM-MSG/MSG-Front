@@ -1,10 +1,15 @@
 import * as S from "./styles";
+import useSwr from "swr";
+import fetcher from "../../lib/fetcher";
+import { ServerUrl } from "../../config/config";
 
 interface InfoPageProps {
   clubName: string;
 }
 
 export default function InfoPage({ clubName }: InfoPageProps) {
+  const { data } = useSwr(`${ServerUrl}/user`, fetcher);
+
   return (
     <S.Wrapper>
       <S.CoverImg src="https://bit.ly/3hA8mg3" />
@@ -86,6 +91,10 @@ export default function InfoPage({ clubName }: InfoPageProps) {
           </S.Contect>
         </S.Footer>
       </S.Contents>
+      <S.ButtonWrapper>
+        {/* 동아리 부장인지 조건식까지 */}
+        <S.Button>{data ? "동아리 신청 명단" : "신청하기"}</S.Button>
+      </S.ButtonWrapper>
     </S.Wrapper>
   );
 }
