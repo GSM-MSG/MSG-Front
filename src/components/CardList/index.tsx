@@ -5,7 +5,7 @@ import * as S from "./styles";
 
 interface CardListProps {
   title: string;
-  kind: "private" | "autonomous" | "major";
+  kind: "editorial" | "freedom" | "major";
 }
 
 export default function CardList({ title, kind }: CardListProps) {

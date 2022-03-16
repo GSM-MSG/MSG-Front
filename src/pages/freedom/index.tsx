@@ -5,7 +5,7 @@ export default function AutonomousList() {
   return (
     <>
       <Header />
-      <CardList kind="autonomous" title="자율 동아리" />
+      <CardList kind="freedom" title="자율 동아리" />
     </>
   );
 }

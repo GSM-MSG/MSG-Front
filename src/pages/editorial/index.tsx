@@ -5,7 +5,7 @@ export default function PrivateList() {
   return (
     <>
       <Header />
-      <CardList kind="private" title="사설 동아리" />
+      <CardList kind="editorial" title="사설 동아리" />
     </>
   );
 }
