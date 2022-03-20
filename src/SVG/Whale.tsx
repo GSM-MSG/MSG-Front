@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Whale() {
+export function Whale() {
   return (
     <svg
       width="316"

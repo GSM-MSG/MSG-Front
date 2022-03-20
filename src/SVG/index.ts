@@ -4,6 +4,6 @@ export * from "./Alarm";
 export * from "./AddImg";
 export * from "./PlusUser";
 export * from "./ImgIcon";
-export * from "./whale";
+export * from "./Whale";
 export * from "./LogoWhite";
 export * from "./LogoBlack";

@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function LogoWhite() {
+export function LogoWhite() {
   return (
     <svg
       width="145"
