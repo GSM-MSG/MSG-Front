@@ -9,18 +9,3 @@ export const Wrapper = styled.div`
 `;
 
 export const Contents = styled.div``;
-
-export const LoginButton = styled.button`
-  outline: none;
-  border: none;
-  background: #fff;
-  cursor: pointer;
-  padding: 15px 20px;
-  width: 500px;
-  font-size: 1.5rem;
-  font-family: inherit;
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
