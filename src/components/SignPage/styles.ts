@@ -13,6 +13,10 @@ export const Logo = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  @media (max-width: 790px) {
+    flex: auto;
+    display: none;
+  }
 `;
 
 export const Title = styled.h1`
@@ -28,10 +32,22 @@ export const Login = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 1350px) {
+    flex: 1.5;
+  }
+  @media (max-width: 900px) {
+    flex: 2;
+  }
+  @media (max-width: 790px) {
+    flex: auto;
+    width: 100%;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
 `;
 
 export const LoginWrapper = styled.div`
-  height: 60%;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -105,7 +121,7 @@ export const ConfirmButton = styled.button`
   background: #5169e8;
   border-top-right-radius: 1rem;
   border-bottom-right-radius: 1rem;
-  width: 8rem;
+  width: 10rem;
   height: 100%;
   cursor: pointer;
 `;
