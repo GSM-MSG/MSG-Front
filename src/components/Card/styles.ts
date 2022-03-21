@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 
 export const Wrapper = styled.a`
+  max-width: 20rem;
   width: 20rem;
-  min-width: 20rem;
   height: 15rem;
   display: flex;
   flex-direction: column;

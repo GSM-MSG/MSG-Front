@@ -4,14 +4,15 @@ export const Wrapper = styled.div`
   margin: 10rem auto 0;
   width: 1386px;
 
-  @media (max-width: 1386px) {
-    width: 1020px;
+  @media (max-width: 1400px) {
+    width: 1036px;
   }
-  @media (max-width: 1036px) {
-    width: 670px;
+  @media (max-width: 1050px) {
+    width: 690px;
   }
-  @media (max-width: 686px) {
-    width: 20rem;
+  @media (max-width: 700px) {
+    max-width: 20rem;
+    width: 100%;
   }
 `;
 
@@ -20,6 +21,11 @@ export const Tags = styled.div`
   justify-content: center;
   gap: 5rem;
   margin-bottom: 2rem;
+
+  @media (max-width: 700px) {
+    flex-direction: column;
+    gap: 1rem;
+  }
 `;
 
 export const Tag = styled.div`

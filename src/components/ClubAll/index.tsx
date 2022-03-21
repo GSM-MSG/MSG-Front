@@ -1,10 +1,10 @@
 /* eslint-disable @next/next/link-passhref */
 import Header from "../Header";
-import Card from "../Card";
 
 import * as S from "./styles";
 import { Club } from "../../types/Clubs";
 import { useRouter } from "next/router";
+import CardList from "../CardList";
 
 interface MainPageProps {
   clubs: Club[];
@@ -37,6 +37,7 @@ export default function ClubAll({ clubs, type }: MainPageProps) {
           </S.Tag>
         </S.Tags>
         <S.Hr />
+        <CardList kind={type} />
       </S.Wrapper>
     </>
   );

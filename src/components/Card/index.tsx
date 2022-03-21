@@ -8,16 +8,11 @@ interface CardProps {
   width?: number;
 }
 
-export default function Card({ link, width }: CardProps) {
+export default function Card({ link }: CardProps) {
   return (
     <motion.div whileHover={{ scale: 1.1 }}>
       <Link href={link}>
-        <S.Wrapper
-          style={{
-            width: `${width ? width : 20}rem`,
-            minWidth: `${width ? width : 20}rem`,
-          }}
-        >
+        <S.Wrapper>
           <S.Picture />
           <S.Name>라이엇</S.Name>
         </S.Wrapper>
