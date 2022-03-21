@@ -31,7 +31,7 @@ export const Login = styled.div`
 `;
 
 export const LoginWrapper = styled.div`
-  height: 55%;
+  height: 60%;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -44,6 +44,7 @@ export const LoginLogo = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `;
 
 export const LoginTitle = styled.h1`
@@ -67,7 +68,8 @@ export const InputWrapper = styled.div`
   border-radius: 1rem;
   display: flex;
   align-items: center;
-  padding: 0 1rem;
+  ${(props: { padding?: boolean }) =>
+    props.padding ? "padding: 0 0 0 1rem;" : "padding: 0 1rem;"}
   box-sizing: border-box;
   gap: 1rem;
 `;
@@ -89,6 +91,23 @@ export const Input = styled.input`
 
 export const Label = styled.div`
   color: #bdbdbd;
+`;
+
+export const ForgetPassword = styled.div`
+  width: 100%;
+  text-align: left;
+  max-width: 30rem;
+`;
+
+export const ConfirmButton = styled.button`
+  color: #fff;
+  border: none;
+  background: #5169e8;
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  width: 8rem;
+  height: 100%;
+  cursor: pointer;
 `;
 
 export const PasswordWrapper = styled.div`
@@ -117,4 +136,10 @@ export const SubmitButton = styled.button`
   border-radius: 1rem;
   background: #4c53ff;
   color: #fff;
+  cursor: pointer;
+  transition: 0.2s;
+
+  :hover {
+    transform: scale(1.05);
+  }
 `;

@@ -1,11 +1,16 @@
 import * as S from "./styles";
 import * as SVG from "../../SVG";
+import In from "./In";
+import Up from "./Up";
+import { useRouter } from "next/router";
 
 interface SignProps {
   type: "signin" | "signup";
 }
 
 export default function SignPage({ type }: SignProps) {
+  const router = useRouter();
+
   return (
     <S.Wrapper>
       <S.Logo>
@@ -18,30 +23,13 @@ export default function SignPage({ type }: SignProps) {
       </S.Logo>
       <S.Login>
         <S.LoginWrapper>
-          <S.LoginLogo>
+          <S.LoginLogo onClick={() => router.push("/login")}>
             <SVG.LogoBlack />
             <S.LoginTitle>
               {type === "signin" ? "Sign in" : "Sign up"}
             </S.LoginTitle>
           </S.LoginLogo>
-          <S.LoginForm>
-            <S.InputWrapper>
-              <S.Input placeholder="s12345" />
-              <S.Label>@gsm.hs.kr</S.Label>
-            </S.InputWrapper>
-            <S.PasswordWrapper>
-              <S.InputWrapper>
-                <S.Input type="password" placeholder="***********" />
-              </S.InputWrapper>
-              <div>
-                비밀번호를 잊으셨나요?
-                <S.FindPassword>비밀번호 찾기</S.FindPassword>
-              </div>
-            </S.PasswordWrapper>
-            <S.SubmitButton>
-              {type === "signin" ? "로그인" : "회원가입"}
-            </S.SubmitButton>
-          </S.LoginForm>
+          {type === "signin" ? <In /> : <Up />}
         </S.LoginWrapper>
       </S.Login>
     </S.Wrapper>

@@ -1,5 +1,6 @@
 import React from "react";
+import SignPage from "../../components/SignPage";
 
 export default function Signup() {
-  return <div>Signup</div>;
+  return <SignPage type="signup" />;
 }
