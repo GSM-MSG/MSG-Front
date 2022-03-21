@@ -1,0 +1,120 @@
+import styled from "@emotion/styled";
+
+export const Wrapper = styled.div`
+  display: flex;
+  height: 100vh;
+`;
+
+export const Logo = styled.div`
+  flex: 1.5;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
+
+export const Title = styled.h1`
+  font-size: 3rem;
+`;
+
+export const Login = styled.div`
+  flex: 1;
+  background-color: #fff;
+  border-top-left-radius: 3rem;
+  border-bottom-left-radius: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const LoginWrapper = styled.div`
+  height: 55%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const LoginLogo = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const LoginTitle = styled.h1`
+  color: #000;
+  text-align: center;
+  font-size: 2.5rem;
+`;
+
+export const LoginForm = styled.form`
+  width: 80%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+`;
+
+export const InputWrapper = styled.div`
+  width: 100%;
+  max-width: 30rem;
+  border: 1px solid #1e1e1c;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  box-sizing: border-box;
+  gap: 1rem;
+`;
+
+export const Input = styled.input`
+  background: none;
+  border: none;
+  width: 100%;
+  height: 3rem;
+  padding: 0.5rem 0;
+  outline: none;
+  font-size: 1rem;
+  font-family: inherit;
+
+  ::placeholder {
+    color: #bdbdbd;
+  }
+`;
+
+export const Label = styled.div`
+  color: #bdbdbd;
+`;
+
+export const PasswordWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: #000;
+`;
+
+export const FindPassword = styled.span`
+  margin-left: 0.5rem;
+  color: #00a8fe;
+  cursor: pointer;
+`;
+
+export const SubmitButton = styled.button`
+  width: 100%;
+  max-width: 30rem;
+  height: 3rem;
+  font-size: 1.5rem;
+  font-family: inherit;
+  font-weight: bold;
+  border: none;
+  border-radius: 1rem;
+  background: #4c53ff;
+  color: #fff;
+`;

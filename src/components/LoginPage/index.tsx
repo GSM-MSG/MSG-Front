@@ -19,8 +19,12 @@ export default function LoginPage() {
           </S.Title>
         </S.Logo>
         <S.Buttons>
-          <S.Signin onClick={() => router.push("/signin")}>로그인</S.Signin>
-          <S.Signup onClick={() => router.push("/signup")}>회원가입</S.Signup>
+          <S.Signin onClick={() => router.push("login/signin")}>
+            로그인
+          </S.Signin>
+          <S.Signup onClick={() => router.push("login/signup")}>
+            회원가입
+          </S.Signup>
         </S.Buttons>
       </S.Contents>
     </S.Wrapper>
