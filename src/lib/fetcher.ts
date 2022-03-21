@@ -1,6 +1,6 @@
-import axios from "axios";
+import api from "./api";
 
 export default async function fetcher(url: string) {
-  const { data } = await axios.get(url);
+  const { data } = await api.get(url);
   return data;
 }
