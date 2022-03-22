@@ -2,7 +2,6 @@
 import type { GetStaticProps, NextPage } from "next";
 import ClubAll from "../components/ClubAll";
 import { Club } from "../types/Clubs";
-import api from "../lib/api";
 import { ClubTypeStaticProps } from "../lib/ClubTypeStaticProps";
 
 export const getStaticProps = ClubTypeStaticProps("MAJOR");
