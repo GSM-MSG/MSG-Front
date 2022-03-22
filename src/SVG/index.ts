@@ -8,3 +8,4 @@ export * from "./Whale";
 export * from "./LogoWhite";
 export * from "./LogoBlack";
 export * from "./UserIcon";
+export * from "./Email";
