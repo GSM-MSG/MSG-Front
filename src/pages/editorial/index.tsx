@@ -1,4 +1,3 @@
-import CardList from "../../components/CardList";
 import ClubAll from "../../components/ClubAll";
 import Header from "../../components/Header";
 import { ClubTypeStaticProps } from "../../lib/ClubTypeStaticProps";
