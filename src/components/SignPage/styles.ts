@@ -109,22 +109,21 @@ export const Label = styled.div`
   color: #bdbdbd;
 `;
 
-export const ForgetPassword = styled.div`
-  width: 100%;
-  text-align: left;
-  max-width: 30rem;
-`;
-
 export const ConfirmButton = styled.button`
   color: #fff;
   border: none;
   background: #5169e8;
-  border-top-right-radius: 1rem;
-  border-bottom-right-radius: 1rem;
+  border-top-right-radius: 0.8rem;
+  border-bottom-right-radius: 0.8rem;
   width: 10rem;
   height: 100%;
   cursor: pointer;
   outline: none;
+  font-size: 1rem;
+  font-family: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const PasswordWrapper = styled.div`
@@ -134,12 +133,6 @@ export const PasswordWrapper = styled.div`
   align-items: center;
   gap: 0.5rem;
   color: #000;
-`;
-
-export const FindPassword = styled.span`
-  margin-left: 0.5rem;
-  color: #00a8fe;
-  cursor: pointer;
 `;
 
 export const SubmitButton = styled.button`
@@ -196,6 +189,15 @@ export const Square = styled.div`
   border-radius: 1rem;
   box-sizing: border-box;
   border: 3px solid #5169e8;
+
+  ${({ isFail }: { isFail: boolean }) =>
+    isFail ? "border: 3px solid #FF8181" : ""}
+`;
+
+export const Comment = styled.p`
+  color: #ff8181;
+  margin: 0;
+  text-align: center;
 `;
 
 export const FinishButton = styled.button`

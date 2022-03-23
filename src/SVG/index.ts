@@ -9,3 +9,4 @@ export * from "./LogoWhite";
 export * from "./LogoBlack";
 export * from "./UserIcon";
 export * from "./Email";
+export * from "./Check";

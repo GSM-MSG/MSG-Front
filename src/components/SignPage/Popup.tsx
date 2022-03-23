@@ -6,6 +6,7 @@ import api from "../../lib/api";
 
 export default function Popup() {
   const [value, setValue] = useState("");
+  const [isFail, setIsFail] = useState(false);
   const InputRef1 = useRef<HTMLInputElement>(null);
   const InputRef2 = useRef<HTMLInputElement>(null);
   const InputRef3 = useRef<HTMLInputElement>(null);
@@ -20,14 +21,6 @@ export default function Popup() {
     const r: RegExp = /[0-9]/g;
     const num = e.target.value;
 
-    console.log(num);
-
-    if (/[\b]/.test(num)) {
-      console.log("hello");
-      setValue(value.slice(0, value.length - 1));
-      return;
-    }
-
     if (!r.test(num)) return;
     setValue(value + num);
     if (pos >= 4) return;
@@ -40,6 +33,8 @@ export default function Popup() {
       await api({ query: "/auth/verify", method: "head", body: value });
     } catch (e) {
       setValue("");
+      setIsFail(true);
+      inputs[0].current?.focus();
     }
   };
 
@@ -53,16 +48,15 @@ export default function Popup() {
         </h2>
         <SVG.Email />
         <S.Squares>
-          <S.Square>
+          <S.Square isFail={isFail}>
             <S.VerifyInput
               value={value.slice(0, 1)}
               onChange={(e) => onChange(1, e)}
               maxLength={1}
-              pattern=""
               ref={InputRef1}
             />
           </S.Square>
-          <S.Square>
+          <S.Square isFail={isFail}>
             <S.VerifyInput
               value={value.slice(1, 2)}
               onChange={(e) => onChange(2, e)}
@@ -70,7 +64,7 @@ export default function Popup() {
               ref={InputRef2}
             />
           </S.Square>
-          <S.Square>
+          <S.Square isFail={isFail}>
             <S.VerifyInput
               value={value.slice(2, 3)}
               onChange={(e) => onChange(3, e)}
@@ -78,7 +72,7 @@ export default function Popup() {
               ref={InputRef3}
             />
           </S.Square>
-          <S.Square>
+          <S.Square isFail={isFail}>
             <S.VerifyInput
               value={value.slice(3, 4)}
               onChange={(e) => onChange(4, e)}
@@ -87,6 +81,7 @@ export default function Popup() {
             />
           </S.Square>
         </S.Squares>
+        {isFail && <S.Comment>인증번호를 다시 확인해 주세요!</S.Comment>}
         <S.FinishButton onClick={onSubmit}>완료</S.FinishButton>
       </S.Popup>
     </S.PopupWrapper>
