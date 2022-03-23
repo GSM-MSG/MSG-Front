@@ -3,6 +3,7 @@ import * as SVG from "../../SVG";
 import In from "./In";
 import Up from "./Up";
 import { useRouter } from "next/router";
+import Popup from "./Popup";
 
 interface SignProps {
   type: "signin" | "signup";
@@ -32,6 +33,7 @@ export default function SignPage({ type }: SignProps) {
           {type === "signin" ? <In /> : <Up />}
         </S.LoginWrapper>
       </S.Login>
+      <Popup />
     </S.Wrapper>
   );
 }

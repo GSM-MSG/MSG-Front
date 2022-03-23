@@ -159,3 +159,71 @@ export const SubmitButton = styled.button`
     transform: scale(1.05);
   }
 `;
+
+export const PopupWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+`;
+
+export const Popup = styled.div`
+  background: #1e1e1c;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 40rem;
+`;
+
+export const Squares = styled.div`
+  display: flex;
+  gap: 2rem;
+`;
+
+export const Square = styled.div`
+  width: 5rem;
+  height: 5rem;
+  border-radius: 1rem;
+  box-sizing: border-box;
+  border: 3px solid #5169e8;
+`;
+
+export const FinishButton = styled.button`
+  border-radius: 5rem;
+  height: 3rem;
+  width: 80%;
+  border: none;
+  outline: none;
+  background: #4c53ff;
+  font-size: 1.5rem;
+  font-family: inherit;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.2s;
+
+  :hover {
+    background: #3e45ff;
+  }
+`;
+
+export const VerifyInput = styled.input`
+  width: 100%;
+  height: 100%;
+  background: none;
+  font-size: 2rem;
+  border: none;
+  outline: none;
+  color: none;
+  text-align: center;
+  color: #fff;
+`;

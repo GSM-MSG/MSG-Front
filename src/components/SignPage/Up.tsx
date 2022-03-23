@@ -1,12 +1,16 @@
 import * as S from "./styles";
 
 export default function Up() {
+  const popup = () => {};
+
   return (
     <S.LoginForm>
       <S.InputWrapper padding>
         <S.Input maxLength={6} placeholder="학교 이메일을 입력하세요" />
         <S.Label>@gsm.hs.kr</S.Label>
-        <S.ConfirmButton>인증하기</S.ConfirmButton>
+        <S.ConfirmButton type="button" onClick={popup}>
+          인증하기
+        </S.ConfirmButton>
       </S.InputWrapper>
       <S.InputWrapper>
         <S.Input type="password" placeholder="비밀번호를 입력하세요" />
