@@ -124,6 +124,7 @@ export const ConfirmButton = styled.button`
   width: 10rem;
   height: 100%;
   cursor: pointer;
+  outline: none;
 `;
 
 export const PasswordWrapper = styled.div`

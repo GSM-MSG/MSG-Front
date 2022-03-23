@@ -4,6 +4,7 @@ import In from "./In";
 import Up from "./Up";
 import { useRouter } from "next/router";
 import Popup from "./Popup";
+import { useState } from "react";
 
 interface SignProps {
   type: "signin" | "signup";
@@ -11,6 +12,7 @@ interface SignProps {
 
 export default function SignPage({ type }: SignProps) {
   const router = useRouter();
+  const [isShow, setIsShow] = useState<boolean>(false);
 
   return (
     <S.Wrapper>
@@ -30,10 +32,10 @@ export default function SignPage({ type }: SignProps) {
               {type === "signin" ? "Sign in" : "Sign up"}
             </S.LoginTitle>
           </S.LoginLogo>
-          {type === "signin" ? <In /> : <Up />}
+          {type === "signin" ? <In /> : <Up setIsShow={setIsShow} />}
         </S.LoginWrapper>
       </S.Login>
-      <Popup />
+      {isShow && <Popup />}
     </S.Wrapper>
   );
 }

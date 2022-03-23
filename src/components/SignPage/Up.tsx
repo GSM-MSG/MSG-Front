@@ -1,12 +1,35 @@
+import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
+import api from "../../lib/api";
 import * as S from "./styles";
 
-export default function Up() {
-  const popup = () => {};
+interface UpProps {
+  setIsShow: Dispatch<SetStateAction<boolean>>;
+}
+
+export default function Up({ setIsShow }: UpProps) {
+  const [email, setEmail] = useState("");
+  const popup = async () => {
+    try {
+      if (!email) return;
+      await api({ query: "/auth/verify", method: "post", body: { email } });
+      setIsShow(true);
+    } catch (e) {}
+  };
+
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value.trim());
+  };
 
   return (
     <S.LoginForm>
       <S.InputWrapper padding>
-        <S.Input maxLength={6} placeholder="학교 이메일을 입력하세요" />
+        <S.Input
+          maxLength={6}
+          value={email}
+          name="email"
+          onChange={onChange}
+          placeholder="학교 이메일을 입력하세요"
+        />
         <S.Label>@gsm.hs.kr</S.Label>
         <S.ConfirmButton type="button" onClick={popup}>
           인증하기
