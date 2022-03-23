@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import { ChangeEvent, Dispatch, FormEvent, SetStateAction } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import api from "../../lib/api";
 import { RootState } from "../../modules";
@@ -6,7 +6,7 @@ import {
   change_email,
   change_password,
   change_password_confirm,
-} from "../../modules/login";
+} from "../../modules/register";
 import * as S from "./styles";
 import * as SVG from "../../SVG";
 
@@ -17,7 +17,7 @@ interface UpProps {
 export default function Up({ setIsShow }: UpProps) {
   const { email, password, passwordConfirm, confirmSuccess } = useSelector(
     (state: RootState) => ({
-      ...state.login,
+      ...state.register,
     })
   );
   const dispatch = useDispatch();
@@ -44,8 +44,22 @@ export default function Up({ setIsShow }: UpProps) {
     }
   };
 
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    try {
+      e.preventDefault();
+      if (password === passwordConfirm) return;
+      await api({
+        query: "/auth/register",
+        method: "post",
+        body: { email, password },
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   return (
-    <S.LoginForm>
+    <S.LoginForm onSubmit={onSubmit}>
       <S.InputWrapper padding>
         <S.Input
           maxLength={6}

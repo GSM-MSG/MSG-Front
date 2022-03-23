@@ -84,10 +84,13 @@ export const InputWrapper = styled.div`
   border-radius: 1rem;
   display: flex;
   align-items: center;
-  ${(props: { padding?: boolean }) =>
+  ${(props: { padding?: boolean; isFaile?: boolean }) =>
     props.padding ? "padding: 0 0 0 1rem;" : "padding: 0 1rem;"}
   box-sizing: border-box;
   gap: 1rem;
+
+  ${({ isFaile }: { isFaile?: boolean }) =>
+    isFaile ? "border: 1px solid #FF8181;" : ""}
 `;
 
 export const Input = styled.input`
@@ -198,6 +201,7 @@ export const Comment = styled.p`
   color: #ff8181;
   margin: 0;
   text-align: center;
+  width: 100%;
 `;
 
 export const FinishButton = styled.button`
