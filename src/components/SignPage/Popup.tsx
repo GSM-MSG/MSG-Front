@@ -1,17 +1,36 @@
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import {
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 import * as S from "./styles";
 import * as SVG from "../../SVG";
 import api from "../../lib/api";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../modules";
+import { confirm_success } from "../../modules/register";
 
-export default function Popup() {
+interface PopupProps {
+  setIsShow: Dispatch<SetStateAction<boolean>>;
+}
+
+export default function Popup({ setIsShow }: PopupProps) {
   const [value, setValue] = useState("");
   const [isFail, setIsFail] = useState(false);
+  const { email } = useSelector((state: RootState) => ({
+    email: state.register.email,
+  }));
   const InputRef1 = useRef<HTMLInputElement>(null);
   const InputRef2 = useRef<HTMLInputElement>(null);
   const InputRef3 = useRef<HTMLInputElement>(null);
   const InputRef4 = useRef<HTMLInputElement>(null);
   const inputs = [InputRef1, InputRef2, InputRef3, InputRef4];
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     InputRef1.current?.focus();
@@ -30,7 +49,12 @@ export default function Popup() {
   const onSubmit = async () => {
     try {
       if (value.length < 4) return;
-      await api({ query: "/auth/verify", method: "head", body: value });
+      await api({
+        query: `/auth/verify?code=${value}&email=${email}`,
+        method: "head",
+      });
+      setIsShow(false);
+      dispatch(confirm_success());
     } catch (e) {
       setValue("");
       setIsFail(true);

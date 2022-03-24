@@ -4,6 +4,8 @@ import api from "../../lib/api";
 import { RootState } from "../../modules";
 import { change_email, change_password } from "../../modules/login";
 import * as S from "./styles";
+import { LoginType } from "../../types/LoginType";
+import { useRouter } from "next/router";
 
 export default function In() {
   const [isFaile, setIsFaile] = useState(false);
@@ -11,6 +13,7 @@ export default function In() {
   const { email, password } = useSelector((state: RootState) => ({
     ...state.login,
   }));
+  const router = useRouter();
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     switch (e.target.name) {
@@ -25,11 +28,16 @@ export default function In() {
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
-      await api({
+      const { data }: LoginType = await api({
         query: "/auth/login",
         method: "post",
         body: { email, password },
+        access: true,
       });
+      localStorage.setItem("msgAccess", data.accessToken);
+      localStorage.setItem("expiredAt", data.expiredAt);
+      localStorage.setItem("msgRefresh", data.refreshToken);
+      router.push("/");
     } catch (e) {
       setIsFaile(true);
     }

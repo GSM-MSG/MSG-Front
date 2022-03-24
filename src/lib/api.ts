@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { ServerUrl } from "../config/config";
 
 interface ApiType {
@@ -13,6 +13,10 @@ interface RefreshReturnType {
   data: { accessToken: string; refreshToken: string; expiredAt: string };
 }
 
+export const remote = axios.create({
+  baseURL: ServerUrl,
+});
+
 export const api = async ({
   query,
   method,
@@ -20,10 +24,6 @@ export const api = async ({
   refresh,
   access,
 }: ApiType) => {
-  const remote = axios.create({
-    baseURL: ServerUrl,
-  });
-
   try {
     if (!access) {
       const date = new Date(localStorage.getItem("expiredAt") || "");
@@ -49,9 +49,28 @@ export const api = async ({
     if (refresh) token = localStorage.getItem("msgRefresh");
     else token = localStorage.getItem("msgAccess");
 
-    const { data } = await remote[method](query, body, {
-      headers: { Authorization: token ? `Bearer ${token}` : "" },
-    });
+    console.log(token ? "hello" : "");
+
+    let data;
+
+    switch (method) {
+      case "get":
+      case "head":
+        data = await remote[method](query, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        break;
+      case "post":
+      case "delete":
+      case "put":
+        data = await remote[method](query, body, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+    }
 
     return data;
   } catch (e: any) {

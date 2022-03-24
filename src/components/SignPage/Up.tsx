@@ -9,6 +9,7 @@ import {
 } from "../../modules/register";
 import * as S from "./styles";
 import * as SVG from "../../SVG";
+import { useRouter } from "next/router";
 
 interface UpProps {
   setIsShow: Dispatch<SetStateAction<boolean>>;
@@ -21,6 +22,7 @@ export default function Up({ setIsShow }: UpProps) {
     })
   );
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const popup = async () => {
     try {
@@ -47,12 +49,13 @@ export default function Up({ setIsShow }: UpProps) {
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
-      if (password === passwordConfirm) return;
+      if (password !== passwordConfirm) return;
       await api({
         query: "/auth/register",
         method: "post",
         body: { email, password },
       });
+      router.push("/login");
     } catch (e) {
       console.error(e);
     }
@@ -70,7 +73,7 @@ export default function Up({ setIsShow }: UpProps) {
         />
         <S.Label>@gsm.hs.kr</S.Label>
         <S.ConfirmButton
-          disabled={!confirmSuccess}
+          disabled={confirmSuccess === true}
           type="button"
           onClick={popup}
         >

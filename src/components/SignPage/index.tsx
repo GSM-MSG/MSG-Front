@@ -35,7 +35,7 @@ export default function SignPage({ type }: SignProps) {
           {type === "signin" ? <In /> : <Up setIsShow={setIsShow} />}
         </S.LoginWrapper>
       </S.Login>
-      {isShow && <Popup />}
+      {isShow && <Popup setIsShow={setIsShow} />}
     </S.Wrapper>
   );
 }
