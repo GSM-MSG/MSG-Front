@@ -1,4 +1,16 @@
 import styled from "@emotion/styled";
+import { keyframes } from "@emotion/react";
+
+const Show = keyframes`
+  0% {
+    opacity: 0;
+    scale: 0;
+  }
+  100% {
+    opacity: 1;
+    scale: 1;
+  }
+`;
 
 export const Wrapper = styled.div`
   display: flex;
@@ -45,6 +57,13 @@ export const Login = styled.div`
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
   }
+`;
+
+export const InputsWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 1rem;
 `;
 
 export const LoginWrapper = styled.div`
@@ -119,7 +138,7 @@ export const ConfirmButton = styled.button`
   border-top-right-radius: 0.8rem;
   border-bottom-right-radius: 0.8rem;
   width: 10rem;
-  height: 100%;
+  height: 3rem;
   cursor: pointer;
   outline: none;
   font-size: 1rem;
@@ -127,6 +146,11 @@ export const ConfirmButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  svg {
+    animation-name: ${Show};
+    animation-duration: 0.2s;
+  }
 `;
 
 export const PasswordWrapper = styled.div`
@@ -158,6 +182,8 @@ export const SubmitButton = styled.button`
 `;
 
 export const PopupWrapper = styled.div`
+  animation-name: ${Show};
+  animation-duration: 0.2s;
   position: absolute;
   top: 0;
   left: 0;
@@ -181,27 +207,23 @@ export const Popup = styled.div`
   height: 40rem;
 `;
 
-export const Squares = styled.div`
-  display: flex;
-  gap: 2rem;
-`;
-
-export const Square = styled.div`
-  width: 5rem;
-  height: 5rem;
-  border-radius: 1rem;
-  box-sizing: border-box;
-  border: 3px solid #5169e8;
-
-  ${({ isFail }: { isFail: boolean }) =>
-    isFail ? "border: 3px solid #FF8181" : ""}
-`;
-
-export const Comment = styled.p`
-  color: #ff8181;
-  margin: 0;
-  text-align: center;
+export const Inputs = styled.div`
   width: 100%;
+
+  input {
+    appearance: none;
+    outline: none;
+    border: none;
+    display: inline-block;
+    border-radius: 1rem;
+    margin: 0 0.5rem;
+    font-size: 3rem;
+    font-family: inherit;
+    color: #000;
+    background: none;
+    border: 3px solid #5169e8;
+    color: #fff;
+  }
 `;
 
 export const FinishButton = styled.button`

@@ -24,58 +24,52 @@ export const api = async ({
   refresh,
   access,
 }: ApiType) => {
-  try {
-    if (!access) {
-      const date = new Date(localStorage.getItem("expiredAt") || "");
-      if (date <= new Date()) {
-        const token = localStorage.getItem("msgRefresh");
-        const { data }: RefreshReturnType = await remote.post(
-          `${ServerUrl}/auth/refresh`,
-          {},
-          {
-            headers: {
-              Authorization: token ? `Bearer ${token}` : "",
-            },
-          }
-        );
-
-        localStorage.setItem("msgAccess", data.accessToken);
-        localStorage.setItem("msgRefresh", data.refreshToken);
-        localStorage.setItem("expiredAt", data.expiredAt);
-      }
-    }
-
-    let token;
-    if (refresh) token = localStorage.getItem("msgRefresh");
-    else token = localStorage.getItem("msgAccess");
-
-    console.log(token ? "hello" : "");
-
-    let data;
-
-    switch (method) {
-      case "get":
-      case "head":
-        data = await remote[method](query, {
+  if (!access) {
+    const date = new Date(localStorage.getItem("expiredAt") || "");
+    if (date <= new Date()) {
+      const token = localStorage.getItem("msgRefresh");
+      const { data }: RefreshReturnType = await remote.post(
+        `${ServerUrl}/auth/refresh`,
+        {},
+        {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: token ? `Bearer ${token}` : "",
           },
-        });
-        break;
-      case "post":
-      case "delete":
-      case "put":
-        data = await remote[method](query, body, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-    }
+        }
+      );
 
-    return data;
-  } catch (e: any) {
-    throw new Error(e);
+      localStorage.setItem("msgAccess", data.accessToken);
+      localStorage.setItem("msgRefresh", data.refreshToken);
+      localStorage.setItem("expiredAt", data.expiredAt);
+    }
   }
+
+  let token;
+  if (refresh) token = localStorage.getItem("msgRefresh");
+  else token = localStorage.getItem("msgAccess");
+
+  let data;
+
+  switch (method) {
+    case "get":
+    case "head":
+      data = await remote[method](query, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      break;
+    case "post":
+    case "delete":
+    case "put":
+      data = await remote[method](query, body, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+  }
+
+  return data;
 };
 
 export default api;

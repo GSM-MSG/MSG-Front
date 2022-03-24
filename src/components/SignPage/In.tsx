@@ -6,6 +6,7 @@ import { change_email, change_password } from "../../modules/login";
 import * as S from "./styles";
 import { LoginType } from "../../types/LoginType";
 import { useRouter } from "next/router";
+import { motion } from "framer-motion";
 
 export default function In() {
   const [isFaile, setIsFaile] = useState(false);
@@ -66,9 +67,9 @@ export default function In() {
           />
         </S.InputWrapper>
         {isFaile && (
-          <S.Comment style={{ textAlign: "left" }}>
+          <motion.div style={{ textAlign: "left", color: "#FF8181" }}>
             이메일 또는 비밀번호를 다시 확인해 주세요!
-          </S.Comment>
+          </motion.div>
         )}
       </S.PasswordWrapper>
       <S.SubmitButton>로그인</S.SubmitButton>

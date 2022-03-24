@@ -1,11 +1,4 @@
-import {
-  ChangeEvent,
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
 import * as S from "./styles";
 import * as SVG from "../../SVG";
@@ -13,6 +6,8 @@ import api from "../../lib/api";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../modules";
 import { confirm_success } from "../../modules/register";
+import OtpInput from "react-otp-input";
+import { motion } from "framer-motion";
 
 interface PopupProps {
   setIsShow: Dispatch<SetStateAction<boolean>>;
@@ -24,27 +19,8 @@ export default function Popup({ setIsShow }: PopupProps) {
   const { email } = useSelector((state: RootState) => ({
     email: state.register.email,
   }));
-  const InputRef1 = useRef<HTMLInputElement>(null);
-  const InputRef2 = useRef<HTMLInputElement>(null);
-  const InputRef3 = useRef<HTMLInputElement>(null);
-  const InputRef4 = useRef<HTMLInputElement>(null);
-  const inputs = [InputRef1, InputRef2, InputRef3, InputRef4];
 
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    InputRef1.current?.focus();
-  }, []);
-
-  const onChange = (pos: number, e: ChangeEvent<HTMLInputElement>) => {
-    const r: RegExp = /[0-9]/g;
-    const num = e.target.value;
-
-    if (!r.test(num)) return;
-    setValue(value + num);
-    if (pos >= 4) return;
-    inputs[pos].current?.focus();
-  };
 
   const onSubmit = async () => {
     try {
@@ -58,7 +34,6 @@ export default function Popup({ setIsShow }: PopupProps) {
     } catch (e) {
       setValue("");
       setIsFail(true);
-      inputs[0].current?.focus();
     }
   };
 
@@ -71,41 +46,43 @@ export default function Popup({ setIsShow }: PopupProps) {
           인증 번호를 전송했어요!
         </h2>
         <SVG.Email />
-        <S.Squares>
-          <S.Square isFail={isFail}>
-            <S.VerifyInput
-              value={value.slice(0, 1)}
-              onChange={(e) => onChange(1, e)}
-              maxLength={1}
-              ref={InputRef1}
-            />
-          </S.Square>
-          <S.Square isFail={isFail}>
-            <S.VerifyInput
-              value={value.slice(1, 2)}
-              onChange={(e) => onChange(2, e)}
-              maxLength={1}
-              ref={InputRef2}
-            />
-          </S.Square>
-          <S.Square isFail={isFail}>
-            <S.VerifyInput
-              value={value.slice(2, 3)}
-              onChange={(e) => onChange(3, e)}
-              maxLength={1}
-              ref={InputRef3}
-            />
-          </S.Square>
-          <S.Square isFail={isFail}>
-            <S.VerifyInput
-              value={value.slice(3, 4)}
-              onChange={(e) => onChange(4, e)}
-              maxLength={1}
-              ref={InputRef4}
-            />
-          </S.Square>
-        </S.Squares>
-        {isFail && <S.Comment>인증번호를 다시 확인해 주세요!</S.Comment>}
+        <S.Inputs>
+          <OtpInput
+            isInputNum
+            inputStyle={{
+              width: "5rem",
+              height: "5rem",
+            }}
+            onChange={(value: string) => setValue(value)}
+            value={value}
+            hasErrored={isFail}
+          />
+        </S.Inputs>
+
+        <motion.div
+          style={{
+            color: "#FF8181",
+            display: isFail ? "block" : "none",
+          }}
+          whileInView={{
+            position: "relative",
+            rotate: [0, 5, -5, 0],
+            scale: [1, 1.4, 1.2, 1],
+            transition: {
+              duration: 0.2,
+            },
+          }}
+          whileHover={{
+            position: "relative",
+            rotate: [0, 5, -5, 0],
+            scale: [1, 1.4, 1.2, 1],
+            transition: {
+              duration: 0.2,
+            },
+          }}
+        >
+          인증번호를 다시 확인해 주세요!
+        </motion.div>
         <S.FinishButton onClick={onSubmit}>완료</S.FinishButton>
       </S.Popup>
     </S.PopupWrapper>
