@@ -41,6 +41,7 @@ export default function In() {
       router.push("/");
     } catch (e) {
       setIsFaile(true);
+      dispatch(change_password(""));
     }
   };
 
@@ -67,7 +68,17 @@ export default function In() {
           />
         </S.InputWrapper>
         {isFaile && (
-          <motion.div style={{ textAlign: "left", color: "#FF8181" }}>
+          <motion.div
+            style={{ textAlign: "left", color: "#FF8181" }}
+            whileInView={{
+              position: "relative",
+              rotate: [0, -5, 5, 0],
+              scale: [1, 1.1, 1],
+              transition: {
+                duration: 0.2,
+              },
+            }}
+          >
             이메일 또는 비밀번호를 다시 확인해 주세요!
           </motion.div>
         )}

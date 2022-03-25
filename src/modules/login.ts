@@ -2,7 +2,6 @@ import produce from "immer";
 
 const CHANGE_EMAIL = "login/CHANGE_EMAIL" as const;
 const CHANGE_PASSWORD = "login/CHANGE_PASSWORD" as const;
-const CONFIRM_SUCCESS = "login/CONFIRM_SUCCESS" as const;
 
 export const change_email = (email: string) => ({
   type: CHANGE_EMAIL,
@@ -14,13 +13,7 @@ export const change_password = (value: string) => ({
   value,
 });
 
-export const confirm_success = () => ({
-  type: CONFIRM_SUCCESS,
-});
-
-type ActionType = ReturnType<
-  typeof change_email | typeof change_password | typeof confirm_success
->;
+type ActionType = ReturnType<typeof change_email | typeof change_password>;
 
 interface initialStateType {
   email: string;
@@ -46,10 +39,6 @@ export default function register(
     case CHANGE_PASSWORD:
       return produce(state, (draft) => {
         draft.password = action.value;
-      });
-    case CONFIRM_SUCCESS:
-      return produce(state, (draft) => {
-        draft.confirmSuccess = !draft.confirmSuccess;
       });
     default:
       return state;

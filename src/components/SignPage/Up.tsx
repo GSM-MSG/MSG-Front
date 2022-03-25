@@ -33,6 +33,9 @@ export default function Up({ setIsShow }: UpProps) {
   const [error, setError] = useState("");
 
   const popup = async () => {
+    setTimeout(() => {
+      setIsShow(false);
+    }, 1000 * 60 * 5);
     try {
       if (!email) return;
       await api({ query: "/auth/verify", method: "post", body: { email } });
@@ -59,7 +62,12 @@ export default function Up({ setIsShow }: UpProps) {
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
-      if (password !== passwordConfirm) {
+      if (!confirmSuccess) {
+        setError("이메일 인증을 먼저 해주세요");
+        return;
+      } else if (password.length < 8 || passwordConfirm.length < 8) {
+        setError("비밀번호는 8글자 이상입니다.");
+      } else if (password !== passwordConfirm) {
         setError("비밀번호가 서로 다릅니다.");
         return;
       } else if (!password || !passwordConfirm) {
