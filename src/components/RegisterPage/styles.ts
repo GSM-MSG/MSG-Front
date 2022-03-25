@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
 
 export const Img = styled.img`
   width: 100%;
-  height: 200px;
+  height: 400px;
   object-fit: cover;
   cursor: pointer;
 `;
@@ -14,7 +14,7 @@ export const Img = styled.img`
 export const CoverImg = styled.div`
   position: relative;
   background: rgba(225, 225, 225, 0.8);
-  height: 200px;
+  height: 400px;
   width: 100%;
   cursor: pointer;
 `;
@@ -43,7 +43,7 @@ export const Contents = styled.div`
   @media (max-width: 1225px) {
     flex-wrap: wrap;
     gap: 5rem;
-    padding: 5rem 0;
+    padding: 5rem 2rem;
     justify-content: center;
   }
 `;
@@ -57,6 +57,12 @@ export const Article = styled.div`
   @media (max-width: 1225px) {
     width: auto;
   }
+`;
+
+export const Optional = styled.span`
+  color: #646464;
+  margin: 0;
+  font-size: 1rem;
 `;
 
 export const NameInput = styled.input`
@@ -153,79 +159,98 @@ export const IntroImage = styled.img`
   border-radius: 10px;
 `;
 
-export const Contect = styled.div`
+export const ContactKind = styled.div`
   display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+`;
+
+export const Contact = styled.div`
+  display: flex;
+  justify-content: right;
   gap: 0.5rem;
   align-items: center;
 `;
 
-export const ContectInput = styled.input`
-  width: 5rem;
+export const ContactInput = styled.input`
+  width: 15rem;
   border: none;
   border-bottom: 2px solid #fff;
   outline: none;
   background: none;
   color: #fff;
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-family: inherit;
   text-align: center;
 `;
 
-export const SelectWrapper = styled.div`
-  width: 20rem;
-  height: 2.5rem;
-  display: flex;
-  align-items: center;
-  border-radius: 10px;
-  background: #d2d2d2;
-  position: relative;
+export const Kind = styled.div``;
 
-  ::after {
-    content: "\\25BC";
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 0 0.7rem;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    background: #646464;
-    border-top-right-radius: 9px;
-    border-bottom-right-radius: 9px;
-    pointer-events: none;
-  }
+interface KindOptionI {
+  active?: boolean;
+  right?: boolean;
+  left?: boolean;
+}
+
+export const KindOption = styled.button`
+  outline: none;
+  border: none;
+  padding: 0.8rem 2rem;
+  cursor: pointer;
+  background: #a3a3a3;
+  color: #8c8a8a;
+  font-size: 1.2rem;
+  font-family: inherit;
+  font-weight: bold;
+
+  ${({ active }: KindOptionI) =>
+    active && "background: #f4f4f4; color: #1c1c1e;"}
+
+  ${({ right }: KindOptionI) =>
+    right &&
+    "border-top-right-radius: 0.5rem; border-bottom-right-radius: 0.5rem;"}
+  ${({ left }: KindOptionI) =>
+    left &&
+    "border-top-left-radius: 0.5rem; border-bottom-left-radius: 0.5rem;"}
 `;
 
-export const SelectKind = styled.select`
-  font-size: 1rem;
-  padding: 0 1rem;
-  outline: none;
-  font-family: inherit;
-  height: 100%;
-  width: 100%;
-  background: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  border: none;
-  color: #646464;
-  cursor: pointer;
-
-  option[value=""] {
-    display: none;
-  }
-
-  option:not([value=""]) {
-    background: #d2d2d2;
-    color: #000;
-    font-weight: bold;
-    text-align: center;
-  }
+export const PromotionLink = styled.form`
+  display: flex;
+  gap: 2rem;
 `;
 
 export const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
+`;
+
+export const LinkNameInput = styled.input`
+  width: 11rem;
+  border-radius: 0.7rem;
+  padding: 1rem;
+  outline: none;
+  border: none;
+  font-size: 1rem;
+  font-family: inherit;
+
+  ::placeholder {
+    color: #bdbdbd;
+  }
+`;
+
+export const LinkInput = styled.input`
+  width: 20rem;
+  border-radius: 0.7rem;
+  padding: 1rem;
+  outline: none;
+  border: none;
+  font-size: 1rem;
+  font-family: inherit;
+
+  ::placeholder {
+    color: #bdbdbd;
+  }
 `;
 
 export const SubmitButton = styled.button`

@@ -121,10 +121,6 @@ export default function RegisterPage() {
             <S.UserList>
               <S.User>
                 <S.UserImg />
-                <S.UserName></S.UserName>
-              </S.User>
-              <S.User>
-                <S.UserImg />
                 <S.UserName>이름</S.UserName>
               </S.User>
               <S.User>
@@ -146,7 +142,9 @@ export default function RegisterPage() {
         </S.Article>
         <S.Article>
           <div>
-            <h2>동아리 홍보사진</h2>
+            <h2>
+              동아리 홍보사진 <S.Optional>(선택)</S.Optional>
+            </h2>
             <S.ImagesWrapper>
               {value?.clubphoto.map((photo, i) => (
                 <S.IntroImage
@@ -175,49 +173,42 @@ export default function RegisterPage() {
               )}
             </S.ImagesWrapper>
           </div>
+          <S.ContactKind>
+            <div>
+              <h2>연락처</h2>
+              <S.Contact>
+                <h3>선생님</h3>
+                <S.Optional>(선택)</S.Optional>
+                <S.ContactInput />
+              </S.Contact>
+              <S.Contact>
+                <h3>부장</h3>
+                <S.ContactInput />
+              </S.Contact>
+            </div>
+            <S.Kind>
+              <h2>동아리 종류</h2>
+              <div>
+                <S.KindOption name="MAJOR" left active>
+                  전공
+                </S.KindOption>
+                <S.KindOption name="FREEDOM">자율</S.KindOption>
+                <S.KindOption name="EDITORIAL" right>
+                  사설
+                </S.KindOption>
+              </div>
+            </S.Kind>
+          </S.ContactKind>
           <div>
-            <h2>연락처</h2>
-            <h3>부장</h3>
-            <S.Contect>
-              <p>전화번호</p>
-              <S.ContectInput
-                name="contect1"
-                onChange={ChangeContect}
-                value={contects.contect1}
-                maxLength={3}
-              />
-              <span>-</span>
-              <S.ContectInput
-                name="contect2"
-                onChange={ChangeContect}
-                value={contects.contect2}
-                maxLength={4}
-              />
-              <span>-</span>
-              <S.ContectInput
-                name="contect3"
-                onChange={ChangeContect}
-                value={contects.contect3}
-                maxLength={4}
-              />
-            </S.Contect>
-            <S.Contect>
-              <p>디스코드</p>
-              <S.ContectInput name="discordName" />
-              <span>#</span>
-              <S.ContectInput name="discordNumber" maxLength={4} />
-            </S.Contect>
-          </div>
-          <div>
-            <h2>동아리 종류</h2>
-            <S.SelectWrapper>
-              <S.SelectKind value={value.type} onChange={ChangeType}>
-                <option value="">동아리 종류를 선택해 주세요</option>
-                <option value="editorial">사설 동아리</option>
-                <option value="freedom">자율 동아리</option>
-                <option value="major">전공 동아리</option>
-              </S.SelectKind>
-            </S.SelectWrapper>
+            <h2>
+              홍보 링크 <S.Optional>(선택)</S.Optional>
+            </h2>
+            <div>
+              <S.PromotionLink>
+                <S.LinkNameInput placeholder="제목을 입력하세요" />
+                <S.LinkInput placeholder="link를 입력해주세요" />
+              </S.PromotionLink>
+            </div>
           </div>
         </S.Article>
       </S.Contents>
