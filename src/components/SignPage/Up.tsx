@@ -12,7 +12,7 @@ import {
   change_email,
   change_password,
   change_password_confirm,
-} from "../../modules/register";
+} from "../../modules/signup";
 import * as S from "./styles";
 import * as SVG from "../../SVG";
 import { useRouter } from "next/router";
@@ -25,7 +25,7 @@ interface UpProps {
 export default function Up({ setIsShow }: UpProps) {
   const { email, password, passwordConfirm, confirmSuccess } = useSelector(
     (state: RootState) => ({
-      ...state.register,
+      ...state.signup,
     })
   );
   const dispatch = useDispatch();

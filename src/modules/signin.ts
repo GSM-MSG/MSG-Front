@@ -1,7 +1,7 @@
 import produce from "immer";
 
-const CHANGE_EMAIL = "login/CHANGE_EMAIL" as const;
-const CHANGE_PASSWORD = "login/CHANGE_PASSWORD" as const;
+const CHANGE_EMAIL = "signin/CHANGE_EMAIL" as const;
+const CHANGE_PASSWORD = "signin/CHANGE_PASSWORD" as const;
 
 export const change_email = (email: string) => ({
   type: CHANGE_EMAIL,
@@ -18,16 +18,14 @@ type ActionType = ReturnType<typeof change_email | typeof change_password>;
 interface initialStateType {
   email: string;
   password: string;
-  confirmSuccess: boolean | null;
 }
 
 const initialState: initialStateType = {
   email: "",
   password: "",
-  confirmSuccess: null,
 };
 
-export default function register(
+export default function signin(
   state = initialState,
   action: ActionType
 ): initialStateType {

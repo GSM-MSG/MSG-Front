@@ -1,9 +1,9 @@
 import produce from "immer";
 
-const CHANGE_EMAIL = "register/CHANGE_EMAIL" as const;
-const CHANGE_PASSWORD = "register/CHANGE_PASSWORD" as const;
-const CHANGE_PASSWORD_CONFIRM = "register/CHANGE_PASSWORD_CONFIRM" as const;
-const CONFIRM_SUCCESS = "register/CONFIRM_SUCCESS" as const;
+const CHANGE_EMAIL = "signup/CHANGE_EMAIL" as const;
+const CHANGE_PASSWORD = "signup/CHANGE_PASSWORD" as const;
+const CHANGE_PASSWORD_CONFIRM = "signup/CHANGE_PASSWORD_CONFIRM" as const;
+const CONFIRM_SUCCESS = "signup/CONFIRM_SUCCESS" as const;
 
 export const change_email = (email: string) => ({
   type: CHANGE_EMAIL,
@@ -45,7 +45,7 @@ const initialState: initialStateType = {
   confirmSuccess: null,
 };
 
-export default function register(
+export default function signup(
   state = initialState,
   action: ActionType
 ): initialStateType {

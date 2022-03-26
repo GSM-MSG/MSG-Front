@@ -2,7 +2,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import api from "../../lib/api";
 import { RootState } from "../../modules";
-import { change_email, change_password } from "../../modules/login";
+import { change_email, change_password } from "../../modules/signin";
 import * as S from "./styles";
 import { LoginType } from "../../types/LoginType";
 import { useRouter } from "next/router";
@@ -12,7 +12,7 @@ export default function In() {
   const [isFaile, setIsFaile] = useState(false);
   const dispatch = useDispatch();
   const { email, password } = useSelector((state: RootState) => ({
-    ...state.login,
+    ...state.signin,
   }));
   const router = useRouter();
 

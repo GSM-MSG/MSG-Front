@@ -1,13 +1,13 @@
 import { Dispatch, SetStateAction, useState } from "react";
-
-import * as S from "./styles";
-import * as SVG from "../../SVG";
 import api from "../../lib/api";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../modules";
-import { confirm_success } from "../../modules/register";
+import { confirm_success } from "../../modules/signup";
 import OtpInput from "react-otp-input";
 import { motion } from "framer-motion";
+
+import * as S from "./styles";
+import * as SVG from "../../SVG";
 
 interface PopupProps {
   setIsShow: Dispatch<SetStateAction<boolean>>;
@@ -17,7 +17,7 @@ export default function Popup({ setIsShow }: PopupProps) {
   const [value, setValue] = useState("");
   const [isFail, setIsFail] = useState(false);
   const { email } = useSelector((state: RootState) => ({
-    email: state.register.email,
+    email: state.signup.email,
   }));
 
   const dispatch = useDispatch();
