@@ -305,7 +305,10 @@ export const Popup = styled.div`
   border-radius: 1rem;
   animation-name: ${BackgroundAnimation};
   animation-duration: 0.2s;
-  padding: 1rem;
+  padding: 1rem 0 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const PopupTitle = styled.h2`
@@ -313,7 +316,7 @@ export const PopupTitle = styled.h2`
 `;
 
 export const SearchBar = styled.form`
-  width: 100%;
+  width: 90%;
   height: 3rem;
   border: 1px solid #fff;
   border-radius: 1rem;
@@ -332,4 +335,60 @@ export const SearchInput = styled.input`
   color: #fff;
   font-size: 1.1rem;
   font-family: inherit;
+`;
+
+export const Users = styled.div`
+  flex: 1;
+  padding: 0.5rem 0;
+  width: 100%;
+`;
+
+export const PopupUser = styled.div`
+  display: flex;
+  padding: 1rem;
+  align-items: center;
+  gap: 2rem;
+`;
+
+export const AddUserImg = styled.img`
+  width: 5rem;
+  height: 5rem;
+  border-radius: 100%;
+`;
+
+export const UserInfo = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+  align-items: center;
+
+  h3 {
+    margin: 0;
+  }
+`;
+
+export const CheckBox = styled.input`
+  width: 1.2rem;
+  height: 1.2rem;
+  cursor: pointer;
+`;
+
+export const PopupButton = styled.button`
+  width: 100%;
+  background: #4c54ff;
+  color: #fff;
+  border: none;
+  outline: none;
+  height: 3rem;
+  font-size: 1.3rem;
+  font-family: inherit;
+  font-weight: bold;
+  cursor: pointer;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  transition: 0.2s;
+
+  :hover {
+    background: #434cfa;
+  }
 `;
