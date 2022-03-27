@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { KindOptionI } from "../../types";
 
 export const Wrapper = styled.div`
   margin: 4rem 0 4rem;
@@ -39,6 +40,7 @@ export const CoverImgInfo = styled.div`
 export const Contents = styled.div`
   padding: 5rem 10rem;
   display: flex;
+  gap: 2rem;
 
   @media (max-width: 1225px) {
     flex-wrap: wrap;
@@ -147,6 +149,14 @@ export const GrayBg = styled.div`
   }
 `;
 
+export const ImageKind = styled.div`
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+`;
+
 export const ImagesWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -158,40 +168,6 @@ export const IntroImage = styled.img`
   height: 10rem;
   border-radius: 10px;
 `;
-
-export const ContactKind = styled.div`
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 1rem;
-`;
-
-export const Contact = styled.div`
-  display: flex;
-  justify-content: right;
-  gap: 0.5rem;
-  align-items: center;
-`;
-
-export const ContactInput = styled.input`
-  width: 15rem;
-  border: none;
-  border-bottom: 2px solid #fff;
-  outline: none;
-  background: none;
-  color: #fff;
-  font-size: 1.2rem;
-  font-family: inherit;
-  text-align: center;
-`;
-
-export const Kind = styled.div``;
-
-interface KindOptionI {
-  active?: boolean;
-  right?: boolean;
-  left?: boolean;
-}
 
 export const KindOption = styled.button`
   outline: none;
@@ -213,6 +189,24 @@ export const KindOption = styled.button`
   ${({ left }: KindOptionI) =>
     left &&
     "border-top-left-radius: 0.5rem; border-bottom-left-radius: 0.5rem;"}
+`;
+
+export const Contact = styled.div`
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+`;
+
+export const ContactInput = styled.input`
+  width: 15rem;
+  border: none;
+  border-bottom: 2px solid #fff;
+  outline: none;
+  background: none;
+  color: #fff;
+  font-size: 1.2rem;
+  font-family: inherit;
+  text-align: center;
 `;
 
 export const PromotionLink = styled.form`

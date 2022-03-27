@@ -3,70 +3,52 @@ import { AddImg, ImgIcon, PlusUser } from "../../SVG";
 import { ChangeEvent, useRef, useState } from "react";
 import { CreateClub } from "../../types";
 import produce from "immer";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../modules";
+import {
+  change,
+  delete_activityUrls,
+  push_activityUrls,
+} from "../../modules/register";
 
 export default function RegisterPage() {
+  const {
+    activityUrls,
+    bannerUrl,
+    contact,
+    description,
+    member,
+    relatedLink,
+    teacher,
+    title,
+    type,
+  } = useSelector((state: RootState) => ({
+    ...state.register,
+  }));
+  const dispatch = useDispatch();
   const CoverImgRef = useRef<HTMLInputElement>(null);
   const IntroImgRef = useRef<HTMLInputElement>(null);
-  const [contects, setContects] = useState({
-    contect1: "",
-    contect2: "",
-    contect3: "",
-  });
-  const [value, setValue] = useState<CreateClub>({
-    name: "",
-    clubmember: [""],
-    description: "",
-    clubphoto: [],
-    discord: "#",
-    photo: "",
-    teacher: "",
-    type: "",
-    contect: `${contects.contect1}${contects.contect2}${contects.contect3}`,
-  });
-
-  const ChangeContect = (e: ChangeEvent<HTMLInputElement>) =>
-    setContects({ ...contects, [e.target.name]: e.target.value });
-
-  const ChangeType = (e: ChangeEvent<HTMLSelectElement>) =>
-    setValue({ ...value, type: e.target.value });
-
-  const ChangeDescription = (e: ChangeEvent<HTMLTextAreaElement>) =>
-    setValue({ ...value, description: e.target.value });
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     switch (e.target.name) {
-      case "photo":
+      case "bannerUrl":
         if (!e.target.files || !e.target.files[0]) return;
         const reader = new FileReader();
         reader.onload = () => {
-          setValue({ ...value, photo: `${reader.result}` });
+          dispatch(change("bannerUrl", reader.result as string));
         };
         reader.readAsDataURL(e.target.files[0]);
         return;
 
-      case "name":
-        setValue({ ...value, name: e.target.value });
-        return;
-
-      case "discordName":
-        const values = value.discord.split("#");
-        setValue({ ...value, discord: `${e.target.value}#${values[1]}` });
-        return;
-
-      case "discordNumber":
-        const discords = value.discord.split("#");
-        setValue({ ...value, discord: `${discords[0]}#${e.target.value}` });
+      case "title":
+        dispatch(change("title", e.target.value));
         return;
 
       case "clubphoto":
         if (!e.target.files || !e.target.files[0]) return;
         const imgReader = new FileReader();
         imgReader.onload = () => {
-          setValue(
-            produce(value, (draft) => {
-              draft.clubphoto.push(`${imgReader.result}`);
-            })
-          );
+          dispatch(push_activityUrls(imgReader.result as string));
         };
         imgReader.readAsDataURL(e.target.files[0]);
       default:
@@ -76,11 +58,7 @@ export default function RegisterPage() {
 
   const deleteImg = (i: number) => {
     if (!confirm("정말 지우시겠습니까?")) return;
-    setValue(
-      produce(value, (draft) => {
-        draft.clubphoto = draft.clubphoto.filter((_, index) => index !== i);
-      })
-    );
+    dispatch(delete_activityUrls(i));
   };
 
   return (
@@ -88,13 +66,13 @@ export default function RegisterPage() {
       <input
         type="file"
         accept="image/gif,image/jpeg,image/png"
-        name="photo"
+        name="bannerUrl"
         onChange={onChange}
         ref={CoverImgRef}
         style={{ display: "none" }}
       />
-      {value.photo ? (
-        <S.Img src={value.photo} onClick={() => CoverImgRef.current?.click()} />
+      {bannerUrl ? (
+        <S.Img src={bannerUrl} onClick={() => CoverImgRef.current?.click()} />
       ) : (
         <S.CoverImg onClick={() => CoverImgRef.current?.click()}>
           <S.CoverImgInfo>
@@ -110,8 +88,8 @@ export default function RegisterPage() {
           <div>
             <h2>동아리 이름</h2>
             <S.NameInput
-              name="name"
-              value={value.name}
+              name="title"
+              value={title}
               onChange={onChange}
               placeholder="동아리 이름을 입력해 주세요"
             />
@@ -134,46 +112,62 @@ export default function RegisterPage() {
           <div>
             <h2>동아리 소개</h2>
             <S.ClubIntroduce
-              value={value.description}
-              onChange={ChangeDescription}
+              value={description}
+              onChange={(e: any) =>
+                dispatch(change("description", e.target.value))
+              }
               placeholder="동아리 소개를 입력해 주세요"
             ></S.ClubIntroduce>
           </div>
         </S.Article>
         <S.Article>
-          <div>
-            <h2>
-              동아리 홍보사진 <S.Optional>(선택)</S.Optional>
-            </h2>
-            <S.ImagesWrapper>
-              {value?.clubphoto.map((photo, i) => (
-                <S.IntroImage
-                  src={photo}
-                  onClick={() => deleteImg(i)}
-                  key={i}
-                />
-              ))}
-              {value.clubphoto.length < 6 && (
-                <>
-                  <input
-                    type="file"
-                    accept="image/gif,image/jpeg,image/png"
-                    ref={IntroImgRef}
-                    name="clubphoto"
-                    onChange={onChange}
-                    style={{ display: "none" }}
+          <S.ImageKind>
+            <div>
+              <h2>
+                동아리 홍보사진 <S.Optional>(선택)</S.Optional>
+              </h2>
+              <S.ImagesWrapper>
+                {activityUrls.map((photo, i) => (
+                  <S.IntroImage
+                    src={photo}
+                    onClick={() => deleteImg(i)}
+                    key={i}
                   />
-                  <S.GrayBg onClick={() => IntroImgRef.current?.click()}>
-                    <div>
-                      <ImgIcon />
-                      <p>추가하기</p>
-                    </div>
-                  </S.GrayBg>
-                </>
-              )}
-            </S.ImagesWrapper>
-          </div>
-          <S.ContactKind>
+                ))}
+                {activityUrls.length < 4 && (
+                  <>
+                    <input
+                      type="file"
+                      accept="image/gif,image/jpeg,image/png"
+                      ref={IntroImgRef}
+                      name="clubphoto"
+                      onChange={onChange}
+                      style={{ display: "none" }}
+                    />
+                    <S.GrayBg onClick={() => IntroImgRef.current?.click()}>
+                      <div>
+                        <ImgIcon />
+                        <p>추가하기</p>
+                      </div>
+                    </S.GrayBg>
+                  </>
+                )}
+              </S.ImagesWrapper>
+            </div>
+            <div>
+              <h2>동아리 종류</h2>
+              <div>
+                <S.KindOption name="MAJOR" left active>
+                  전공
+                </S.KindOption>
+                <S.KindOption name="FREEDOM">자율</S.KindOption>
+                <S.KindOption name="EDITORIAL" right>
+                  사설
+                </S.KindOption>
+              </div>
+            </div>
+          </S.ImageKind>
+          <div>
             <div>
               <h2>연락처</h2>
               <S.Contact>
@@ -186,19 +180,7 @@ export default function RegisterPage() {
                 <S.ContactInput />
               </S.Contact>
             </div>
-            <S.Kind>
-              <h2>동아리 종류</h2>
-              <div>
-                <S.KindOption name="MAJOR" left active>
-                  전공
-                </S.KindOption>
-                <S.KindOption name="FREEDOM">자율</S.KindOption>
-                <S.KindOption name="EDITORIAL" right>
-                  사설
-                </S.KindOption>
-              </div>
-            </S.Kind>
-          </S.ContactKind>
+          </div>
           <div>
             <h2>
               홍보 링크 <S.Optional>(선택)</S.Optional>
