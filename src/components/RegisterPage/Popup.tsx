@@ -12,6 +12,10 @@ export default function Popup({ setIsShow }: PopupProps) {
       <S.PopupBackground onClick={() => setIsShow(false)} />
       <S.Popup>
         <S.PopupTitle>구성원 추가</S.PopupTitle>
+        <S.SearchBar>
+          <SVG.ReadingGlasses />
+          <S.SearchInput />
+        </S.SearchBar>
       </S.Popup>
     </>
   );

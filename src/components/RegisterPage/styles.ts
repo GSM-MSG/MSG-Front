@@ -305,10 +305,31 @@ export const Popup = styled.div`
   border-radius: 1rem;
   animation-name: ${BackgroundAnimation};
   animation-duration: 0.2s;
-  display: flex;
-  justify-content: center;
+  padding: 1rem;
 `;
 
-export const PopupTitle = styled.h2``;
+export const PopupTitle = styled.h2`
+  text-align: center;
+`;
 
-export const SearchBar = styled.div``;
+export const SearchBar = styled.form`
+  width: 100%;
+  height: 3rem;
+  border: 1px solid #fff;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+`;
+
+export const SearchInput = styled.input`
+  border: none;
+  outline: none;
+  height: 100%;
+  flex: 1;
+  background: none;
+  padding: 0 1rem;
+  color: #fff;
+  font-size: 1.1rem;
+  font-family: inherit;
+`;
