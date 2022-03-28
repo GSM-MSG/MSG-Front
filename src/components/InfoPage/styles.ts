@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
 
 export const CoverImg = styled.img`
   width: 100%;
-  height: 200px;
+  height: 400px;
   object-fit: cover;
 `;
 
@@ -64,6 +64,14 @@ export const UserName = styled.div`
   margin-top: 1rem;
 `;
 
+export const IntroduceContact = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5rem;
+  flex-wrap: wrap;
+`;
+
 export const Introduce = styled.p`
   font-size: 1.2rem;
   margin-bottom: 5rem;
@@ -72,18 +80,13 @@ export const Introduce = styled.p`
 export const Footer = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 2rem;
-`;
-
-export const Promotion = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  max-width: calc(10rem * 3 + 4rem);
-  width: 100%;
 `;
 
 export const Imgs = styled.div`
   display: flex;
+  width: 22rem;
   flex-wrap: wrap;
   gap: 2rem;
 `;
@@ -111,11 +114,14 @@ export const ContectUserInfo = styled.div`
 
 export const ContectInfo = styled.div`
   padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 export const Info = styled.p`
-  font-size: 1.2rem;
   margin: 0.5rem 0;
+  text-align: right;
 `;
 
 export const ButtonWrapper = styled.div`
