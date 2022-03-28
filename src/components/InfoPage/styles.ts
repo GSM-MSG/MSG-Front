@@ -18,21 +18,21 @@ export const ClubName = styled.h1`
   font-size: 3rem;
 `;
 
-export const Users = styled.ul`
+export const Users = styled.div`
   list-style: none;
   padding: 0;
   margin: 0 0 4rem;
   display: flex;
   overflow: auto;
+  gap: 5rem;
 
   ::-webkit-scrollbar {
     width: 0;
   }
 `;
 
-export const User = styled.li`
+export const User = styled.div`
   position: relative;
-  margin-right: 5rem;
 `;
 
 export const UserImg = styled.img`
@@ -64,30 +64,48 @@ export const UserName = styled.div`
   margin-top: 1rem;
 `;
 
-export const IntroduceContact = styled.div`
+export const Info = styled.div`
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  padding: 0 5rem;
+  flex: 1;
+  gap: 2rem;
+
+  @media (max-width: 1250px) {
+    flex-wrap: wrap;
+    padding: 0 2rem;
+    justify-content: center;
+  }
+`;
+
+export const AllInfo = styled.div`
+  display: flex;
+  flex-direction: column;
   gap: 5rem;
-  flex-wrap: wrap;
 `;
 
-export const Introduce = styled.p`
-  font-size: 1.2rem;
-  margin-bottom: 5rem;
+export const Introduce = styled.div`
+  max-width: 60rem;
 `;
 
-export const Footer = styled.div`
+export const SubInfo = styled.div`
   display: flex;
   justify-content: space-between;
+  gap: 2rem;
   align-items: center;
-  margin-bottom: 2rem;
+
+  @media (max-width: 1250px) {
+    justify-content: space-around;
+  }
+  @media (max-width: 790px) {
+    flex-wrap: wrap;
+  }
 `;
 
 export const Imgs = styled.div`
   display: flex;
-  width: 22rem;
   flex-wrap: wrap;
+  width: 22rem;
   gap: 2rem;
 `;
 
@@ -98,30 +116,34 @@ export const Img = styled.img`
 `;
 
 export const Contect = styled.div`
-  height: 10rem;
-  width: 100%;
-  margin-left: 7rem;
-`;
-
-export const ContectUser = styled.div`
   display: flex;
-  margin-bottom: 1rem;
+  align-items: center;
+  gap: 2rem;
 `;
 
-export const ContectUserInfo = styled.div`
-  position: relative;
+export const UserContact = styled.div`
+  h3 {
+    margin: 0;
+  }
+  p {
+    margin: 0;
+  }
 `;
 
-export const ContectInfo = styled.div`
-  padding: 0 2rem;
+export const Link = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
 `;
 
-export const Info = styled.p`
-  margin: 0.5rem 0;
-  text-align: right;
+export const LinkButton = styled.div`
+  background: #fff;
+  padding: 1rem;
+  border-radius: 1rem;
+  max-width: 60rem;
+  color: #5169e8;
+  height: 3.3rem;
+  overflow: hidden;
 `;
 
 export const ButtonWrapper = styled.div`
