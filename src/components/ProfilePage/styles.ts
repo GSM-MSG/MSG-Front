@@ -25,6 +25,11 @@ export const Main = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media (max-width: 900px) {
+    padding: 2rem;
+    width: 90%;
+  }
 `;
 
 export const User = styled.div`
@@ -57,9 +62,21 @@ export const Logout = styled.p`
   :hover {
     text-decoration: underline;
   }
+
+  @media (max-width: 570px) {
+    position: static;
+  }
 `;
 
 export const Hr = styled.hr`
   border: 1px solid #646464;
   width: 100%;
+`;
+
+export const Cards = styled.div`
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
 `;

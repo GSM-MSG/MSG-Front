@@ -27,6 +27,12 @@ export default function ProfilePage({ username }: ProfilePageProps) {
           </S.User>
           <S.Hr />
           <h2>내 동아리</h2>
+          <S.Cards>
+            <Card link="/major/동아리임" />
+            <Card link="/major/동아리임" />
+            <Card link="/major/동아리임" />
+            <Card link="/major/동아리임" />
+          </S.Cards>
         </S.Main>
       </S.Wrapper>
     </>
