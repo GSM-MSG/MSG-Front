@@ -26,7 +26,7 @@ export const Main = styled.div`
   flex-direction: column;
   align-items: center;
 
-  @media (max-width: 900px) {
+  @media (max-width: 1300px) {
     padding: 2rem;
     width: 90%;
   }
@@ -73,10 +73,32 @@ export const Hr = styled.hr`
   width: 100%;
 `;
 
+export const Clubs = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+`;
+
+export const TitleClubs = styled.div``;
+
+export const ClubTitle = styled.h2`
+  width: 100%;
+`;
+
 export const Cards = styled.div`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 2rem;
+  gap: 3rem;
+`;
+
+export const Combine = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+
+  @media (max-width: 900px) {
+    flex-wrap: wrap;
+  }
 `;

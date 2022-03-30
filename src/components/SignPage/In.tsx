@@ -38,6 +38,8 @@ export default function In() {
       localStorage.setItem("msgAccess", data.accessToken);
       localStorage.setItem("expiredAt", data.expiredAt);
       localStorage.setItem("msgRefresh", data.refreshToken);
+      dispatch(change_email(""));
+      dispatch(change_password(""));
       router.push("/");
     } catch (e) {
       setIsFaile(true);
