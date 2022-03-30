@@ -20,7 +20,9 @@ export default function ProfilePage({ username }: ProfilePageProps) {
       localStorage.removeItem("expiredAt");
       localStorage.removeItem("msgRefresh");
       router.push("/login");
-    } catch (e) {}
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (

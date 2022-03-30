@@ -21,7 +21,7 @@ export default function Header() {
             <SVG.Plus />
           </a>
         </Link>
-        <Link href={`/user/${"사람"}`}>
+        <Link href="/my">
           <a>
             <SVG.UserIcon />
           </a>

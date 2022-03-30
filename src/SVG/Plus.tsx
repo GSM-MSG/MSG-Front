@@ -1,6 +1,12 @@
 export function Plus() {
   return (
-    <svg width="30" height="30" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      viewBox="0 0 30 30"
+      width="25"
+      height="25"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M0 3a3 3 0 0 1 3-3h24a3 3 0 0 1 3 3v24a3 3 0 0 1-3 3H3a3 3 0 0 1-3-3V3Z"
         fill="#FCFFFF"

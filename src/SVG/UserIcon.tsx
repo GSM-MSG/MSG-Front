@@ -1,6 +1,12 @@
 export function UserIcon() {
   return (
-    <svg width="44" height="44" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      viewBox="0 0 44 44"
+      width="30"
+      height="30"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         fillRule="evenodd"
         clipRule="evenodd"
