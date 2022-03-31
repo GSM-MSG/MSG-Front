@@ -10,14 +10,15 @@ export default function MyProfile() {
   const [user, setUser] = useState<any>();
 
   useEffect(() => {
-    try {
-      (async () => {
+    (async () => {
+      try {
         const { data } = await api({ query: "/user/my", method: "get" });
         setUser(data);
-      })();
-    } catch (e) {
-      router.push("/login");
-    }
+      } catch (e) {
+        // router.push("/login");
+        console.log(e);
+      }
+    })();
   }, []);
 
   return (

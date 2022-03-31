@@ -68,7 +68,7 @@ export default function InfoPage({ clubName }: InfoPageProps) {
             </div>
             <div>
               <h2>유튜브 링크</h2>
-              <S.LinkButton>
+              <S.LinkButton href="https://www.youtube.com/watch?v=7_0tJ8zkluc">
                 https://www.youtube.com/watch?v=7_0tJ8zkluc
               </S.LinkButton>
             </div>

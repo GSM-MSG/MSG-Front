@@ -136,7 +136,7 @@ export const Link = styled.div`
   justify-content: flex-end;
 `;
 
-export const LinkButton = styled.div`
+export const LinkButton = styled.a`
   background: #fff;
   padding: 1rem;
   border-radius: 1rem;
@@ -144,6 +144,10 @@ export const LinkButton = styled.div`
   color: #5169e8;
   height: 3.3rem;
   overflow: hidden;
+
+  :hover {
+    text-decoration: underline;
+  }
 `;
 
 export const ButtonWrapper = styled.div`

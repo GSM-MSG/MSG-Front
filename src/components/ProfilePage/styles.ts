@@ -102,3 +102,44 @@ export const Combine = styled.div`
     flex-wrap: wrap;
   }
 `;
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  width: 100%;
+`;
+
+export const ExitButton = styled.button`
+  max-width: 25rem;
+  width: 90%;
+  padding: 0.7rem 0;
+  border: none;
+  outline: none;
+  background: #4c53ff;
+  color: #fff;
+  border-radius: 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  font-family: inherit;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+
+  &:hover:after {
+    right: -10%;
+    border-radius: 5rem;
+  }
+
+  ::after {
+    content: "";
+    display: block;
+    width: 120%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 100%;
+    background: rgba(0, 0, 0, 0.1);
+    transition: 0.5s;
+  }
+`;
