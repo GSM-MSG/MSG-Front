@@ -68,11 +68,9 @@ export default function ProfilePage({ username }: ProfilePageProps) {
               </div>
             </S.Combine>
           </S.Clubs>
-          {router.asPath === "/my" && (
-            <S.ButtonWrapper>
-              <S.ExitButton>탈퇴하기</S.ExitButton>
-            </S.ButtonWrapper>
-          )}
+          <S.ButtonWrapper>
+            <S.ExitButton>탈퇴하기</S.ExitButton>
+          </S.ButtonWrapper>
         </S.Main>
       </S.Wrapper>
     </>
