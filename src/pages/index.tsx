@@ -4,7 +4,7 @@ import ClubAll from "../components/ClubAll";
 import { Club } from "../types/Clubs";
 import { ClubTypeStaticProps } from "../lib/ClubTypeStaticProps";
 import { useEffect } from "react";
-import api, { remote } from "../lib/api";
+import api from "../lib/api";
 import { useRouter } from "next/router";
 
 export const getStaticProps = ClubTypeStaticProps("MAJOR");
