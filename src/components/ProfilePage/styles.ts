@@ -40,6 +40,24 @@ export const User = styled.div`
   position: relative;
 `;
 
+export const UserImgWrapper = styled.span`
+  position: relative;
+`;
+
+export const EditButton = styled.div`
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 100%;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+`;
+
 export const UserImg = styled.img`
   width: 7rem;
   height: 7rem;
@@ -140,6 +158,6 @@ export const ExitButton = styled.button`
     top: 0;
     right: 100%;
     background: rgba(0, 0, 0, 0.1);
-    transition: 0.5s;
+    transition: 0.5s cubic-bezier(0.23, 0.56, 0.68, 0.38);
   }
 `;

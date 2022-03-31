@@ -3,6 +3,7 @@ import * as S from "./styles";
 import { Global } from "@emotion/react";
 import api from "../../lib/api";
 import { useRouter } from "next/router";
+import * as SVG from "../../SVG";
 
 interface ProfilePageProps {
   username: string;
@@ -38,7 +39,12 @@ export default function ProfilePage({ username }: ProfilePageProps) {
         <S.Title>프로필</S.Title>
         <S.Main>
           <S.User>
-            <S.UserImg src="https://bit.ly/3NwF4Oc" />
+            <S.UserImgWrapper>
+              <S.UserImg src="https://bit.ly/3NwF4Oc" />
+              <S.EditButton>
+                <SVG.Pen />
+              </S.EditButton>
+            </S.UserImgWrapper>
             <h1>{username}</h1>
             <h3>s12345@gsm.hs.kr</h3>
             <S.Logout onClick={Logout}>로그아웃</S.Logout>
