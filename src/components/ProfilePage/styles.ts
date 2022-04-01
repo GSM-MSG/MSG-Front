@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { keyframes } from "@emotion/react";
 
 export const Wrapper = styled.div`
   margin-top: 4rem;
@@ -160,4 +161,56 @@ export const ExitButton = styled.button`
     background: rgba(0, 0, 0, 0.1);
     transition: 0.5s cubic-bezier(0.23, 0.56, 0.68, 0.38);
   }
+`;
+
+//----------------------ExitPopup------------------------------
+
+const Opacity = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
+export const PopupWrapper = styled.div`
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const Popup = styled.div`
+  background: #1e1e1c;
+  padding: 1rem;
+  border-radius: 0.5rem;
+`;
+
+export const RightX = styled.div`
+  display: flex;
+  justify-content: right;
+`;
+
+export const PopupTitle = styled.h1`
+  text-align: center;
+`;
+
+export const Comment = styled.p`
+  color: #646464;
+  margin-top: 0;
+  text-align: center;
+`;
+
+export const CardList = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 2rem;
+  padding: 1rem;
 `;

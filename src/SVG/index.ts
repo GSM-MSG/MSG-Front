@@ -12,3 +12,4 @@ export * from "./Email";
 export * from "./Check";
 export * from "./ReadingGlasses";
 export * from "./Pen";
+export * from "./X";

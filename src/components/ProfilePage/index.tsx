@@ -4,12 +4,15 @@ import { Global } from "@emotion/react";
 import api from "../../lib/api";
 import { useRouter } from "next/router";
 import * as SVG from "../../SVG";
+import ExitPopup from "./ExitPopup";
+import { useState } from "react";
 
 interface ProfilePageProps {
   username: string;
 }
 
 export default function ProfilePage({ username }: ProfilePageProps) {
+  const [isShow, setIsShow] = useState(false);
   const router = useRouter();
   const Logout = async () => {
     try {
@@ -75,10 +78,13 @@ export default function ProfilePage({ username }: ProfilePageProps) {
             </S.Combine>
           </S.Clubs>
           <S.ButtonWrapper>
-            <S.ExitButton>탈퇴하기</S.ExitButton>
+            <S.ExitButton onClick={() => setIsShow(true)}>
+              탈퇴하기
+            </S.ExitButton>
           </S.ButtonWrapper>
         </S.Main>
       </S.Wrapper>
+      {isShow && <ExitPopup setIsShow={setIsShow} />}
     </>
   );
 }
