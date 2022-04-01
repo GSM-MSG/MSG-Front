@@ -174,6 +174,18 @@ const Opacity = keyframes`
   }
 `;
 
+const Sliding = keyframes`
+  0% {
+    top: -100%;
+  }
+  60% {
+    top: 5%;
+  }
+  100% {
+    top: 0;
+  }
+`;
+
 export const PopupWrapper = styled.div`
   width: 100%;
   height: 100vh;
@@ -184,12 +196,25 @@ export const PopupWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  animation-name: ${Opacity};
+  animation-duration: 0.2s;
 `;
 
 export const Popup = styled.div`
   background: #1e1e1c;
   padding: 1rem;
   border-radius: 0.5rem;
+  position: relative;
+  animation-name: ${Sliding};
+  animation-duration: 0.3s;
+  animation-direction: alternate;
+  animation-play-state: running;
+
+  @media (max-width: 900px) {
+    width: 90%;
+    max-height: 70%;
+    overflow: scroll;
+  }
 `;
 
 export const RightX = styled.div`
@@ -213,4 +238,9 @@ export const CardList = styled.div`
   grid-template-rows: 1fr 1fr;
   gap: 2rem;
   padding: 1rem;
+  justify-content: center;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 20rem;
+  }
 `;
