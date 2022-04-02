@@ -33,6 +33,7 @@ export const Tag = styled.div`
   font-size: 1.2rem;
   padding: 0.5rem 1rem;
   border-radius: 2rem;
+  transition: 0.3s;
 
   ${(props: { active?: boolean }) =>
     props.active ? "background: #5169e8;" : "cursor: pointer; cusour"}
