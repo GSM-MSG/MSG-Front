@@ -5,6 +5,7 @@ import api from "../../lib/api";
 import { UserType } from "../../types";
 import * as S from "./styles";
 import { Tag, Tags } from "../ClubAll/styles";
+import UserCard from "./UserCard";
 
 export default function Users() {
   const router = useRouter();
@@ -37,6 +38,7 @@ export default function Users() {
         </Tags>
         <S.Hr />
       </div>
+      <UserCard />
     </S.UsersWrapper>
   );
 }
