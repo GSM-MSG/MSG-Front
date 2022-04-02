@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import * as SVG from "../../SVG";
 import ExitPopup from "./ExitPopup";
 import { useState } from "react";
+import { ExitClubI } from "../../types";
 
 interface ProfilePageProps {
   username: string;
@@ -13,6 +14,7 @@ interface ProfilePageProps {
 
 export default function ProfilePage({ username }: ProfilePageProps) {
   const [isShow, setIsShow] = useState(false);
+  const [exitClubs, setExitClubs] = useState<ExitClubI[]>([]);
   const router = useRouter();
   const Logout = async () => {
     try {
