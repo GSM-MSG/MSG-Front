@@ -38,7 +38,19 @@ export default function Users() {
         </Tags>
         <S.Hr />
       </div>
-      <UserCard />
+      <S.CardList>
+        <UserCard />
+        <UserCard />
+        <UserCard />
+        <UserCard />
+        <UserCard />
+        <UserCard />
+        <UserCard />
+        <UserCard />
+        <UserCard />
+        <UserCard />
+        <UserCard />
+      </S.CardList>
     </S.UsersWrapper>
   );
 }

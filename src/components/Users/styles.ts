@@ -16,6 +16,14 @@ export const Hr = styled.hr`
   width: 90%;
 `;
 
+export const CardList = styled.span`
+  margin: 5rem 0 2rem 0;
+  display: flex;
+  gap: 5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
+
 //---------------------UserCard--------------------
 
 export const UserCardWrapper = styled.div`
@@ -75,6 +83,12 @@ export const Approve = styled.button`
   font-family: inherit;
   font-size: 1.2rem;
   font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+
+  :hover {
+    background: #3a41f9;
+  }
 `;
 
 export const Refuse = styled.button`
@@ -87,4 +101,10 @@ export const Refuse = styled.button`
   font-family: inherit;
   font-size: 1.2rem;
   font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+
+  :hover {
+    background: #4c4c4c;
+  }
 `;
