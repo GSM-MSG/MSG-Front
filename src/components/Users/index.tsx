@@ -6,6 +6,7 @@ import { UserType } from "../../types";
 import * as S from "./styles";
 import { Tag, Tags } from "../ClubAll/styles";
 import UserCard from "./UserCard";
+import MemberCard from "./MemberCard";
 
 export default function Users() {
   const router = useRouter();
@@ -38,19 +39,28 @@ export default function Users() {
         </Tags>
         <S.Hr />
       </div>
-      <S.CardList>
-        <UserCard />
-        <UserCard />
-        <UserCard />
-        <UserCard />
-        <UserCard />
-        <UserCard />
-        <UserCard />
-        <UserCard />
-        <UserCard />
-        <UserCard />
-        <UserCard />
-      </S.CardList>
+      {page ? (
+        <S.CardList>
+          <UserCard />
+          <UserCard />
+          <UserCard />
+          <UserCard />
+          <UserCard />
+          <UserCard />
+          <UserCard />
+          <UserCard />
+          <UserCard />
+          <UserCard />
+          <UserCard />
+        </S.CardList>
+      ) : (
+        <S.CardList>
+          <MemberCard />
+          <MemberCard />
+          <MemberCard />
+          <MemberCard />
+        </S.CardList>
+      )}
     </S.UsersWrapper>
   );
 }
