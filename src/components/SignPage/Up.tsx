@@ -41,7 +41,8 @@ export default function Up({ setIsShow }: UpProps) {
       await api({ query: "/auth/verify", method: "post", body: { email } });
       setIsShow(true);
     } catch (e: any) {
-      setError(e.response.data.message);
+      if (!e.response) setError("인터넷 연결이 불안정합니다.");
+      else setError(e.response.data.message);
     }
   };
 
@@ -81,7 +82,8 @@ export default function Up({ setIsShow }: UpProps) {
       });
       router.push("/login");
     } catch (e: any) {
-      setError(e.response.data.message);
+      if (!e.response) setError("인터넷 연결이 불안정합니다.");
+      else setError(e.response.data.message);
     }
   };
 
