@@ -7,23 +7,36 @@ import * as S from "./styles";
 import { Tag, Tags } from "../ClubAll/styles";
 import UserCard from "./UserCard";
 import MemberCard from "./MemberCard";
+import Loading from "../Loading";
+import { ApplicantsType } from "../../types/ApplicantsType";
 
 export default function Users() {
   const router = useRouter();
   const [users, setUsers] = useState<UserType[]>();
+  const [applicants, setApplicants] = useState<ApplicantsType>();
   const [page, setPage] = useState<boolean>(true);
 
   useEffect(() => {
     (async () => {
       try {
-        const { data } = await api({ query: "/club/members", method: "get" });
-        setUsers(data);
+        if (page) {
+          const { data } = await api({ query: "/club/members", method: "get" });
+          setUsers(data);
+        } else {
+          const { data } = await api({
+            query: "/club/applicant",
+            method: "get",
+          });
+          setApplicants(data);
+        }
       } catch (e: any) {
         // if (e.response.data.status === 406) router.back();
         // else router.push("/login");
       }
     })();
-  }, []);
+  }, [page]);
+
+  if ((!users && page) || (!applicants && !page)) return <Loading />;
 
   return (
     <S.UsersWrapper>
@@ -41,6 +54,9 @@ export default function Users() {
       </div>
       {page ? (
         <S.CardList>
+          {/* {users?.map((user) => (
+            <UserCard key={user.userId} user={user} />
+          ))} */}
           <UserCard />
           <UserCard />
           <UserCard />
@@ -55,6 +71,9 @@ export default function Users() {
         </S.CardList>
       ) : (
         <S.CardList>
+          {/* {applicants?.list.map((user) => (
+            <UserCard key={user.userId} user={user} />
+          ))} */}
           <MemberCard />
           <MemberCard />
           <MemberCard />

@@ -2,14 +2,14 @@ import { Dispatch, SetStateAction, useState } from "react";
 import Card from "./Card";
 import * as S from "./styles";
 import * as SVG from "../../SVG";
-import { MyPageType } from "../../types/MypageType";
+import { MyPageType } from "../../types";
 
 interface ExitPopupProps {
   setIsShow: Dispatch<SetStateAction<boolean>>;
-  userData: MyPageType;
+  user: MyPageType;
 }
 
-export default function ExitPopup({ setIsShow, userData }: ExitPopupProps) {
+export default function ExitPopup({ setIsShow, user }: ExitPopupProps) {
   const onClick = (id: number) => {};
   return (
     <S.PopupWrapper>

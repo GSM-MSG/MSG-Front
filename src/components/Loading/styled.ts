@@ -9,11 +9,14 @@ const Cycle = keyframes`
 
 export const Wrapper = styled.div`
   width: 100%;
-  margin-top: 4rem;
-  height: calc(100vh - 4rem);
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.2);
 `;
 
 export const LoadingImg = styled.img`
