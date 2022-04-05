@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Card from "../Card";
 import * as S from "./styles";
 import { Global } from "@emotion/react";
@@ -5,8 +6,9 @@ import api from "../../lib/api";
 import { useRouter } from "next/router";
 import * as SVG from "../../SVG";
 import ExitPopup from "./ExitPopup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ExitClubI } from "../../types";
+import { MyPageType } from "../../types/MypageType";
 
 interface ProfilePageProps {
   username: string;
@@ -14,7 +16,7 @@ interface ProfilePageProps {
 
 export default function ProfilePage({ username }: ProfilePageProps) {
   const [isShow, setIsShow] = useState(false);
-  const [exitClubs, setExitClubs] = useState<ExitClubI[]>([]);
+  const [userData, setUserData] = useState<MyPageType>();
   const router = useRouter();
   const Logout = async () => {
     try {
@@ -30,6 +32,19 @@ export default function ProfilePage({ username }: ProfilePageProps) {
       console.log(e);
     }
   };
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await api({ query: "/user/my", method: "get" });
+        setUserData(data);
+      } catch (e) {
+        // router.push("/login");
+      }
+    })();
+  }, []);
+
+  if (!userData) return <div>로딩중</div>;
 
   return (
     <>
@@ -86,7 +101,7 @@ export default function ProfilePage({ username }: ProfilePageProps) {
           </S.ButtonWrapper>
         </S.Main>
       </S.Wrapper>
-      {isShow && <ExitPopup setIsShow={setIsShow} />}
+      {isShow && <ExitPopup userData={userData} setIsShow={setIsShow} />}
     </>
   );
 }
