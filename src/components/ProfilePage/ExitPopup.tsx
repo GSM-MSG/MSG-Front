@@ -1,5 +1,5 @@
-import { Dispatch, MouseEvent, SetStateAction, useState } from "react";
-import Card from "../Card";
+import { Dispatch, SetStateAction, useState } from "react";
+import Card from "./Card";
 import * as S from "./styles";
 import * as SVG from "../../SVG";
 
@@ -26,10 +26,10 @@ export default function ExitPopup({ setIsShow }: ExitPopupProps) {
         <S.PopupTitle>탈퇴하기</S.PopupTitle>
         <S.Comment>탈퇴하고 싶은 동아리를 클릭해 주세요</S.Comment>
         <S.CardList>
-          <Card link="sdf/sdfsdf" />
-          <Card link="sdf/sdfsdf" />
-          <Card link="sdf/sdfsdf" />
-          <Card link="sdf/sdfsdf" />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
         </S.CardList>
       </S.Popup>
     </S.PopupWrapper>
