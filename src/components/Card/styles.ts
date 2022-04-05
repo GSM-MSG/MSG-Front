@@ -9,6 +9,10 @@ export const Wrapper = styled.a`
   justify-content: space-between;
   text-decoration: none;
   cursor: pointer;
+  transition: 0.3s;
+  :hover {
+    transform: scale(1.1);
+  }
 `;
 
 export const Picture = styled.img`
