@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import ProfilePage from "../components/ProfilePage";
 import api from "../lib/api";
+import Loading from "../components/Loading";
 
 export default function MyProfile() {
   const router = useRouter();
