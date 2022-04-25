@@ -20,7 +20,7 @@ export default function ClubInfo() {
         });
         setClubData(data);
       } catch (e) {
-        // router.push("/login");
+        router.push("/login");
       }
     })();
   }, []);

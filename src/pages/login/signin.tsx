@@ -15,7 +15,10 @@ export default function Signin() {
           refresh: true,
         });
         router.push("/");
-      } catch (e) {}
+      } catch (e) {
+        if (localStorage.getItem("refreshToken"))
+          localStorage.removeItem("refreshToken");
+      }
     })();
   }, []);
   return <SignPage type="signin" />;

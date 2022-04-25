@@ -16,7 +16,7 @@ export default function Register() {
           refresh: true,
         });
       } catch (e) {
-        // router.push("/login");
+        router.push("/login");
       }
     })();
   }, []);

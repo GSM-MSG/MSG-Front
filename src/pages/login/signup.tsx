@@ -15,7 +15,10 @@ export default function Signup() {
           refresh: true,
         });
         router.push("/");
-      } catch (e) {}
+      } catch (e) {
+        if (localStorage.getItem("refreshToken"))
+          localStorage.removeItem("refreshToken");
+      }
     })();
   }, []);
 

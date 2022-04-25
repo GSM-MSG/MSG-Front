@@ -17,7 +17,7 @@ export default function MyProfile() {
         const { data } = await api({ query: "/user/my", method: "get" });
         setUser(data);
       } catch (e) {
-        // router.push("/login");
+        router.push("/login");
         console.log(e);
       }
     })();

@@ -22,7 +22,7 @@ export const Wrapper = styled.div`
 export const LoadingImg = styled.img`
   object-position: center;
   animation-name: ${Cycle};
-  animation-duration: 6s;
+  animation-duration: 0.1s;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
 `;
