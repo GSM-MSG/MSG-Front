@@ -32,45 +32,26 @@ export const Title = styled.h1`
   text-align: center;
 `;
 
-export const Buttons = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-`;
-
-export const Signin = styled.button`
-  background: #4d54ff;
-  color: #fff;
-  border: none;
-  outline: none;
-  height: 3.5rem;
-  font-size: 1.5rem;
-  font-weight: bold;
-  font-family: inherit;
-  border-radius: 1rem;
-  box-shadow: -0.2rem 0.2rem 0.5rem rgba(77, 84, 255, 0.3);
-  cursor: pointer;
-  transition: 0.2s;
-
-  :hover {
-    transform: scale(1.02);
-  }
-`;
-
-export const Signup = styled.button`
+export const OauthButton = styled.div`
+  max-width: 30rem;
+  max-height: 4rem;
+  width: 90%;
   background: #fff;
-  border: none;
-  outline: none;
-  height: 3.5rem;
-  font-size: 1.5rem;
-  font-weight: bold;
-  font-family: inherit;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  transition: 0.2s;
+  padding: 2rem 1rem;
 
-  :hover {
-    transform: scale(1.02);
+  svg {
+    height: 2rem;
+    width: 2rem;
+    margin-right: 1.5rem;
   }
+`;
+
+export const LoginText = styled.div`
+  color: #000;
+  font-size: 1.3rem;
 `;
