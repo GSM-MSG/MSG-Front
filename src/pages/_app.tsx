@@ -1,6 +1,5 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import wrapper from "../modules";
 import { motion } from "framer-motion";
 import { Global } from "@emotion/react";
 
@@ -31,4 +30,4 @@ function MyApp({ Component, pageProps, router }: AppProps) {
   );
 }
 
-export default wrapper.withRedux(MyApp);
+export default MyApp;

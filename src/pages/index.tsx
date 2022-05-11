@@ -18,7 +18,7 @@ const Home: NextPage<MainProps> = ({ clubs }) => {
   useEffect(() => {
     (async () => {
       try {
-        await api({ query: "/check", method: "get", refresh: true });
+        await api.get("/auth/check");
       } catch (e) {
         router.push("/login");
       }
