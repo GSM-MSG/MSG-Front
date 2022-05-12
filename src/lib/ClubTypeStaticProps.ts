@@ -5,9 +5,11 @@ export const ClubTypeStaticProps =
   (type: "MAJOR" | "EDITORIAL" | "FREEDOM"): GetStaticProps =>
   async () => {
     try {
-      const data = await api.get(`/club/list?type=${type}`, {
+      const { data } = await api.get(`/club/list?type=${type}`, {
         withCredentials: false,
       });
+
+      console.log(data);
 
       return {
         props: {
