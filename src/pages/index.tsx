@@ -18,9 +18,13 @@ const Home: NextPage<MainProps> = ({ clubs }) => {
   useEffect(() => {
     (async () => {
       try {
-        await api.get("/auth/check");
+        await api.get("/auth/check", { withCredentials: true });
       } catch (e) {
-        router.push("/login");
+        try {
+          await api.post("/auth/refresh", {}, { withCredentials: true });
+        } catch (e) {
+          router.push("/login");
+        }
       }
     })();
   }, []);
