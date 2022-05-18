@@ -144,6 +144,9 @@ export const Link = styled.input`
 
 export const RightFormWrapper = styled.div`
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
 `;
 
 export const Imgs = styled.div`
@@ -174,4 +177,33 @@ export const ImgAddBox = styled.div`
 export const ImgAddComment = styled.p`
   color: #00a8fe;
   margin-bottom: 0;
+`;
+
+interface ClubButtonProps {
+  active: boolean;
+  position?: "left" | "right";
+}
+
+export const ClubButton = styled.button<ClubButtonProps>`
+  border: none;
+  ${(props) =>
+    props.position &&
+    `
+    border-top-${props.position}-radius: 0.5rem;
+    border-bottom-${props.position}-radius: 0.5rem;
+    `}
+  background: #A3A3A3;
+  color: #8c8a8a;
+
+  ${(props) =>
+    props.active &&
+    `
+    background: #F4F4F4;
+    color: #1C1C1E;
+    `}
+  padding: 1rem 2rem;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: 0.2s;
 `;

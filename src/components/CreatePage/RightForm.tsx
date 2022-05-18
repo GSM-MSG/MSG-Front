@@ -14,13 +14,14 @@ interface RightFormProps {
   setInfo: Dispatch<SetStateAction<InfoType>>;
 }
 
-const RightForm: NextPage<RightFormProps> = ({ images }) => {
+const RightForm: NextPage<RightFormProps> = ({ images, kind, setKind }) => {
   const ImgRef = useRef<HTMLInputElement>(null);
   const Upload = async () => {
     // 이미지 업로드 하는 코드
     if (!ImgRef.current?.files) return;
     console.log(ImgRef.current?.files[0]);
   };
+  const ChangeKind = (e: any) => setKind(e.target.name);
 
   return (
     <S.RightFormWrapper>
@@ -46,6 +47,32 @@ const RightForm: NextPage<RightFormProps> = ({ images }) => {
             <S.ImgAddComment>추가하기</S.ImgAddComment>
           </S.ImgAddBox>
         </S.Imgs>
+      </div>
+      <div>
+        <S.SubTitle>동아리 종류</S.SubTitle>
+        <S.ClubButton
+          onClick={ChangeKind}
+          active={kind === "MAJOR"}
+          position="left"
+          name="MAJOR"
+        >
+          전공
+        </S.ClubButton>
+        <S.ClubButton
+          onClick={ChangeKind}
+          active={kind === "FREEDOM"}
+          name="FREEDOM"
+        >
+          자율
+        </S.ClubButton>
+        <S.ClubButton
+          onClick={ChangeKind}
+          active={kind === "EDITORIAL"}
+          position="right"
+          name="EDITORIAL"
+        >
+          사설
+        </S.ClubButton>
       </div>
     </S.RightFormWrapper>
   );
