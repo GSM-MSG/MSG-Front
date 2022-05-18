@@ -3,17 +3,25 @@ import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import * as SVG from "../../SVG";
 import { UserType } from "../../types";
 import * as S from "./styles";
+import { TextsType } from "./types/TextsType";
 
 interface LeftFormProps {
-  texts: { title: string; description: string };
-  setTexts: Dispatch<SetStateAction<{ title: string; description: string }>>;
+  texts: TextsType;
+  setTexts: Dispatch<SetStateAction<TextsType>>;
   users: UserType[];
   setUsers: Dispatch<SetStateAction<UserType[]>>;
 }
 
 const LeftForm: NextPage<LeftFormProps> = ({ users, texts, setTexts }) => {
   const onChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setTexts({ ...texts, [e.target.name]: e.target.value });
+    const element = e.target;
+    if (element.name === "relatedLinkLd") {
+      setTexts({
+        ...texts,
+        relatedLinkLd: { ...texts.relatedLinkLd, [element.id]: element.value },
+      });
+    }
+    setTexts({ ...texts, [element.name]: element.value });
   };
 
   return (
@@ -49,6 +57,26 @@ const LeftForm: NextPage<LeftFormProps> = ({ users, texts, setTexts }) => {
           value={texts.description}
           onChange={onChange}
         ></S.Textarea>
+      </div>
+      <div>
+        <S.SubTitle>
+          홍보 링크<S.Choice>(선택)</S.Choice>
+        </S.SubTitle>
+        <S.LinkWrapper>
+          <S.LinkTitle
+            name="relatedLinkLd"
+            id="name"
+            value={texts.relatedLinkLd.name}
+            onChange={onChange}
+            placeholder="제목을 입력해주세요"
+          />
+          <S.Link
+            name="relatedLinkLd"
+            id="url"
+            value={texts.relatedLinkLd.url}
+            onChange={onChange}
+          />
+        </S.LinkWrapper>
       </div>
     </S.LeftFormWrapper>
   );

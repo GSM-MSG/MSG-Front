@@ -44,6 +44,12 @@ export const LeftFormWrapper = styled.div`
 
 export const SubTitle = styled.h2``;
 
+export const Choice = styled.span`
+  color: #646464;
+  margin-left: 0.7rem;
+  font-size: 1rem;
+`;
+
 export const TitleInput = styled.input`
   background: none;
   border: #fff solid 0.2rem;
@@ -64,6 +70,7 @@ export const Users = styled.div`
 
 export const UserBox = styled.div`
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -94,4 +101,41 @@ export const Textarea = styled.textarea`
   font-family: inherit;
   outline: none;
   padding: 1rem;
+`;
+
+export const LinkWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+export const LinkTitle = styled.input`
+  width: 10rem;
+  height: 3.5rem;
+  background: #fff;
+  border-radius: 0.5rem;
+  outline: none;
+  font-size: 1rem;
+  font-family: inherit;
+  padding: 1rem 0.7rem;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  border: none;
+  box-sizing: border-box;
+
+  ::placeholder {
+    font-size: 0.9rem;
+  }
+`;
+
+export const Link = styled.input`
+  max-width: 30rem;
+  width: 90%;
+  height: 3.5rem;
+  background: #fff;
+  border-radius: 0.5rem;
+  outline: none;
+  font-size: 1rem;
+  font-family: inherit;
+  padding: 1rem 0.7rem;
+  border: none;
 `;

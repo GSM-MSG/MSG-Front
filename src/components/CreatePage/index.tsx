@@ -4,10 +4,15 @@ import * as SVG from "../../SVG";
 import { useRef, useState } from "react";
 import LeftForm from "./LeftForm";
 import { UserType } from "../../types/UsersType";
+import { TextsType } from "./types/TextsType";
 
 const CreatePage: NextPage = () => {
   const bannerRef = useRef<HTMLInputElement>(null);
-  const [texts, setTexts] = useState({ title: "", description: "" });
+  const [texts, setTexts] = useState<TextsType>({
+    title: "",
+    description: "",
+    relatedLinkLd: { name: "", url: "" },
+  });
   const [users, setUsers] = useState<UserType[]>([
     {
       name: "윤지빈",
@@ -40,12 +45,10 @@ const CreatePage: NextPage = () => {
       </S.BannerImg>
       <S.Forms>
         <LeftForm
-          title={title}
-          setTitle={setTitle}
           users={users}
           setUsers={setUsers}
-          description={description}
-          setDescription={setDescription}
+          texts={texts}
+          setTexts={setTexts}
         />
       </S.Forms>
     </S.Wrapper>
