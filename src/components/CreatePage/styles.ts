@@ -48,11 +48,35 @@ export const TitleInput = styled.input`
   background: none;
   border: #fff solid 0.2rem;
   border-radius: 0.5rem;
-  padding: 0.5rem 1rem;
+  padding: 0.7rem 1rem;
   color: #fff;
   font-size: 1.2rem;
   font-family: inherit;
   outline: none;
-  max-width: 20rem;
+  max-width: 25rem;
   width: 90%;
+`;
+
+export const Users = styled.div`
+  display: flex;
+  gap: 3rem;
+`;
+
+export const UserBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    width: 7rem;
+    height: 7rem;
+  }
+`;
+
+export const UserImg = styled.img`
+  width: 7rem;
+  height: 7rem;
+  border-radius: 100%;
+  object-fit: cover;
 `;

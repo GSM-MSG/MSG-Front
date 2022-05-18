@@ -1,8 +1,8 @@
 export interface UserType {
-  userId: string;
+  email: string;
   name: string;
   grade: number;
   class: number;
-  number: number;
+  num: number;
   userImg: string;
 }
