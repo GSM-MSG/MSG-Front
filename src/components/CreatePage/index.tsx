@@ -7,7 +7,7 @@ import { UserType } from "../../types/UsersType";
 
 const CreatePage: NextPage = () => {
   const bannerRef = useRef<HTMLInputElement>(null);
-  const [title, setTitle] = useState<string>("");
+  const [texts, setTexts] = useState({ title: "", description: "" });
   const [users, setUsers] = useState<UserType[]>([
     {
       name: "윤지빈",
@@ -44,6 +44,8 @@ const CreatePage: NextPage = () => {
           setTitle={setTitle}
           users={users}
           setUsers={setUsers}
+          description={description}
+          setDescription={setDescription}
         />
       </S.Forms>
     </S.Wrapper>

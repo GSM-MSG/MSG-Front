@@ -5,15 +5,15 @@ import { UserType } from "../../types";
 import * as S from "./styles";
 
 interface LeftFormProps {
-  title: string;
-  setTitle: Dispatch<SetStateAction<string>>;
+  texts: { title: string; description: string };
+  setTexts: Dispatch<SetStateAction<{ title: string; description: string }>>;
   users: UserType[];
   setUsers: Dispatch<SetStateAction<UserType[]>>;
 }
 
-const LeftForm: NextPage<LeftFormProps> = ({ title, setTitle, users }) => {
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setTitle(e.target.value);
+const LeftForm: NextPage<LeftFormProps> = ({ users, texts, setTexts }) => {
+  const onChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setTexts({ ...texts, [e.target.name]: e.target.value });
   };
 
   return (
@@ -21,7 +21,8 @@ const LeftForm: NextPage<LeftFormProps> = ({ title, setTitle, users }) => {
       <div>
         <S.SubTitle>동아리 이름</S.SubTitle>
         <S.TitleInput
-          value={title}
+          name="title"
+          value={texts.title}
           onChange={onChange}
           placeholder="동아리 이름을 입력해주세요"
         />
@@ -40,6 +41,14 @@ const LeftForm: NextPage<LeftFormProps> = ({ title, setTitle, users }) => {
             <h3>추가하기</h3>
           </S.UserBox>
         </S.Users>
+      </div>
+      <div>
+        <S.SubTitle>동아리 소개</S.SubTitle>
+        <S.Textarea
+          name="description"
+          value={texts.description}
+          onChange={onChange}
+        ></S.Textarea>
       </div>
     </S.LeftFormWrapper>
   );

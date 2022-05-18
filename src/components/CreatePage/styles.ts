@@ -80,3 +80,18 @@ export const UserImg = styled.img`
   border-radius: 100%;
   object-fit: cover;
 `;
+
+export const Textarea = styled.textarea`
+  resize: none;
+  max-width: 25rem;
+  width: 90%;
+  height: 10rem;
+  background: none;
+  border-radius: 0.5rem;
+  border: 1px solid #fff;
+  color: #fff;
+  font-size: 1rem;
+  font-family: inherit;
+  outline: none;
+  padding: 1rem;
+`;
