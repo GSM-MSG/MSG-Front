@@ -39,7 +39,7 @@ export const LeftFormWrapper = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 5rem;
+  gap: 3rem;
 `;
 
 export const SubTitle = styled.h2``;
@@ -116,7 +116,7 @@ export const LinkTitle = styled.input`
   outline: none;
   font-size: 1rem;
   font-family: inherit;
-  padding: 1rem 0.7rem;
+  padding: 0.7rem;
   margin-right: 0.5rem;
   margin-bottom: 0.5rem;
   border: none;
@@ -136,6 +136,42 @@ export const Link = styled.input`
   outline: none;
   font-size: 1rem;
   font-family: inherit;
-  padding: 1rem 0.7rem;
+  padding: 0.7rem;
   border: none;
+`;
+
+//------------------RightPage-------------------
+
+export const RightFormWrapper = styled.div`
+  flex: 1;
+`;
+
+export const Imgs = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+`;
+
+export const Img = styled.img`
+  border-radius: 1rem;
+  width: 10rem;
+  height: 10rem;
+  object-fit: cover;
+`;
+
+export const ImgAddBox = styled.div`
+  background: #c4c4c4;
+  width: 10rem;
+  height: 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+  flex-direction: column;
+  cursor: pointer;
+`;
+
+export const ImgAddComment = styled.p`
+  color: #00a8fe;
+  margin-bottom: 0;
 `;

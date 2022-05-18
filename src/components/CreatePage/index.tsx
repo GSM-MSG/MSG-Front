@@ -3,8 +3,11 @@ import * as S from "./styles";
 import * as SVG from "../../SVG";
 import { useRef, useState } from "react";
 import LeftForm from "./LeftForm";
+import RightForm from "./RightForm";
 import { UserType } from "../../types/UsersType";
 import { TextsType } from "./types/TextsType";
+import { ClubKind } from "./types/ClubKind";
+import { InfoType } from "./types/InfoType";
 
 const CreatePage: NextPage = () => {
   const bannerRef = useRef<HTMLInputElement>(null);
@@ -31,10 +34,18 @@ const CreatePage: NextPage = () => {
       num: 3,
     },
   ]);
+  const [images, setImages] = useState<string[]>([]);
+  const [kind, setKind] = useState<ClubKind>("MAJOR");
+  const [info, setInfo] = useState<InfoType>({ teacher: "", contact: "" });
 
   return (
     <S.Wrapper>
-      <input ref={bannerRef} type="file" style={{ display: "none" }} />
+      <input
+        ref={bannerRef}
+        type="file"
+        style={{ display: "none" }}
+        accept="image/png, image/jpeg"
+      />
       <S.BannerImg onClick={() => bannerRef.current?.click()}>
         <SVG.AddImg />
         <S.Comment>
@@ -49,6 +60,14 @@ const CreatePage: NextPage = () => {
           setUsers={setUsers}
           texts={texts}
           setTexts={setTexts}
+        />
+        <RightForm
+          images={images}
+          setImages={setImages}
+          kind={kind}
+          setKind={setKind}
+          info={info}
+          setInfo={setInfo}
         />
       </S.Forms>
     </S.Wrapper>
