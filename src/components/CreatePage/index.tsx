@@ -8,6 +8,10 @@ import { UserType } from "../../types/UsersType";
 import { TextsType } from "./types/TextsType";
 import { ClubKind } from "./types/ClubKind";
 import { InfoType } from "./types/InfoType";
+import { ToastContainer, toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
+import api from "../../lib/api";
 
 const CreatePage: NextPage = () => {
   const bannerRef = useRef<HTMLInputElement>(null);
@@ -37,6 +41,20 @@ const CreatePage: NextPage = () => {
   const [images, setImages] = useState<string[]>([]);
   const [kind, setKind] = useState<ClubKind>("MAJOR");
   const [info, setInfo] = useState<InfoType>({ teacher: "", contact: "" });
+
+  const onSubmit = async () => {
+    try {
+      await api.post("/club", {
+        images,
+        kind,
+        ...texts,
+        ...info,
+        member: users,
+      });
+    } catch (e) {
+      toast.error("동아리 생성 실패");
+    }
+  };
 
   return (
     <S.Wrapper>
@@ -72,8 +90,21 @@ const CreatePage: NextPage = () => {
       </S.Forms>
 
       <S.ButtonCenter>
-        <S.SubmitButton>등록하기</S.SubmitButton>
+        <S.SubmitButton onClick={onSubmit}>등록하기</S.SubmitButton>
       </S.ButtonCenter>
+
+      <ToastContainer
+        position="top-right"
+        theme="dark"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable={false}
+        pauseOnHover={false}
+      />
     </S.Wrapper>
   );
 };

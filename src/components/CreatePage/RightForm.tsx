@@ -37,7 +37,7 @@ const RightForm: NextPage<RightFormProps> = ({ images, kind, setKind }) => {
           accept="image/png, image/jpeg"
         />
         <S.Imgs>
-          {images?.map((i, idx) => (
+          {images?.map((i: string, idx: number) => (
             <S.Img src={i} key={idx} />
           ))}
           <S.Img src="https://bit.ly/3sHtpmI" />
