@@ -74,6 +74,15 @@ const RightForm: NextPage<RightFormProps> = ({ images, kind, setKind }) => {
           사설
         </S.ClubButton>
       </div>
+      <div>
+        <S.SubTitle>정보</S.SubTitle>
+        <h3>
+          선생님<S.Choice>(선택)</S.Choice>
+        </h3>
+        <S.InfoInput placeholder="이름을 입력해 주세요" />
+        <h3>부장</h3>
+        <S.InfoInput placeholder="연락처를 입력해 주세요" />
+      </div>
     </S.RightFormWrapper>
   );
 };

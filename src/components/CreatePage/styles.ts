@@ -207,3 +207,17 @@ export const ClubButton = styled.button<ClubButtonProps>`
   font-weight: bold;
   transition: 0.2s;
 `;
+
+export const InfoInput = styled.input`
+  border: none;
+  outline: none;
+  padding: 1rem;
+  width: 80%;
+  max-width: 20rem;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+
+  ::placeholder {
+    text-align: center;
+  }
+`;
