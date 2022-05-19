@@ -70,6 +70,10 @@ const CreatePage: NextPage = () => {
           setInfo={setInfo}
         />
       </S.Forms>
+
+      <S.ButtonCenter>
+        <S.SubmitButton>등록하기</S.SubmitButton>
+      </S.ButtonCenter>
     </S.Wrapper>
   );
 };

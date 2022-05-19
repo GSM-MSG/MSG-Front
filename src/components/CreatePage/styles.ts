@@ -31,6 +31,36 @@ export const Forms = styled.div`
   display: flex;
   flex-wrap: wrap;
   padding: 5rem 5rem 0;
+  gap: 2rem;
+
+  @media (max-width: 1100px) {
+    flex-direction: column;
+    align-items: center;
+    padding: 5rem 2rem 0;
+  }
+`;
+
+export const ButtonCenter = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 2rem 0;
+`;
+
+export const SubmitButton = styled.button`
+  height: 3.5rem;
+  max-width: 30rem;
+  width: 80%;
+  background: #4c53ff;
+  border: none;
+  border-radius: 1rem;
+  outline: none;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: bold;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 5px 10px rgba(76, 83, 255, 50%);
 `;
 
 //-------------------LeftForm--------------------
@@ -65,6 +95,7 @@ export const TitleInput = styled.input`
 
 export const Users = styled.div`
   display: flex;
+  flex-wrap: wrap;
   gap: 3rem;
 `;
 
@@ -146,7 +177,7 @@ export const RightFormWrapper = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 5rem;
 `;
 
 export const Imgs = styled.div`
