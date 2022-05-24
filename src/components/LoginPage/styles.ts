@@ -32,7 +32,7 @@ export const Title = styled.h1`
   text-align: center;
 `;
 
-export const OauthButton = styled.div`
+export const OauthButton = styled.a`
   max-width: 30rem;
   max-height: 4rem;
   width: 90%;
