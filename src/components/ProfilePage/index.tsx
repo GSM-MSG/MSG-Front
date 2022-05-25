@@ -52,39 +52,58 @@ export default function ProfilePage({ username, user }: ProfilePageProps) {
               </S.EditButton>
             </S.UserImgWrapper>
             <h1>{username}</h1>
-            <h3>s12345@gsm.hs.kr</h3>
+            <h3>{user.userData.email}</h3>
             <S.Logout onClick={Logout}>로그아웃</S.Logout>
           </S.User>
           <S.Hr />
-          <h2>내 동아리</h2>
+          {user.clubs[0] && <h2>내 동아리</h2>}
           <S.Clubs>
-            <S.TitleClubs>
-              <S.ClubTitle>사설 동아리</S.ClubTitle>
-              <S.Cards>
-                <Card link="/major/동아리임" />
-                <Card link="/major/동아리임" />
-              </S.Cards>
-            </S.TitleClubs>
+            {user.clubs.filter((i) => i.type === "EDITORIAL")[0] && (
+              <S.TitleClubs>
+                <S.ClubTitle>사설 동아리</S.ClubTitle>
+                <S.Cards>
+                  {user.clubs
+                    .filter((i) => i.type === "EDITORIAL")
+                    .map((i) => (
+                      <Card key={i.id} link={`/editorial/${i.title}`} />
+                    ))}
+                </S.Cards>
+              </S.TitleClubs>
+            )}
             <S.Combine>
-              <div>
-                <S.ClubTitle>전공 동아리</S.ClubTitle>
-                <S.Cards>
-                  <Card link="/major/동아리임" />
-                </S.Cards>
-              </div>
-              <div>
-                <S.ClubTitle>자율 동아리</S.ClubTitle>
-                <S.Cards>
-                  <Card link="/major/동아리임" />
-                </S.Cards>
-              </div>
+              {user.clubs.filter((i) => i.type === "MAJOR")[0] && (
+                <div>
+                  <S.ClubTitle>전공 동아리</S.ClubTitle>
+                  <S.Cards>
+                    {user.clubs
+                      .filter((i) => i.type === "MAJOR")
+                      .map((i) => (
+                        <Card key={i.id} link={`/major/${i.title}`} />
+                      ))}
+                  </S.Cards>
+                </div>
+              )}
+              {user.clubs.filter((i) => i.type === "FREEDOM")[0] && (
+                <div>
+                  <S.ClubTitle>자율 동아리</S.ClubTitle>
+                  <S.Cards>
+                    {user.clubs
+                      .filter((i) => i.type === "FREEDOM")
+                      .map((i) => (
+                        <Card key={i.id} link={`/freedom/${i.title}`} />
+                      ))}
+                  </S.Cards>
+                </div>
+              )}
             </S.Combine>
           </S.Clubs>
-          <S.ButtonWrapper>
-            <S.ExitButton onClick={() => setIsShow(true)}>
-              탈퇴하기
-            </S.ExitButton>
-          </S.ButtonWrapper>
+          {user.clubs[0] && (
+            <S.ButtonWrapper>
+              <S.ExitButton onClick={() => setIsShow(true)}>
+                탈퇴하기
+              </S.ExitButton>
+            </S.ButtonWrapper>
+          )}
         </S.Main>
       </S.Wrapper>
       {isShow && <ExitPopup user={user} setIsShow={setIsShow} />}

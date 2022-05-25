@@ -1,32 +1,42 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import ProfilePage from "../components/ProfilePage";
 import api from "../lib/api";
-import Loading from "../components/Loading";
 import { MyPageType } from "../types";
+import { GetServerSideProps, NextPage } from "next";
+import userCheck from "../lib/userCheck";
 
-export default function MyProfile() {
-  const router = useRouter();
-  const [user, setUser] = useState<MyPageType>();
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  try {
+    const { cookies, accessToken } = await userCheck(ctx);
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const { data } = await api({ query: "/user/my", method: "get" });
-        setUser(data);
-      } catch (e) {
-        router.push("/login");
-        console.log(e);
-      }
-    })();
-  }, []);
+    const { data } = await api.get("/user/web/my", {
+      headers: { cookie: `accessToken=${accessToken}` },
+    });
 
+    if (cookies) {
+      ctx.res.setHeader("set-cookie", cookies);
+    }
+
+    return { props: { user: data } };
+  } catch (e) {
+    return {
+      props: {},
+      redirect: { destination: "/login" },
+    };
+  }
+};
+
+interface MyPageProps {
+  user: MyPageType;
+}
+
+const MyProfile: NextPage<MyPageProps> = ({ user }) => {
   return (
     <>
       <Header />
-      {user ? <ProfilePage user={user} username="Teemo" /> : <Loading />}
+      <ProfilePage user={user} username={user.userData.name} />
     </>
   );
-}
+};
+
+export default MyProfile;

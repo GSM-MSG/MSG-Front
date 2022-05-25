@@ -19,6 +19,7 @@ export const Title = styled.h1`
 export const Main = styled.div`
   width: 80%;
   max-width: 70rem;
+  height: 100%;
   border-top-left-radius: 2rem;
   border-top-right-radius: 2rem;
   background: #1e1e1c;
