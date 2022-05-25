@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/link-passhref */
 import Header from "../Header";
 
 import * as S from "./styles";

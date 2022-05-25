@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable @next/next/link-passhref */
 import Link from "next/link";
 import { useEffect } from "react";
 
@@ -16,7 +15,7 @@ export default function Header() {
         <S.Logo>GCMS</S.Logo>
       </Link>
       <S.Icons>
-        <Link href="/register">
+        <Link href="/create">
           <a>
             <SVG.Plus />
           </a>
