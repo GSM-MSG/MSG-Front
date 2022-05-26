@@ -1,18 +1,18 @@
-/* eslint-disable @next/next/link-passhref */
 import Link from "next/link";
+import { Club } from "../../types";
 import * as S from "./styles";
 
 interface CardProps {
-  link: string;
   width?: number;
+  club: Club;
 }
 
-export default function Card({ link }: CardProps) {
+export default function Card({ club }: CardProps) {
   return (
-    <Link href={link}>
+    <Link href={`/${club.type}/${club.title}`}>
       <S.Wrapper>
-        <S.Picture />
-        <S.Name>라이엇</S.Name>
+        <S.Picture src={club.bannerUrl || "/png/Loading.png"} />
+        <S.Name>{club.title}</S.Name>
       </S.Wrapper>
     </Link>
   );

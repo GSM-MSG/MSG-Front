@@ -1,29 +1,19 @@
-import { useRouter } from "next/router";
+import { Club } from "../../types";
 import Card from "../Card";
 
 import * as S from "./styles";
 
 interface CardListProps {
-  kind: "editorial" | "freedom" | "major";
+  clubs: Club[];
+  type: "major" | "editorial" | "freedom";
 }
 
-export default function CardList({ kind }: CardListProps) {
+export default function CardList({ clubs }: CardListProps) {
   return (
     <S.CardList>
-      <Card link={`/${kind}/동아리입니다`} />
-      <Card link={`/${kind}/동아리입니다`} />
-      <Card link={`/${kind}/동아리입니다`} />
-      <Card link={`/${kind}/동아리입니다`} />
-      <Card link={`/${kind}/동아리입니다`} />
-      <Card link={`/${kind}/동아리입니다`} />
-      <Card link={`/${kind}/동아리입니다`} />
-      <Card link={`/${kind}/동아리입니다`} />
-      <Card link={`/${kind}/동아리입니다`} />
-      <Card link={`/${kind}/동아리입니다`} />
-      <Card link={`/${kind}/동아리입니다`} />
-      <Card link={`/${kind}/동아리입니다`} />
-      <Card link={`/${kind}/동아리입니다`} />
-      <Card link={`/${kind}/동아리입니다`} />
+      {clubs.map((i) => (
+        <Card key={i.title} club={i} />
+      ))}
     </S.CardList>
   );
 }
