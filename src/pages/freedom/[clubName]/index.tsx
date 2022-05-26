@@ -1,9 +1,9 @@
-import Header from "../../components/Header";
-import InfoPage from "../../components/InfoPage";
-import api from "../../lib/api";
-import userCheck from "../../lib/userCheck";
+import Header from "../../../components/Header";
+import InfoPage from "../../../components/InfoPage";
+import api from "../../../lib/api";
+import userCheck from "../../../lib/userCheck";
 import { GetServerSideProps, NextPage } from "next";
-import { ClubDetail } from "../../types/ClubDetail";
+import { ClubDetail } from "../../../types/ClubDetail";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   try {
