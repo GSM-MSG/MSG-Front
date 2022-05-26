@@ -5,6 +5,28 @@ import Header from "../../../components/Header";
 import InfoPage from "../../../components/InfoPage";
 import api from "../../../lib/api";
 import Loading from "../../../components/Loading";
+import userCheck from "../../../lib/userCheck";
+import { GetServerSideProps } from "next";
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  console.log(ctx.query);
+  try {
+    const { cookies, accessToken } = await userCheck(ctx);
+
+    const { data } = await api.get("/club/web/detail?", {
+      headers: { cookie: `accessToken=${accessToken}` },
+    });
+
+    if (cookies) ctx.res.setHeader("set-cookie", cookies);
+
+    return { props: { clubData: data } };
+  } catch (e) {
+    return {
+      props: {},
+      redirect: { destination: "/login" },
+    };
+  }
+};
 
 export default function ClubInfo() {
   const router = useRouter();

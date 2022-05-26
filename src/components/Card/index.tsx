@@ -9,7 +9,7 @@ interface CardProps {
 
 export default function Card({ club }: CardProps) {
   return (
-    <Link href={`/${club.type}/${club.title}`}>
+    <Link href={`/${club.type.toLowerCase()}/${club.title}`}>
       <S.Wrapper>
         <S.Picture src={club.bannerUrl || "/png/Loading.png"} />
         <S.Name>{club.title}</S.Name>
