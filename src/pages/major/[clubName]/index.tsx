@@ -22,7 +22,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
     return { props: { clubData: data } };
   } catch (e: any) {
-    if (e.response.status === 401)
+    if (!e.response || e.response.status === 401)
       return {
         props: {},
         redirect: { destination: "/login" },

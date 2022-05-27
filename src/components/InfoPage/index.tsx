@@ -82,6 +82,13 @@ export default function InfoPage({ clubData }: InfoPageProps) {
       <S.ButtonWrapper>
         {/* 동아리 부장인지 조건식까지 */}
         {/* <S.Button>{ "동아리 신청 명단" : "신청하기"}</S.Button> */}
+        {clubData.scope === "USER" && clubData.club.isOpened && (
+          <S.Button>신청하기</S.Button>
+        )}
+        {clubData.scope === "MEMBER" && (
+          <S.Button style={{ background: "#FF5C5C" }}>탈퇴하기</S.Button>
+        )}
+        {clubData.scope === "HEAD" && <S.Button>명단 관리하기</S.Button>}
       </S.ButtonWrapper>
     </S.Wrapper>
   );
