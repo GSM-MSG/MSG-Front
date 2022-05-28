@@ -7,6 +7,9 @@ import * as SVG from "../../SVG";
 import ExitPopup from "./ExitPopup";
 import { useState } from "react";
 import { MyPageType } from "../../types";
+import checkQuery from "../../lib/checkQuery";
+import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 interface ProfilePageProps {
   username: string;
@@ -15,7 +18,15 @@ interface ProfilePageProps {
 
 export default function ProfilePage({ username, user }: ProfilePageProps) {
   const [isShow, setIsShow] = useState(false);
-  const Logout = async () => {};
+  const router = useRouter();
+  const Logout = async () => {
+    try {
+      await checkQuery(async () => api.post("/auth/web/logout"));
+      router.push("/login");
+    } catch (e) {
+      toast.error("로그아웃 실패");
+    }
+  };
 
   return (
     <>
