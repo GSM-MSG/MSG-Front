@@ -1,12 +1,10 @@
-import { GetStaticProps } from "next";
 import api from "./api";
 
 export const ClubTypeStaticProps =
-  (type: "MAJOR" | "EDITORIAL" | "FREEDOM"): GetStaticProps =>
-  async () => {
+  (type: "MAJOR" | "EDITORIAL" | "FREEDOM") => async () => {
     try {
       const { data } = await api.get(`/club/list?type=${type}`, {
-        withCredentials: false,
+        withCredentials: true,
       });
 
       console.log(data);

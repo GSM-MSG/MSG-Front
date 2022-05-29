@@ -1,34 +1,51 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import Header from "../../../components/Header";
-import InfoPage from "../../../components/InfoPage";
 import api from "../../../lib/api";
-import Loading from "../../../components/Loading";
+import { GetServerSideProps, NextPage } from "next";
+import userCheck from "../../../lib/userCheck";
+import { ClubDetail } from "../../../types/ClubDetail";
+import InfoPage from "../../../components/InfoPage";
 
-export default function ClubInfo() {
-  const router = useRouter();
-  const { clubName } = router.query;
-  const [clubData, setClubData] = useState<any>();
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  try {
+    const { clubName } = ctx.query;
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const { data } = await api({
-          query: `/club/detail?q=${clubName}&type=MAJOR`,
-          method: "get",
-        });
-        setClubData(data);
-      } catch (e) {
-        router.push("/login");
+    const { cookies, accessToken } = await userCheck(ctx);
+
+    const { data } = await api.get(
+      `/club/web/detail?type=MAJOR&q=${encodeURI(clubName as string)}`,
+      {
+        headers: { cookie: `accessToken=${accessToken}` },
       }
-    })();
-  }, []);
+    );
 
+    if (cookies) ctx.res.setHeader("set-cookie", cookies);
+
+    return { props: { clubData: data } };
+  } catch (e: any) {
+    if (!e.response || e.response.status === 401)
+      return {
+        props: {},
+        redirect: { destination: "/login" },
+      };
+
+    return {
+      props: {},
+      redirect: { destination: "/" },
+    };
+  }
+};
+
+interface ClubInfo {
+  clubData: ClubDetail;
+}
+
+const ClubInfo: NextPage<ClubInfo> = ({ clubData }) => {
   return (
     <>
       <Header />
-      {clubData ? <InfoPage clubName={clubName as string} /> : <Loading />}
+      <InfoPage clubData={clubData} />
     </>
   );
-}
+};
+
+export default ClubInfo;

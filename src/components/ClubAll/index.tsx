@@ -36,7 +36,7 @@ export default function ClubAll({ clubs, type }: MainPageProps) {
           </S.Tag>
         </S.Tags>
         <S.Hr />
-        <CardList kind={type} />
+        <CardList clubs={clubs} type={type} />
       </S.Wrapper>
     </>
   );

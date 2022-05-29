@@ -3,10 +3,9 @@ import Card from "../Card";
 import * as S from "./styles";
 import { Global } from "@emotion/react";
 import api from "../../lib/api";
-import { useRouter } from "next/router";
 import * as SVG from "../../SVG";
 import ExitPopup from "./ExitPopup";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { MyPageType } from "../../types";
 
 interface ProfilePageProps {
@@ -16,21 +15,7 @@ interface ProfilePageProps {
 
 export default function ProfilePage({ username, user }: ProfilePageProps) {
   const [isShow, setIsShow] = useState(false);
-  const router = useRouter();
-  const Logout = async () => {
-    try {
-      await api({
-        query: "/auth/logout",
-        method: "post",
-      });
-      localStorage.removeItem("msgAccess");
-      localStorage.removeItem("expiredAt");
-      localStorage.removeItem("msgRefresh");
-      router.push("/login");
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  const Logout = async () => {};
 
   return (
     <>
@@ -46,7 +31,7 @@ export default function ProfilePage({ username, user }: ProfilePageProps) {
         <S.Main>
           <S.User>
             <S.UserImgWrapper>
-              <S.UserImg src="https://bit.ly/3NwF4Oc" />
+              <S.UserImg src={user.userData.userImg} />
               <S.EditButton>
                 <SVG.Pen />
               </S.EditButton>
@@ -65,7 +50,7 @@ export default function ProfilePage({ username, user }: ProfilePageProps) {
                   {user.clubs
                     .filter((i) => i.type === "EDITORIAL")
                     .map((i) => (
-                      <Card key={i.id} link={`/editorial/${i.title}`} />
+                      <Card key={i.id} club={i} />
                     ))}
                 </S.Cards>
               </S.TitleClubs>
@@ -78,7 +63,7 @@ export default function ProfilePage({ username, user }: ProfilePageProps) {
                     {user.clubs
                       .filter((i) => i.type === "MAJOR")
                       .map((i) => (
-                        <Card key={i.id} link={`/major/${i.title}`} />
+                        <Card key={i.id} club={i} />
                       ))}
                   </S.Cards>
                 </div>
@@ -90,7 +75,7 @@ export default function ProfilePage({ username, user }: ProfilePageProps) {
                     {user.clubs
                       .filter((i) => i.type === "FREEDOM")
                       .map((i) => (
-                        <Card key={i.id} link={`/freedom/${i.title}`} />
+                        <Card key={i.id} club={i} />
                       ))}
                   </S.Cards>
                 </div>

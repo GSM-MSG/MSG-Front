@@ -1,53 +1,45 @@
 import * as S from "./styles";
-import { ServerUrl } from "../../config/config";
+import { ClubDetail } from "../../types/ClubDetail";
 
 interface InfoPageProps {
-  clubName: string;
+  clubData: ClubDetail;
 }
 
-export default function InfoPage({ clubName }: InfoPageProps) {
+export default function InfoPage({ clubData }: InfoPageProps) {
   return (
     <S.Wrapper>
-      <S.CoverImg src="https://bit.ly/3hA8mg3" />
+      <S.CoverImg src={clubData.club.bannerUrl || "/png/Loading.png"} />
       <S.Contents>
-        <S.ClubName>{clubName}</S.ClubName>
+        <S.ClubName>{clubData.club.title}</S.ClubName>
         <S.Users>
+          {clubData.club.teacher && (
+            <S.User>
+              <S.UserImg />
+              <S.Badge>선생님</S.Badge>
+              <S.UserName>{clubData.club.teacher}</S.UserName>
+            </S.User>
+          )}
           <S.User>
-            <S.UserImg src="https://bit.ly/3sD3hKh" />
-            <S.Badge>선생님</S.Badge>
-            <S.UserName>Teemo</S.UserName>
-          </S.User>
-          <S.User>
-            <S.UserImg src="https://bit.ly/3sD3hKh" />
+            <S.UserImg src={clubData.head.userImg} />
             <S.Badge>부장</S.Badge>
-            <S.UserName>Teemo</S.UserName>
+            <S.UserName>{clubData.head.name}</S.UserName>
           </S.User>
-          <S.User>
-            <S.UserImg src="https://bit.ly/3sD3hKh" />
-            <S.UserName>Teemo</S.UserName>
-          </S.User>
-          <S.User>
-            <S.UserImg src="https://bit.ly/3sD3hKh" />
-            <S.UserName>Teemo</S.UserName>
-          </S.User>
-          <S.User>
-            <S.UserImg src="https://bit.ly/3sD3hKh" />
-            <S.UserName>Teemo</S.UserName>
-          </S.User>
+          {clubData.member.map((i, idx) => (
+            <S.User key={idx}>
+              <S.UserImg src={i.userImg} />
+              <S.Badge>
+                {i.grade}-{i.class}
+              </S.Badge>
+              <S.UserName>{i.name}</S.UserName>
+            </S.User>
+          ))}
         </S.Users>
       </S.Contents>
       <S.Info>
         <S.AllInfo>
           <S.Introduce>
             <h2>소개</h2>
-            <div>
-              혜윰은 ‘생각’이라는 뜻의 우리말로, 같이 생각해서 더 좋은 결과를
-              이루자는 뜻으로 동아리를 개설하였습니다. 활동 설명 : 같이혜움은
-              전공을 연계한 봉사활동(멘토링)부터 공모전까지 아울러 학내 학우들과
-              서로 소통하고 호흡해 공동으로 선의의 결과물을 만들고 있으며,
-              도시재생지원센터 도시재생대학 프로그램을 통해 주민들과 함께
-              호흡하는 활동 또한 참여하고 있습니다.
-            </div>
+            <div>{clubData.club.description}</div>
           </S.Introduce>
           <S.SubInfo>
             <div>
@@ -55,9 +47,9 @@ export default function InfoPage({ clubName }: InfoPageProps) {
               <S.Contect>
                 <div>
                   <S.User>
-                    <S.UserImg src="https://bit.ly/3sD3hKh" />
+                    <S.UserImg src={clubData.head.userImg} />
                     <S.Badge>부장</S.Badge>
-                    <S.UserName>Teemo</S.UserName>
+                    <S.UserName>{clubData.head.name}</S.UserName>
                   </S.User>
                 </div>
                 <S.UserContact>
@@ -66,27 +58,37 @@ export default function InfoPage({ clubName }: InfoPageProps) {
                 </S.UserContact>
               </S.Contect>
             </div>
-            <div>
-              <h2>유튜브 링크</h2>
-              <S.LinkButton href="https://www.youtube.com/watch?v=7_0tJ8zkluc">
-                https://www.youtube.com/watch?v=7_0tJ8zkluc
-              </S.LinkButton>
-            </div>
+            {clubData.club.relatedLink.url && (
+              <div>
+                <h2>{clubData.club.relatedLink.name}</h2>
+                <S.LinkButton href={clubData.club.relatedLink.url}>
+                  {clubData.club.relatedLink.url}
+                </S.LinkButton>
+              </div>
+            )}
           </S.SubInfo>
         </S.AllInfo>
-        <div>
-          <h2>홍보 사진</h2>
-          <S.Imgs>
-            <S.Img />
-            <S.Img />
-            <S.Img />
-            <S.Img />
-          </S.Imgs>
-        </div>
+        {clubData.activityurls[0] && (
+          <div>
+            <h2>홍보 사진</h2>
+            <S.Imgs>
+              {clubData.activityurls.map((i, idx) => (
+                <S.Img key={idx} src={i} />
+              ))}
+            </S.Imgs>
+          </div>
+        )}
       </S.Info>
       <S.ButtonWrapper>
         {/* 동아리 부장인지 조건식까지 */}
         {/* <S.Button>{ "동아리 신청 명단" : "신청하기"}</S.Button> */}
+        {clubData.scope === "USER" && clubData.club.isOpened && (
+          <S.Button>신청하기</S.Button>
+        )}
+        {clubData.scope === "MEMBER" && (
+          <S.Button style={{ background: "#FF5C5C" }}>탈퇴하기</S.Button>
+        )}
+        {clubData.scope === "HEAD" && <S.Button>명단 관리하기</S.Button>}
       </S.ButtonWrapper>
     </S.Wrapper>
   );
