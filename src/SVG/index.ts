@@ -18,4 +18,5 @@ export * from "./Google";
 export * from "./SearchIcon";
 export * from "./SeachFilter";
 export * from "./SmallX";
-export * from "./letter"
+export * from "./Letter";
+export * from "./LeftArrow";

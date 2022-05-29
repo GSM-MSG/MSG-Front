@@ -1,11 +1,15 @@
 import Header from "../../components/Header";
 import styled from "@emotion/styled";
-import { Alarm, ReadingGlasses, SmallX, SearchFilter, SearchIcon } from "../../SVG";
+import { Alarm, ReadingGlasses, SmallX, SearchFilter, SearchIcon, Letter, Plus, LeftArrow } from "../../SVG";
 import { text } from "stream/consumers";
 import { stringifyQuery } from "next/dist/server/server-route-utils";
 import { type } from "os";
 import { useState } from "react";
 import * as S from "./style"
+import { AlarmAfterSchool } from "../../components/AlarmAfterSchool";
+import { GoAfter } from "../../components/GoAfter";
+import {list}  from "./dummyData"
+
 
 type UserState = {
     id: number,
@@ -14,16 +18,9 @@ type UserState = {
     week: string,
     personnel: number,
     maxPersonnel: number,
-    isApplied: 0 | 1
+    isApplied: boolean
 };
 
-type ListType = {
-    lecture: string,
-    week: "MON" | "TUE" | "WED",
-    grade: number,
-    personnel: number,
-    maxPersonnel: number
-}[];
 
 type PropListType = {
     lecture: string,
@@ -35,31 +32,6 @@ type PropListType = {
 
 type ChangeWeekType = (e: "MON" | "TUE" | "WED") => any;
 
-const AfterMoveBg = styled.div`
-    z-index: 200;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #1E1E1C4D;
-    /* background: rgba(243,244,245,0.5); */
-    /* -webkit-backdrop-filter: blur(10px); */
-    backdrop-filter: Blur(10px);
-`
-const AfterMoveBox = styled.div`
-    z-index: 200;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    /* width: 900px;    */
-    width: 56rem;
-    height: 56rem;
-    height: 37rem;
-    border-radius: 10px;
-    background-color: white;
-    color: black;
-`
 
 export default function AfterSchool() {
 
@@ -73,7 +45,7 @@ export default function AfterSchool() {
         week: "MON",
         personnel: 13,
         maxPersonnel: 25,
-        isApplied: 1
+        isApplied: false
     };
 
     const makeSelectButton = ({ lecture, week }: { lecture: string, week: "MON" | "TUE" | "WED" }) => {
@@ -81,7 +53,7 @@ export default function AfterSchool() {
         if (userState.title === undefined) {
 
             return <S.SelectButton state={"null"}>신청</S.SelectButton>
-        } else if (lecture === userState.title && week === userState.week && userState.isApplied === 1) {
+        } else if (lecture === userState.title && week === userState.week && userState.isApplied === false) {
 
             return <S.SelectButton state={"true"}>취소</S.SelectButton>
 
@@ -168,106 +140,6 @@ export default function AfterSchool() {
         }
     }
 
-    const list: ListType = [
-        {
-            lecture: "배드민턴",
-            week: "MON",
-            grade: 1,
-            personnel: 12,
-            maxPersonnel: 50
-        },
-        {
-            lecture: "축구",
-            week: "TUE",
-            grade: 3,
-            personnel: 18,
-            maxPersonnel: 30
-        },
-        {
-            lecture: "미술",
-            week: "WED",
-            grade: 2,
-            personnel: 8,
-            maxPersonnel: 10
-        },
-        {
-            lecture: "치킨",
-            week: "TUE",
-            grade: 2,
-            personnel: 8,
-            maxPersonnel: 110
-        },
-        {
-            lecture: "밥",
-            week: "WED",
-            grade: 2,
-            personnel: 8,
-            maxPersonnel: 110
-        },
-        {
-            lecture: "밥",
-            week: "WED",
-            grade: 2,
-            personnel: 8,
-            maxPersonnel: 110
-        },
-        {
-            lecture: "밥",
-            week: "WED",
-            grade: 2,
-            personnel: 8,
-            maxPersonnel: 110
-        },
-        {
-            lecture: "밥",
-            week: "WED",
-            grade: 2,
-            personnel: 8,
-            maxPersonnel: 110
-        },
-        {
-            lecture: "밥",
-            week: "WED",
-            grade: 2,
-            personnel: 8,
-            maxPersonnel: 110
-        },
-        {
-            lecture: "밥",
-            week: "WED",
-            grade: 2,
-            personnel: 8,
-            maxPersonnel: 110
-        },
-        {
-            lecture: "밥",
-            week: "WED",
-            grade: 2,
-            personnel: 8,
-            maxPersonnel: 110
-        },
-        {
-            lecture: "밥",
-            week: "WED",
-            grade: 2,
-            personnel: 8,
-            maxPersonnel: 110
-        },
-        {
-            lecture: "밥",
-            week: "WED",
-            grade: 2,
-            personnel: 8,
-            maxPersonnel: 110
-        },
-        {
-            lecture: "밥",
-            week: "WED",
-            grade: 2,
-            personnel: 8,
-            maxPersonnel: 110
-        }
-    ];
     return (
         <>
             <Header />
@@ -343,11 +215,6 @@ export default function AfterSchool() {
                     }
                 </S.ScollBox>
             </S.AfterSchoolBox>
-            {/* <AfterMoveBg>
-                    <AfterMoveBox>
-                        ss
-                    </AfterMoveBox>
-            </AfterMoveBg> */}
         </>
     )
 }

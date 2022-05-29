@@ -101,7 +101,6 @@ export const SelectButton = styled.button<StlyedProps>`
         }
     }
     };
-    /* background-color: #4C53FF; */
     color: white;
     margin-left: 3rem;
 `;
@@ -121,10 +120,7 @@ export const FilterBox = styled.div`
     margin-top: 3rem;
     margin-bottom: 2rem;
     width: 28rem;
-    /* background-color: red; */
     display: flex;
-    /* align-items */
-    /* justify-content: center; */
     justify-content: space-between;
     animation: fadeInDown 1s;
     @keyframes fadeInDown {
@@ -137,8 +133,6 @@ export const FilterBox = styled.div`
             transform: translateZ(0);
         }
     }
-
-    /* animation: 3s ease-in 1s 2 reverse both paused slidein;  */
 `;
 
 export const FilterList = styled.div`
@@ -163,5 +157,6 @@ export const FilterElement = styled.div<StlyedProps>`
     svg {
         cursor: pointer;
     }
-    background-color: ${({state}) => state ? "#A5A5FE" : "transparent" };;    
+    background-color: ${({state}) => state ? "#A5A5FE" : "transparent" };   
 `
+
