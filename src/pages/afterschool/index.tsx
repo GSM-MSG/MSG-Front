@@ -215,6 +215,8 @@ export default function AfterSchool() {
                     }
                 </S.ScollBox>
             </S.AfterSchoolBox>
+            {/* <GoAfter /> */}
+            {/* <AlarmAfterSchool /> */}
         </>
     )
 }
