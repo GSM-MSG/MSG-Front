@@ -14,3 +14,9 @@ export * from "./ReadingGlasses";
 export * from "./Pen";
 export * from "./X";
 export * from "./Google";
+//Youngjae
+export * from "./SearchIcon";
+export * from "./SeachFilter";
+export * from "./SmallX";
+export * from "./Letter";
+export * from "./LeftArrow";

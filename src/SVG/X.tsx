@@ -1,6 +1,6 @@
-export function X() {
+export function X({width,height} : {width:string,height:string}) {
   return (
-    <svg width="25" height="25" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width={width} height={height} fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         fillRule="evenodd"
         clipRule="evenodd"
