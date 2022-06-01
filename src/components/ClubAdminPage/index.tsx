@@ -17,11 +17,41 @@ export default function ClubAdminPage() {
         if (e !== null && e !== undefined) {
             setList(
                 list.map((item) =>
-                    a === num ? e : item
+                    a++ === num ? e : item
                 )
             )
         }
         setModalNum(-1);
+    }
+
+    const onRemove = (e: any) => {
+        console.log(e[2]);
+        setList(list.filter(item => item.grade !== e[0] || item.class !== e[1] || item.num !== e[2]));
+    }
+
+    const onList = () => {
+        return (
+            list.filter((item: any) => {
+                const stuNum: string = item.grade + "학년 " + item.class + "반 " + item.num + "번";
+                console.log(search, item.name);
+                if (item.name.toLowerCase().includes(search.toLowerCase()) || stuNum.toLowerCase().includes(search.toLowerCase()) || search === "") {
+                    return item;
+                }
+            }).map((item: any, idx: number) => (
+                <S.ListWrapper key={idx} bgcolor={isModifying} >
+                    <img src={item.img} />
+                    <div>
+                        <p>{item.name}</p>
+                        <p>{item.grade + "학년 " + item.class + "반 " + item.num + "번"}</p>
+                    </div>
+                    {
+                        isModifying ?
+                            <button onClick={() => { onRemove([item.grade, item.class, item.num]) }}>탈퇴</button> :
+                            <button onClick={() => setModalNum(idx)}>수정</button>
+                    }
+                </S.ListWrapper>
+            ))
+        )
     }
 
     return (
@@ -35,22 +65,7 @@ export default function ClubAdminPage() {
             </S.InputContainer>
             <S.ListContainer>
                 <ul>
-                    {
-                        list.map((item: any, idx: number) => (
-                            <S.ListWrapper key={idx} bgcolor={isModifying} >
-                                <img src={item.img} />
-                                <div>
-                                    <p>{item.name}</p>
-                                    <p>{item.grade + "학년 " + item.class + "반 " + item.num + "번"}</p>
-                                </div>
-                                {
-                                    isModifying ?
-                                        <button onClick={() => { }}>탈퇴</button> :
-                                        <button onClick={() => setModalNum(idx)}>수정</button>
-                                }
-                            </S.ListWrapper>
-                        ))
-                    }
+                    {onList()}
                 </ul>
             </S.ListContainer>
             <S.WithdrawalBtn onClick={() => setModifying(!isModifying)} bgcolor={isModifying}>
