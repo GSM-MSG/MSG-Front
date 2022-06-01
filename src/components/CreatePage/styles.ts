@@ -15,6 +15,12 @@ export const BannerImg = styled.div`
   cursor: pointer;
 `;
 
+export const BannerView = styled.img`
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+`;
+
 export const Comment = styled.p`
   font-size: 1.2rem;
   font-weight: bold;

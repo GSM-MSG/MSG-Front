@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import * as S from "./styles";
 import * as SVG from "../../SVG";
-import { useRef, useState } from "react";
+import { RefObject, useRef, useState } from "react";
 import LeftForm from "./LeftForm";
 import RightForm from "./RightForm";
 import { UserType } from "../../types/UsersType";
@@ -12,9 +12,10 @@ import { ToastContainer, toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
 import api from "../../lib/api";
+import checkQuery from "../../lib/checkQuery";
 
 const CreatePage: NextPage = () => {
-  const bannerRef = useRef<HTMLInputElement>(null);
+  const bannerRef = useRef<HTMLInputElement | null>(null);
   const [texts, setTexts] = useState<TextsType>({
     title: "",
     description: "",
@@ -41,6 +42,25 @@ const CreatePage: NextPage = () => {
   const [images, setImages] = useState<string[]>([]);
   const [kind, setKind] = useState<ClubKind>("MAJOR");
   const [info, setInfo] = useState<InfoType>({ teacher: "", contact: "" });
+  const [bannerUrl, setBannerUrl] = useState<string>("");
+
+  const UploadImg = async () => {
+    if (!bannerRef.current?.files || !bannerRef.current?.files[0]) return;
+
+    try {
+      const formData = new FormData();
+      formData.append("files", bannerRef.current?.files[0]);
+
+      const data = await checkQuery(
+        async () => await api.post("/image/web", formData)
+      );
+
+      setBannerUrl(data);
+    } catch (e) {
+      toast.error("이미지 업로드 실패");
+      bannerRef.current = null;
+    }
+  };
 
   const onSubmit = async () => {
     try {
@@ -50,6 +70,7 @@ const CreatePage: NextPage = () => {
         ...texts,
         ...info,
         member: users,
+        bannerUrl,
       });
     } catch (e) {
       toast.error("동아리 생성 실패");
@@ -63,15 +84,23 @@ const CreatePage: NextPage = () => {
         type="file"
         style={{ display: "none" }}
         accept="image/png, image/jpeg"
+        onChange={UploadImg}
       />
-      <S.BannerImg onClick={() => bannerRef.current?.click()}>
-        <SVG.AddImg />
-        <S.Comment>
-          배너를 추가해 주세요
-          <br />
-        </S.Comment>
-        <S.Description>(1920 X 400)</S.Description>
-      </S.BannerImg>
+      {bannerUrl ? (
+        <S.BannerView
+          src={bannerUrl}
+          onClick={() => bannerRef.current?.click()}
+        />
+      ) : (
+        <S.BannerImg onClick={() => bannerRef.current?.click()}>
+          <SVG.AddImg />
+          <S.Comment>
+            배너를 추가해 주세요
+            <br />
+          </S.Comment>
+          <S.Description>(1920 X 400)</S.Description>
+        </S.BannerImg>
+      )}
       <S.Forms>
         <LeftForm
           users={users}
