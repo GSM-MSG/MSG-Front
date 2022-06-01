@@ -4,6 +4,9 @@ import * as S from "./styles";
 import * as SVG from "../../SVG";
 import { ClubKind } from "./types/ClubKind";
 import { InfoType } from "./types/InfoType";
+import checkQuery from "../../lib/checkQuery";
+import api from "../../lib/api";
+import { toast } from "react-toastify";
 
 interface RightFormProps {
   images: string[];
@@ -14,14 +17,31 @@ interface RightFormProps {
   setInfo: Dispatch<SetStateAction<InfoType>>;
 }
 
-const RightForm: NextPage<RightFormProps> = ({ images, kind, setKind }) => {
+const RightForm: NextPage<RightFormProps> = ({
+  images,
+  setImages,
+  kind,
+  setKind,
+}) => {
   const ImgRef = useRef<HTMLInputElement>(null);
-  const Upload = async () => {
-    // 이미지 업로드 하는 코드
-    if (!ImgRef.current?.files) return;
-    console.log(ImgRef.current?.files[0]);
-  };
   const ChangeKind = (e: any) => setKind(e.target.name);
+
+  const UploadImg = async () => {
+    if (!ImgRef || !ImgRef.current || !ImgRef.current.files) return;
+
+    try {
+      const formData = new FormData();
+      formData.append("files", ImgRef.current.files[0]);
+
+      const data = await checkQuery(
+        async () => await api.post("/image/web", formData)
+      );
+
+      setImages([...images, data]);
+    } catch (e) {
+      toast.error("이미지 업로드에 실패했습니다.");
+    }
+  };
 
   return (
     <S.RightFormWrapper>
@@ -33,19 +53,19 @@ const RightForm: NextPage<RightFormProps> = ({ images, kind, setKind }) => {
           style={{ display: "none" }}
           type="file"
           ref={ImgRef}
-          onChange={Upload}
+          onChange={UploadImg}
           accept="image/png, image/jpeg"
         />
         <S.Imgs>
           {images?.map((i: string, idx: number) => (
             <S.Img src={i} key={idx} />
           ))}
-          <S.Img src="https://bit.ly/3sHtpmI" />
-
-          <S.ImgAddBox onClick={() => ImgRef.current?.click()}>
-            <SVG.ImgIcon />
-            <S.ImgAddComment>추가하기</S.ImgAddComment>
-          </S.ImgAddBox>
+          {images.length < 4 && (
+            <S.ImgAddBox onClick={() => ImgRef.current?.click()}>
+              <SVG.ImgIcon />
+              <S.ImgAddComment>추가하기</S.ImgAddComment>
+            </S.ImgAddBox>
+          )}
         </S.Imgs>
       </div>
       <div>

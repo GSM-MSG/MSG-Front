@@ -19,6 +19,7 @@ export const BannerView = styled.img`
   width: 100%;
   height: 400px;
   object-fit: cover;
+  background-position: center;
 `;
 
 export const Comment = styled.p`
