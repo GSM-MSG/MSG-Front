@@ -5,3 +5,4 @@ export * from "./RegisterType";
 export * from "./KindOption";
 export * from "./UsersType";
 export * from "./MyPageType";
+export * from "./AfterSchoolType";
