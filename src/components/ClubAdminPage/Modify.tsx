@@ -1,20 +1,10 @@
 import * as S from "./style";
 import * as SVG from "../../SVG";
 import React, { useRef, useState } from "react";
+import { ClubMembersType } from "../../types";
 
 
-type itemType = {
-    name: string;
-    grade: number;
-    class: number;
-    num: number;
-    img: any;
-    club: string;
-    role: string;
-}
-
-export default function Modify({ item, onClose }: { item: itemType, onClose: (e: any) => void }) {
-    const outside: any = useRef();
+export default function Modify({ item, onClose }: { item: ClubMembersType, onClose: (e: any) => void }) {
     const [isSearch, setSearch] = useState<boolean>(false);
     const [values, setValues] = useState({
         name: item.name,
@@ -22,6 +12,7 @@ export default function Modify({ item, onClose }: { item: itemType, onClose: (e:
         club: item.club,
         role: item.role,
     });
+    const outside: any = useRef();
 
     const ModalClose = () => {
         onClose({
@@ -61,7 +52,7 @@ export default function Modify({ item, onClose }: { item: itemType, onClose: (e:
                                 </li>
                                 <li>
                                     <p>학번</p>
-                                    <S.ModifyInput value={values.stuNum} onChange={(e) => {setValues({ ...values, stuNum: +e.target.value })}} />
+                                    <S.ModifyInput value={values.stuNum} onChange={(e) => { setValues({ ...values, stuNum: +e.target.value }) }} readOnly/>
                                 </li>
                                 <li>
                                     <p>동아리</p>

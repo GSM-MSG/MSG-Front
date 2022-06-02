@@ -1,6 +1,7 @@
 import img from "../../../public/png/Loading.png"
+import { Club, ClubMembersType } from "../../types"
 
-export default [
+export const userData:Array<ClubMembersType> = [
     {
         name: "강경민",
         grade: 2,
@@ -22,7 +23,7 @@ export default [
     {
         name: "김준",
         grade: 2,
-        class: 2,
+        class: 1,
         num: 5,
         img: img.src,
         club: "MSG",
@@ -37,4 +38,12 @@ export default [
         club: "MSG",
         role: "부원"
     },
+]
+
+export const clubData:Array<Club> = [
+    {
+        type: "MAJOR",
+        title: "MSG",
+        bannerUrl: img.src,
+    }
 ]

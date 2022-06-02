@@ -1,40 +1,37 @@
 import * as S from "./style";
 import * as SVG from "../../SVG";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Modify from "./Modify";
-import DummyData from "./DummyData";
 import { ClubMembersType } from "../../types";
+import { userData } from "./DummyData";
 
 
 export default function ClubAdminPage() {
-    const [list, setList] = useState<Array<ClubMembersType>>(DummyData);
+    const [userList, setUserList] = useState<Array<ClubMembersType>>(userData);
     const [isModifying, setModifying] = useState<boolean>(false);
-    const [modalNum, setModalNum] = useState<number>(-1);
+    const [modalNum, setModalNum] = useState<ClubMembersType|null>(null);
     const [search, setSearch] = useState<string>("");
 
     const onDone = (e: ClubMembersType, num: number) => {
-        var a: number = 0;
         if (e !== null && e !== undefined) {
-            setList(
-                list.map((item) =>
-                    a++ === num ? e : item
+            setUserList(
+                userList.map((item) =>
+                    e.grade === item.grade && e.class === item.class && e.num === item.num ? e : item
                 )
             )
         }
-        setModalNum(-1);
+        setModalNum(null);
     }
 
     const onRemove = (e: any) => {
-        console.log(e[2]);
-        setList(list.filter(item => item.grade !== e[0] || item.class !== e[1] || item.num !== e[2]));
+        setUserList(userList.filter(item => item.grade !== e[0] || item.class !== e[1] || item.num !== e[2]));
     }
 
     const onList = () => {
         return (
-            list.filter((item: any) => {
-                const stuNum: string = item.grade + "학년 " + item.class + "반 " + item.num + "번";
-                console.log(search, item.name);
-                if (item.name.toLowerCase().includes(search.toLowerCase()) || stuNum.toLowerCase().includes(search.toLowerCase()) || search === "") {
+            userList.filter((item: any) => {
+                const stuNum: string = item.grade + "학년" + item.class + "반" + item.num + "번";
+                if (item.name.toLowerCase().includes(search.toLowerCase()) || stuNum.includes(search.replace(/\s/gi, "")) || search === "") {
                     return item;
                 }
             }).map((item: any, idx: number) => (
@@ -47,15 +44,19 @@ export default function ClubAdminPage() {
                     {
                         isModifying ?
                             <button onClick={() => { onRemove([item.grade, item.class, item.num]) }}>탈퇴</button> :
-                            <button onClick={() => setModalNum(idx)}>수정</button>
+                            <button onClick={() => setModalNum(item)}>수정</button>
                     }
                 </S.ListWrapper>
             ))
         )
     }
 
+    useEffect(() => {
+        console.log(modalNum);
+    }, [])
+
     return (
-        <S.Wrapper isModal={modalNum !== -1 ? true : false}>
+        <S.Wrapper isModal={modalNum !== null ? true : false}>
             <S.InputContainer>
                 <S.Title>학생정보 수정</S.Title>
                 <S.InputWrapper>
@@ -71,7 +72,7 @@ export default function ClubAdminPage() {
             <S.WithdrawalBtn onClick={() => setModifying(!isModifying)} bgcolor={isModifying}>
                 {isModifying ? <SVG.ModifyPen /> : <SVG.TrashCan />}
             </S.WithdrawalBtn>
-            {modalNum !== -1 && <Modify item={list[modalNum]} onClose={(e) => onDone(e, modalNum)} />}
+            {modalNum !== null && <Modify item={modalNum} onClose={(e) => onDone(e, 0)} />}
         </S.Wrapper>
     );
 }
