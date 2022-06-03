@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import * as S from "./styles";
 import * as SVG from "../../SVG";
-import { RefObject, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import LeftForm from "./LeftForm";
 import RightForm from "./RightForm";
 import { UserType } from "../../types/UsersType";
@@ -21,24 +21,7 @@ const CreatePage: NextPage = () => {
     description: "",
     relatedLinkLd: { name: "", url: "" },
   });
-  const [users, setUsers] = useState<UserType[]>([
-    {
-      name: "윤지빈",
-      email: "s12345",
-      userImg: "https://bit.ly/3PrP38e",
-      class: 4,
-      grade: 2,
-      num: 3,
-    },
-    {
-      name: "안진형",
-      email: "s54321",
-      userImg: "https://bit.ly/3PrP38e",
-      class: 4,
-      grade: 2,
-      num: 3,
-    },
-  ]);
+  const [users, setUsers] = useState<UserType[]>([]);
   const [images, setImages] = useState<string[]>([]);
   const [kind, setKind] = useState<ClubKind>("MAJOR");
   const [info, setInfo] = useState<InfoType>({ teacher: "", contact: "" });
@@ -107,6 +90,7 @@ const CreatePage: NextPage = () => {
           setUsers={setUsers}
           texts={texts}
           setTexts={setTexts}
+          type={kind}
         />
         <RightForm
           images={images}
