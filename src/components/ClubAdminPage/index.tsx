@@ -4,12 +4,13 @@ import { useState, useEffect } from "react";
 import Modify from "./Modify";
 import { ClubMembersType } from "../../types";
 import { userData } from "./DummyData";
+import Link from "next/link";
 
 
 export default function ClubAdminPage() {
     const [userList, setUserList] = useState<Array<ClubMembersType>>(userData);
     const [isModifying, setModifying] = useState<boolean>(false);
-    const [modalNum, setModalNum] = useState<ClubMembersType|null>(null);
+    const [modalNum, setModalNum] = useState<ClubMembersType | null>(null);
     const [search, setSearch] = useState<string>("");
 
     const onDone = (e: ClubMembersType, num: number) => {
@@ -24,7 +25,7 @@ export default function ClubAdminPage() {
     }
 
     const onRemove = (e: any) => {
-        setUserList(userList.filter(item => item.grade !== e[0] || item.class !== e[1] || item.num !== e[2]));
+        setUserList(userList.filter(item => item.grade !== Number(e.grade) || item.class !== Number(e.class) || item.num !== Number(e.num)));
     }
 
     const onList = () => {
@@ -43,7 +44,13 @@ export default function ClubAdminPage() {
                     </div>
                     {
                         isModifying ?
-                            <button onClick={() => { onRemove([item.grade, item.class, item.num]) }}>탈퇴</button> :
+                            <Link
+                                // as={`/admin/${item.grade+""+item.class+""+item.num}`}
+                                href={{
+                                    pathname: '/admin/secession',
+                                    query: { grade: item.grade, class: item.class, num: item.num }
+                                }}>
+                                <button onClick={() => { /*onRemove([item.grade, item.class, item.num])*/ }}>탈퇴</button></Link> :
                             <button onClick={() => setModalNum(item)}>수정</button>
                     }
                 </S.ListWrapper>
@@ -52,7 +59,11 @@ export default function ClubAdminPage() {
     }
 
     useEffect(() => {
-        console.log(modalNum);
+        const stuNum: object = JSON.parse(localStorage.getItem('stuNum' || '{}'));
+        if (stuNum !== undefined && stuNum !== null) {
+            onRemove(stuNum);
+        }
+        localStorage.removeItem('stuNum');
     }, [])
 
     return (

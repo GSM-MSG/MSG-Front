@@ -1,7 +1,7 @@
 import img from "../../../public/png/Loading.png"
 import { Club, ClubMembersType } from "../../types"
 
-export const userData:Array<ClubMembersType> = [
+export const userData: Array<ClubMembersType> = [
     {
         name: "강경민",
         grade: 2,
@@ -40,10 +40,30 @@ export const userData:Array<ClubMembersType> = [
     },
 ]
 
-export const clubData:Array<Club> = [
+export const clubData: Array<Club> = [
     {
         type: "MAJOR",
         title: "MSG",
         bannerUrl: img.src,
-    }
+    },
+    {
+        type: "MAJOR",
+        title: "&mpersand",
+        bannerUrl: img.src,
+    },
+    {
+        type: "MAJOR",
+        title: "잡탕",
+        bannerUrl: img.src,
+    },
+    {
+        type: "MAJOR",
+        title: "Team.Dotori",
+        bannerUrl: img.src,
+    },
+    {
+        type: "MAJOR",
+        title: "동아리",
+        bannerUrl: img.src,
+    },
 ]

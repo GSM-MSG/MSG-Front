@@ -170,8 +170,7 @@ export const WithdrawalBtn = styled.div<StyledProps>`
         height: 7.6vw;
         min-width: 80px;
         min-height: 80px;
-        left: 88vw;
-        
+        left: 88vw; 
     }
 
     @media (max-width: 800px) {
@@ -208,14 +207,14 @@ export const ModifyLayout = styled.div`
 
 export const ModifyBox = styled.div<ModalProps>`
     position: fixed;
-    width: ${props => {return props.isModal ? "846px" : "700px"}};
-    height: ${props => {return props.isModal ? "610px" : "780px"}};
+    width: ${props => { return props.isModal ? "846px" : "700px" }};
+    height: ${props => { return props.isModal ? "610px" : "780px" }};
     background: #1E1E1C;
     display: flex;
     flex-direction: column;
     align-items: center;
     z-index: 200;
-    padding: ${props => {return props.isModal ? "30px 172px" : "20px 110px"}};
+    padding: ${props => { return props.isModal ? "30px 172px" : "20px 110px" }};
     transition: width .5s, height 0s, gap 0s;
     gap: 30px;
     
@@ -273,7 +272,7 @@ export const DoneBtn = styled.button<ModalProps>`
     width: 50%;
     height: 60px;
     border-radius: 10px;
-    gap: ${props => {return(props.isModal ? "30px" : 0)}};
+    gap: ${props => { return (props.isModal ? "30px" : 0) }};
     font-weight: 600;
     font-size: 26px;
     line-height: 35px;
@@ -297,6 +296,7 @@ export const ClubInfo = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 250px;
 `
 
 export const ClubBanner = styled.img`
