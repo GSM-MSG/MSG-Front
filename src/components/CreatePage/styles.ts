@@ -342,11 +342,12 @@ export const PopupUsers = styled.div`
   overflow: auto;
 `;
 
-export const PopupUser = styled.div`
+export const PopupUser = styled.div<{ isHave: boolean }>`
   display: flex;
   padding: 1rem;
   align-items: center;
   gap: 2rem;
+  ${({ isHave }) => isHave && "filter: brightness(30%);"}
 `;
 
 export const AddUserImg = styled.img`

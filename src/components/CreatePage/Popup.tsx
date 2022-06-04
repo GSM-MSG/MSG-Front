@@ -20,20 +20,31 @@ export default function Popup({
   setUsers,
 }: PopupProps) {
   const [name, setName] = useState<string>("");
-  const [usersTemp, setUsersTemp] = useState<UserType[] | null>(null);
+  const [apiTemp, setApiTemp] = useState<UserType[]>([]);
+  const [temp, setTemp] = useState<UserType[]>([]);
 
   const onClick = () => {
+    setUsers([...users, ...temp]);
     setIsShow(false);
   };
 
   useEffect(() => {
+    if (name.length <= 0) {
+      setApiTemp([]);
+      return;
+    }
     (async () => {
       const data = await checkQuery(() =>
         api.get(`/user/web/search?name=${name}&type=${type}`)
       );
-      setUsersTemp(data);
+      setApiTemp(data);
     })();
   }, [name, type]);
+
+  const AddUser = (user: UserType) => {
+    if (!temp.find((i) => i.email === user.email)) setTemp([...temp, user]);
+    else setTemp(temp.filter((i) => i.email !== user.email));
+  };
 
   return (
     <S.PopupWrapper>
@@ -50,20 +61,25 @@ export default function Popup({
           />
         </S.SearchBar>
         <S.PopupUsers>
-          {usersTemp?.map((i) => (
-            <S.PopupUser key={i.email}>
-              <S.AddUserImg src={i.userImg} />
-              <S.UserInfo>
-                <div>
-                  <h3>{i.name}</h3>
+          {apiTemp
+            ?.filter((i) => !users.find((j) => i.email === j.email))
+            .map((i) => (
+              <S.PopupUser
+                isHave={!!temp.find((j) => j.email === i.email)}
+                key={i.email}
+                onClick={() => AddUser(i)}
+              >
+                <S.AddUserImg src={i.userImg} />
+                <S.UserInfo>
                   <div>
-                    {i.grade}학년 {i.class}반 {i.num}번
+                    <h3>{i.name}</h3>
+                    <div>
+                      {i.grade}학년 {i.class}반 {i.num}번
+                    </div>
                   </div>
-                </div>
-                <S.CheckBox type="checkbox" />
-              </S.UserInfo>
-            </S.PopupUser>
-          ))}
+                </S.UserInfo>
+              </S.PopupUser>
+            ))}
         </S.PopupUsers>
         <S.PopupButton onClick={onClick}>추가하기</S.PopupButton>
       </S.Popup>
