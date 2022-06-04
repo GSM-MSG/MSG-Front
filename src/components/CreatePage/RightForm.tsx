@@ -7,6 +7,7 @@ import { InfoType } from "./types/InfoType";
 import checkQuery from "../../lib/checkQuery";
 import api from "../../lib/api";
 import { toast } from "react-toastify";
+import { UserType } from "../../types";
 
 interface RightFormProps {
   images: string[];
@@ -15,6 +16,7 @@ interface RightFormProps {
   setKind: Dispatch<SetStateAction<ClubKind>>;
   info: InfoType;
   setInfo: Dispatch<SetStateAction<InfoType>>;
+  setUsers: Dispatch<SetStateAction<UserType[]>>;
 }
 
 const RightForm: NextPage<RightFormProps> = ({
@@ -22,9 +24,13 @@ const RightForm: NextPage<RightFormProps> = ({
   setImages,
   kind,
   setKind,
+  setUsers,
 }) => {
   const ImgRef = useRef<HTMLInputElement>(null);
-  const ChangeKind = (e: any) => setKind(e.target.name);
+  const ChangeKind = (e: any) => {
+    setKind(e.target.name);
+    setUsers([]);
+  };
 
   const UploadImg = async () => {
     if (!ImgRef || !ImgRef.current || !ImgRef.current.files) return;

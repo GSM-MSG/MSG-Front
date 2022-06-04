@@ -109,6 +109,7 @@ const CreatePage: NextPage = () => {
           setKind={setType}
           info={info}
           setInfo={setInfo}
+          setUsers={setUsers}
         />
       </S.Forms>
 
