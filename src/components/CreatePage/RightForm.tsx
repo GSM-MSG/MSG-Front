@@ -28,6 +28,7 @@ const RightForm: NextPage<RightFormProps> = ({
 
   const UploadImg = async () => {
     if (!ImgRef || !ImgRef.current || !ImgRef.current.files) return;
+    if (!ImgRef?.current?.files[0].type.includes("image")) return;
 
     try {
       const formData = new FormData();
@@ -54,7 +55,7 @@ const RightForm: NextPage<RightFormProps> = ({
           type="file"
           ref={ImgRef}
           onChange={UploadImg}
-          accept="image/png, image/jpeg"
+          accept="image/*"
         />
         <S.Imgs>
           {images?.map((i: string, idx: number) => (

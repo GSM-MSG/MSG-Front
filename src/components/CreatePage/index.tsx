@@ -13,8 +13,10 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import api from "../../lib/api";
 import checkQuery from "../../lib/checkQuery";
+import { useRouter } from "next/router";
 
 const CreatePage: NextPage = () => {
+  const router = useRouter();
   const bannerRef = useRef<HTMLInputElement | null>(null);
   const [texts, setTexts] = useState<TextsType>({
     title: "",
@@ -23,12 +25,13 @@ const CreatePage: NextPage = () => {
   });
   const [users, setUsers] = useState<UserType[]>([]);
   const [images, setImages] = useState<string[]>([]);
-  const [kind, setKind] = useState<ClubKind>("MAJOR");
+  const [type, setType] = useState<ClubKind>("MAJOR");
   const [info, setInfo] = useState<InfoType>({ teacher: "", contact: "" });
   const [bannerUrl, setBannerUrl] = useState<string>("");
 
   const UploadImg = async () => {
     if (!bannerRef.current?.files || !bannerRef.current?.files[0]) return;
+    if (!bannerRef?.current?.files[0].type.includes("image")) return;
 
     try {
       const formData = new FormData();
@@ -38,7 +41,7 @@ const CreatePage: NextPage = () => {
         async () => await api.post("/image/web", formData)
       );
 
-      setBannerUrl(data);
+      setBannerUrl(data[0]);
     } catch (e) {
       toast.error("이미지 업로드 실패");
       bannerRef.current = null;
@@ -46,15 +49,23 @@ const CreatePage: NextPage = () => {
   };
 
   const onSubmit = async () => {
+    if (/[\{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi.test(texts.title)) {
+      toast.info("제목에 특수문자를 넣을 수 없습니다.");
+      return;
+    }
     try {
-      await api.post("/club", {
-        images,
-        kind,
-        ...texts,
-        ...info,
-        member: users,
-        bannerUrl,
-      });
+      await checkQuery(() =>
+        api.post("/club/web", {
+          images,
+          type,
+          ...texts,
+          ...info,
+          member: users,
+          bannerUrl,
+        })
+      );
+
+      router.push("/");
     } catch (e) {
       toast.error("동아리 생성 실패");
     }
@@ -66,13 +77,13 @@ const CreatePage: NextPage = () => {
         ref={bannerRef}
         type="file"
         style={{ display: "none" }}
-        accept="image/png, image/jpeg"
+        accept="image/*"
         onChange={UploadImg}
       />
       {bannerUrl ? (
         <S.BannerView
           src={bannerUrl}
-          onClick={() => bannerRef.current?.click()}
+          onDoubleClick={() => bannerRef.current?.click()}
         />
       ) : (
         <S.BannerImg onClick={() => bannerRef.current?.click()}>
@@ -90,13 +101,13 @@ const CreatePage: NextPage = () => {
           setUsers={setUsers}
           texts={texts}
           setTexts={setTexts}
-          type={kind}
+          type={type}
         />
         <RightForm
           images={images}
           setImages={setImages}
-          kind={kind}
-          setKind={setKind}
+          kind={type}
+          setKind={setType}
           info={info}
           setInfo={setInfo}
         />
