@@ -44,7 +44,6 @@ const CreatePage: NextPage = () => {
       setBannerUrl(data[0]);
     } catch (e) {
       toast.error("이미지 업로드 실패");
-      bannerRef.current = null;
     }
   };
 
@@ -56,11 +55,11 @@ const CreatePage: NextPage = () => {
     try {
       await checkQuery(() =>
         api.post("/club/web", {
-          images,
+          activtdtyUrls: images,
           type,
           ...texts,
           ...info,
-          member: users,
+          member: users.map((i) => i.email),
           bannerUrl,
         })
       );

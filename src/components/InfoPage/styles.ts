@@ -157,6 +157,7 @@ export const ButtonWrapper = styled.div`
 `;
 
 export const Button = styled.button`
+  margin-top: 3rem;
   font-size: 1.5rem;
   font-weight: bold;
   font-family: inherit;

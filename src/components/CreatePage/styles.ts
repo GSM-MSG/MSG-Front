@@ -255,6 +255,7 @@ export const InfoInput = styled.input`
   max-width: 20rem;
   font-size: 1rem;
   border-radius: 0.5rem;
+  text-align: center;
 
   ::placeholder {
     text-align: center;
@@ -313,7 +314,7 @@ export const PopupTitle = styled.h2`
   text-align: center;
 `;
 
-export const SearchBar = styled.form`
+export const SearchBar = styled.div`
   width: 90%;
   height: 3rem;
   border: 1px solid #fff;

@@ -96,7 +96,7 @@ const RightForm: NextPage<RightFormProps> = ({
         </S.ClubButton>
       </div>
       <div>
-        <S.SubTitle>정보</S.SubTitle>
+        <S.SubTitle>연락처</S.SubTitle>
         <h3>
           선생님<S.Choice>(선택)</S.Choice>
         </h3>

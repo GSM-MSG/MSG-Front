@@ -3,7 +3,7 @@ import { keyframes } from "@emotion/react";
 
 export const Wrapper = styled.div`
   margin-top: 4rem;
-  height: calc(100vh - 4rem);
+  min-height: calc(100vh - 4rem);
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -17,9 +17,10 @@ export const Title = styled.h1`
 `;
 
 export const Main = styled.div`
+  flex: 1;
   width: 80%;
+  height: auto;
   max-width: 70rem;
-  height: 100%;
   border-top-left-radius: 2rem;
   border-top-right-radius: 2rem;
   background: #1e1e1c;

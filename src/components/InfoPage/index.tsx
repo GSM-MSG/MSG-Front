@@ -37,27 +37,33 @@ export default function InfoPage({ clubData }: InfoPageProps) {
       </S.Contents>
       <S.Info>
         <S.AllInfo>
-          <S.Introduce>
-            <h2>소개</h2>
-            <div>{clubData.club.description}</div>
-          </S.Introduce>
+          {clubData.club.description && (
+            <S.Introduce>
+              <h2>소개</h2>
+              <div>{clubData.club.description}</div>
+            </S.Introduce>
+          )}
+
           <S.SubInfo>
-            <div>
-              <h2>연락처</h2>
-              <S.Contect>
-                <div>
-                  <S.User>
-                    <S.UserImg src={clubData.head.userImg} />
-                    <S.Badge>부장</S.Badge>
-                    <S.UserName>{clubData.head.name}</S.UserName>
-                  </S.User>
-                </div>
-                <S.UserContact>
-                  <h3>discord</h3>
-                  <p>김부장#1234</p>
-                </S.UserContact>
-              </S.Contect>
-            </div>
+            {clubData.club.relatedLink.name && (
+              <div>
+                <h2>연락처</h2>
+                <S.Contect>
+                  <div>
+                    <S.User>
+                      <S.UserImg src={clubData.head.userImg} />
+                      <S.Badge>부장</S.Badge>
+                      <S.UserName>{clubData.head.name}</S.UserName>
+                    </S.User>
+                  </div>
+                  <S.UserContact>
+                    <h3>{clubData.club.relatedLink.name}</h3>
+                    <p>{clubData.club.relatedLink.url}</p>
+                  </S.UserContact>
+                </S.Contect>
+              </div>
+            )}
+
             {clubData.club.relatedLink.url && (
               <div>
                 <h2>{clubData.club.relatedLink.name}</h2>
@@ -80,8 +86,6 @@ export default function InfoPage({ clubData }: InfoPageProps) {
         )}
       </S.Info>
       <S.ButtonWrapper>
-        {/* 동아리 부장인지 조건식까지 */}
-        {/* <S.Button>{ "동아리 신청 명단" : "신청하기"}</S.Button> */}
         {clubData.scope === "USER" && clubData.club.isOpened && (
           <S.Button>신청하기</S.Button>
         )}

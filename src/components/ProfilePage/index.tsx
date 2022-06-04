@@ -3,7 +3,6 @@ import Card from "../Card";
 import * as S from "./styles";
 import { Global } from "@emotion/react";
 import api from "../../lib/api";
-import * as SVG from "../../SVG";
 import ExitPopup from "./ExitPopup";
 import { useState } from "react";
 import { MyPageType } from "../../types";
@@ -17,6 +16,7 @@ interface ProfilePageProps {
 }
 
 export default function ProfilePage({ username, user }: ProfilePageProps) {
+  console.log(user.clubs);
   const [isShow, setIsShow] = useState(false);
   const router = useRouter();
   const Logout = async () => {
@@ -43,9 +43,9 @@ export default function ProfilePage({ username, user }: ProfilePageProps) {
           <S.User>
             <S.UserImgWrapper>
               <S.UserImg src={user.userData.userImg} />
-              <S.EditButton>
-                <SVG.Pen />
-              </S.EditButton>
+              {/* <S.EditButton> */}
+              {/*   <SVG.Pen /> */}
+              {/* </S.EditButton> */}
             </S.UserImgWrapper>
             <h1>{username}</h1>
             <h3>{user.userData.email}</h3>
