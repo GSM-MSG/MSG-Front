@@ -156,7 +156,7 @@ export const ButtonWrapper = styled.div`
   align-items: center;
 `;
 
-export const Button = styled.button`
+export const Button = styled.a`
   margin-top: 3rem;
   font-size: 1.5rem;
   font-weight: bold;

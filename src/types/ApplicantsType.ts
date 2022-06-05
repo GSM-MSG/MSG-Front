@@ -1,12 +1,10 @@
 export interface ApplicantsType {
-  list: [
-    {
-      userId: string;
-      name: string;
-      grade: 1;
-      class: 2;
-      number: 3;
-      userImg: string;
-    }
-  ];
+  list: {
+    userId: string;
+    name: string;
+    grade: number;
+    class: number;
+    number: number;
+    userImg: string;
+  }[];
 }

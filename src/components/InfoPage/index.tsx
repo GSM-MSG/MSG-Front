@@ -1,5 +1,7 @@
 import * as S from "./styles";
 import { ClubDetail } from "../../types/ClubDetail";
+import Link from "next/link";
+import { type } from "os";
 
 interface InfoPageProps {
   clubData: ClubDetail;
@@ -92,7 +94,15 @@ export default function InfoPage({ clubData }: InfoPageProps) {
         {clubData.scope === "MEMBER" && (
           <S.Button style={{ background: "#FF5C5C" }}>탈퇴하기</S.Button>
         )}
-        {clubData.scope === "HEAD" && <S.Button>명단 관리하기</S.Button>}
+        {clubData.scope === "HEAD" && (
+          <Link
+            href={`/${clubData.club.type.toLowerCase()}/${
+              clubData.club.title
+            }/users`}
+          >
+            <S.Button>명단 관리하기</S.Button>
+          </Link>
+        )}
       </S.ButtonWrapper>
     </S.Wrapper>
   );

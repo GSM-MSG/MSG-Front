@@ -1,42 +1,21 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import api from "../../lib/api";
-import { UserType } from "../../types";
+import { useState } from "react";
 import * as S from "./styles";
 import { Tag, Tags } from "../ClubAll/styles";
 import UserCard from "./UserCard";
 import MemberCard from "./MemberCard";
-import Loading from "../Loading";
 import { ApplicantsType } from "../../types/ApplicantsType";
+import { MemberType } from "../../types/MemberType";
+import { NextPage } from "next";
 
-export default function Users() {
-  const router = useRouter();
-  const [users, setUsers] = useState<UserType[]>();
+interface UsersProps {
+  users: MemberType[];
+}
+
+const Users: NextPage<UsersProps> = ({ users }) => {
+  const [member, setMember] = useState<MemberType[]>(users);
   const [applicants, setApplicants] = useState<ApplicantsType>();
   const [page, setPage] = useState<boolean>(true);
-
-  useEffect(() => {
-    (async () => {
-      try {
-        if (page) {
-          const { data } = await api({ query: "/club/members", method: "get" });
-          setUsers(data);
-        } else {
-          const { data } = await api({
-            query: "/club/applicant",
-            method: "get",
-          });
-          setApplicants(data);
-        }
-      } catch (e: any) {
-        // if (e.response.data.status === 406) router.back();
-        // else router.push("/login");
-      }
-    })();
-  }, [page]);
-
-  if ((!users && page) || (!applicants && !page)) return <Loading />;
 
   return (
     <S.UsersWrapper>
@@ -54,20 +33,9 @@ export default function Users() {
       </div>
       {page ? (
         <S.CardList>
-          {/* {users?.map((user) => (
-            <UserCard key={user.userId} user={user} />
-          ))} */}
-          <UserCard />
-          <UserCard />
-          <UserCard />
-          <UserCard />
-          <UserCard />
-          <UserCard />
-          <UserCard />
-          <UserCard />
-          <UserCard />
-          <UserCard />
-          <UserCard />
+          {member?.map((user) => (
+            <UserCard key={user.id} user={user} />
+          ))}
         </S.CardList>
       ) : (
         <S.CardList>
@@ -82,4 +50,6 @@ export default function Users() {
       )}
     </S.UsersWrapper>
   );
-}
+};
+
+export default Users;
