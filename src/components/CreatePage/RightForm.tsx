@@ -44,7 +44,7 @@ const RightForm: NextPage<RightFormProps> = ({
         async () => await api.post("/image/web", formData)
       );
 
-      setImages([...images, data]);
+      setImages([...images, data[0]]);
     } catch (e) {
       toast.error("이미지 업로드에 실패했습니다.");
     }

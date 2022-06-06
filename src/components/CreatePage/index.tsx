@@ -61,6 +61,9 @@ const CreatePage: NextPage = () => {
           ...info,
           member: users.map((i) => i.email),
           bannerUrl,
+          relatedLinkLd: {
+            ...texts.relatedLinkLd,
+          },
         })
       );
 

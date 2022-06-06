@@ -1,7 +1,6 @@
 import * as S from "./styles";
 import { ClubDetail } from "../../types/ClubDetail";
 import Link from "next/link";
-import { type } from "os";
 
 interface InfoPageProps {
   clubData: ClubDetail;
