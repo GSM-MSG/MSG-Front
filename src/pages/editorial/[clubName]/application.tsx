@@ -1,9 +1,8 @@
 import { GetServerSideProps, NextPage } from "next";
-import Header from "../../../components/Header";
 import Users from "../../../components/Users";
 import api from "../../../lib/api";
 import userCheck from "../../../lib/userCheck";
-import { MemberType } from "../../../types/MemberType";
+import { ApplicantsType } from "../../../types/ApplicantsType";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   try {
@@ -12,7 +11,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const { clubName } = ctx.query;
 
     const { data } = await api.get(
-      `/club/web/members?q=${encodeURI(clubName as string)}&type=FREEDOM`,
+      `/club/web/applicant?q=${encodeURI(clubName as string)}&type=EDITORIAL`,
       { headers: { cookie: `accessToken=${accessToken}` } }
     );
 
@@ -22,22 +21,16 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
     return { props: { users: data } };
   } catch (e) {
-    console.log(e);
-    return { props: {} };
+    return { props: {}, redirect: { destination: "/login" } };
   }
 };
 
-interface UsersProps {
-  users: MemberType[];
+interface ApplicationProps {
+  users: ApplicantsType[];
 }
 
-const users: NextPage<UsersProps> = ({ users }) => {
-  return (
-    <>
-      <Header />
-      <Users users={users} type="FREEDOM" page />
-    </>
-  );
+const Application: NextPage<ApplicationProps> = ({ users }) => {
+  return <Users applications={users} page={false} type="EDITORIAL" />;
 };
 
-export default users;
+export default Application;

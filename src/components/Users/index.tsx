@@ -7,14 +7,19 @@ import MemberCard from "./MemberCard";
 import { ApplicantsType } from "../../types/ApplicantsType";
 import { MemberType } from "../../types/MemberType";
 import { NextPage } from "next";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { ClubKind } from "../CreatePage/types/ClubKind";
 
 interface UsersProps {
   users?: MemberType[];
   applications?: ApplicantsType[];
   page: boolean;
+  type: ClubKind;
 }
 
-const Users: NextPage<UsersProps> = ({ users, applications, page }) => {
+const Users: NextPage<UsersProps> = ({ users, applications, page, type }) => {
+  const router = useRouter();
   const [member, setMember] = useState<MemberType[] | undefined>(users);
   const [application, setApplication] = useState<ApplicantsType[] | undefined>(
     applications
@@ -25,8 +30,18 @@ const Users: NextPage<UsersProps> = ({ users, applications, page }) => {
       <S.Title>명단 관리</S.Title>
       <div>
         <Tags>
-          <Tag active={page}>구성원</Tag>
-          <Tag active={!page}>신청 명단</Tag>
+          <Link href={`/${type.toLowerCase()}/${router.query.clubName}/users`}>
+            <a>
+              <Tag active={page}>구성원</Tag>
+            </a>
+          </Link>
+          <Link
+            href={`/${type.toLowerCase()}/${router.query.clubName}/application`}
+          >
+            <a>
+              <Tag active={!page}>신청 명단</Tag>
+            </a>
+          </Link>
         </Tags>
         <S.Hr />
       </div>
@@ -38,7 +53,7 @@ const Users: NextPage<UsersProps> = ({ users, applications, page }) => {
         </S.CardList>
       ) : (
         <S.CardList>
-          {users.map((user) => (
+          {application?.map((user) => (
             <UserCard key={user.userId} user={user} />
           ))}
         </S.CardList>

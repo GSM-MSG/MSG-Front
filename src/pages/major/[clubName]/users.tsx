@@ -35,7 +35,7 @@ const users: NextPage<UsersProps> = ({ users }) => {
   return (
     <>
       <Header />
-      <Users users={users} />
+      <Users users={users} page type="MAJOR" />
     </>
   );
 };
