@@ -1,19 +1,19 @@
-import { MemberType } from "../../types/MemberType";
+import { ApplicantsType } from "../../types/ApplicantsType";
 import * as S from "./styles";
 
 interface UserCardProps {
-  user: MemberType;
+  user: ApplicantsType;
 }
 
 export default function UserCard({ user }: UserCardProps) {
   return (
     <S.UserCardWrapper>
-      <S.UserImg src={user.user.userImg} />
+      <S.UserImg src={user.userImg} />
       <S.Info>
         <div>
-          <S.Name>{user.user.name}</S.Name>
+          <S.Name>{user.name}</S.Name>
           <S.Description>
-            {user.user.grade}학년 {user.user.class}반 {user.user.num}번
+            {user.grade}학년 {user.class}반 {user.num}번
           </S.Description>
         </div>
         <S.Bottom>
