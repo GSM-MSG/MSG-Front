@@ -2,7 +2,7 @@
 import { useState } from "react";
 import * as S from "./styles";
 import { Tag, Tags } from "../ClubAll/styles";
-import UserCard from "./UserCard";
+import ApplicationCard from "./ApplicationCard";
 import MemberCard from "./MemberCard";
 import { ApplicantsType } from "../../types/ApplicantsType";
 import { MemberType } from "../../types/MemberType";
@@ -54,7 +54,7 @@ const Users: NextPage<UsersProps> = ({ users, applications, page, type }) => {
       ) : (
         <S.CardList>
           {application?.map((user) => (
-            <UserCard key={user.userId} user={user} />
+            <ApplicationCard key={user.userId} user={user} />
           ))}
         </S.CardList>
       )}

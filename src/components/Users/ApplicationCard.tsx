@@ -5,7 +5,7 @@ interface UserCardProps {
   user: ApplicantsType;
 }
 
-export default function UserCard({ user }: UserCardProps) {
+export default function ApplicationCard({ user }: UserCardProps) {
   return (
     <S.UserCardWrapper>
       <S.UserImg src={user.userImg} />

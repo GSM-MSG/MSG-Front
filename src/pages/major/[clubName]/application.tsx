@@ -21,7 +21,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
     return { props: { users: data } };
   } catch (e) {
-    return { props: {}, redirect: { destination: "/login" } };
+    return { props: {}, redirect: { destination: "/" } };
   }
 };
 
