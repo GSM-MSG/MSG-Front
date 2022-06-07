@@ -46,7 +46,7 @@ export default function InfoPage({ clubData }: InfoPageProps) {
           )}
 
           <S.SubInfo>
-            {clubData.club.relatedLink.name && (
+            {clubData.club.contact && (
               <div>
                 <h2>연락처</h2>
                 <S.Contect>
@@ -58,18 +58,18 @@ export default function InfoPage({ clubData }: InfoPageProps) {
                     </S.User>
                   </div>
                   <S.UserContact>
-                    <h3>{clubData.club.relatedLink.name}</h3>
-                    <p>{clubData.club.relatedLink.url}</p>
+                    <h3>discord</h3>
+                    <p>{clubData.club.contact}</p>
                   </S.UserContact>
                 </S.Contect>
               </div>
             )}
 
-            {clubData.club.relatedLink.url && (
+            {clubData.club.notionLink && (
               <div>
-                <h2>{clubData.club.relatedLink.name}</h2>
-                <S.LinkButton href={clubData.club.relatedLink.url}>
-                  {clubData.club.relatedLink.url}
+                <h2>노션 링크</h2>
+                <S.LinkButton href={clubData.club.notionLink}>
+                  {clubData.club.notionLink}
                 </S.LinkButton>
               </div>
             )}

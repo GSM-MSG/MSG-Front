@@ -26,12 +26,6 @@ const LeftForm: NextPage<LeftFormProps> = ({
 
   const onChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const element = e.target;
-    if (element.name === "relatedLinkLd") {
-      setTexts({
-        ...texts,
-        relatedLinkLd: { ...texts.relatedLinkLd, [element.id]: element.value },
-      });
-    }
     setTexts({ ...texts, [element.name]: element.value });
   };
 
@@ -71,21 +65,12 @@ const LeftForm: NextPage<LeftFormProps> = ({
           ></S.Textarea>
         </div>
         <div>
-          <S.SubTitle>
-            홍보 링크<S.Choice>(선택)</S.Choice>
-          </S.SubTitle>
+          <S.SubTitle>노션 링크</S.SubTitle>
           <S.LinkWrapper>
-            <S.LinkTitle
-              name="relatedLinkLd"
-              id="name"
-              value={texts.relatedLinkLd.name}
-              onChange={onChange}
-              placeholder="제목을 입력해주세요"
-            />
             <S.Link
-              name="relatedLinkLd"
+              name="notionLink"
               id="url"
-              value={texts.relatedLinkLd.url}
+              value={texts.notionLink}
               onChange={onChange}
             />
           </S.LinkWrapper>

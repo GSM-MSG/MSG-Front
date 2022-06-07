@@ -40,6 +40,7 @@ interface ClubInfo {
 }
 
 const ClubInfo: NextPage<ClubInfo> = ({ clubData }) => {
+  console.log(clubData);
   return (
     <>
       <Header />

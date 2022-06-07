@@ -8,7 +8,7 @@ interface MemberCardProps {
 
 const MemberCard: NextPage<MemberCardProps> = ({ user }) => {
   return (
-    <S.UserCardWrapper>
+    <S.MemberWrapper>
       <S.UserImg src={user.user.userImg} />
       <S.Info>
         <div>
@@ -22,7 +22,7 @@ const MemberCard: NextPage<MemberCardProps> = ({ user }) => {
           <S.Refuse>강퇴</S.Refuse>
         </S.Bottom>
       </S.Info>
-    </S.UserCardWrapper>
+    </S.MemberWrapper>
   );
 };
 

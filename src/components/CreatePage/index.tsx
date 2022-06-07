@@ -21,7 +21,7 @@ const CreatePage: NextPage = () => {
   const [texts, setTexts] = useState<TextsType>({
     title: "",
     description: "",
-    relatedLinkLd: { name: "", url: "" },
+    notionLink: "",
   });
   const [users, setUsers] = useState<UserType[]>([]);
   const [images, setImages] = useState<string[]>([]);
@@ -55,15 +55,13 @@ const CreatePage: NextPage = () => {
     try {
       await checkQuery(() =>
         api.post("/club/web", {
-          activtdtyUrls: images,
+          activityUrls: images,
           type,
           ...texts,
+          notionLink: texts.notionLink ? texts.notionLink : undefined,
           ...info,
           member: users.map((i) => i.email),
           bannerUrl,
-          relatedLinkLd: {
-            ...texts.relatedLinkLd,
-          },
         })
       );
 

@@ -24,9 +24,9 @@ export const CardList = styled.span`
   justify-content: center;
 `;
 
-//---------------------UserCard--------------------
+//---------------------ApplicationCard | MemberCard--------------------
 
-export const UserCardWrapper = styled.div`
+export const MemberWrapper = styled.div`
   width: 20rem;
   height: 12rem;
   background: #fdfdfd;
@@ -107,4 +107,16 @@ export const Refuse = styled.button`
   :hover {
     background: #4c4c4c;
   }
+`;
+
+//------------------UserCard-----------------
+
+export const UserCardWrapper = styled.div`
+  width: 20rem;
+  height: 12rem;
+  background: #fdfdfd;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  padding-top: 2.5rem;
+  color: #000;
 `;

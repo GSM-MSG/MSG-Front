@@ -147,24 +147,7 @@ export const LinkWrapper = styled.div`
   flex-wrap: wrap;
 `;
 
-export const LinkTitle = styled.input`
-  width: 10rem;
-  height: 3.5rem;
-  background: #fff;
-  border-radius: 0.5rem;
-  outline: none;
-  font-size: 1rem;
-  font-family: inherit;
-  padding: 0.7rem;
-  margin-right: 0.5rem;
-  margin-bottom: 0.5rem;
-  border: none;
-  box-sizing: border-box;
-
-  ::placeholder {
-    font-size: 0.9rem;
-  }
-`;
+export const LinkTitle = styled.h3``;
 
 export const Link = styled.input`
   max-width: 30rem;

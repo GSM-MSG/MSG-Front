@@ -7,10 +7,7 @@ export interface ClubDetail {
     contact: string;
     teacher?: string;
     isOpened: true;
-    relatedLink: {
-      name: string;
-      url: string;
-    };
+    notionLink: string;
   };
   activityurls: string[];
   head: {

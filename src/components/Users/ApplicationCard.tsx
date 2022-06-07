@@ -7,7 +7,7 @@ interface UserCardProps {
 
 export default function ApplicationCard({ user }: UserCardProps) {
   return (
-    <S.UserCardWrapper>
+    <S.MemberWrapper>
       <S.UserImg src={user.userImg} />
       <S.Info>
         <div>
@@ -21,6 +21,6 @@ export default function ApplicationCard({ user }: UserCardProps) {
           <S.Refuse>거절</S.Refuse>
         </S.Bottom>
       </S.Info>
-    </S.UserCardWrapper>
+    </S.MemberWrapper>
   );
 }

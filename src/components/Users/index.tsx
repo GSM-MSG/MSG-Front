@@ -10,6 +10,7 @@ import { NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { ClubKind } from "../CreatePage/types/ClubKind";
+import UserCard from "./UserCard";
 
 interface UsersProps {
   users?: MemberType[];
@@ -48,7 +49,7 @@ const Users: NextPage<UsersProps> = ({ users, applications, page, type }) => {
       {page ? (
         <S.CardList>
           {member?.map((user) => (
-            <MemberCard key={user.id} user={user} />
+            <UserCard key={user.id} user={user} />
           ))}
         </S.CardList>
       ) : (
