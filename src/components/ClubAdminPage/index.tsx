@@ -45,12 +45,11 @@ export default function ClubAdminPage() {
                     {
                         isModifying ?
                             <Link
-                                // as={`/admin/${item.grade+""+item.class+""+item.num}`}
                                 href={{
                                     pathname: '/admin/secession',
                                     query: { grade: item.grade, class: item.class, num: item.num }
                                 }}>
-                                <button onClick={() => { /*onRemove([item.grade, item.class, item.num])*/ }}>탈퇴</button></Link> :
+                                <button>탈퇴</button></Link> :
                             <button onClick={() => setModalNum(item)}>수정</button>
                     }
                 </S.ListWrapper>

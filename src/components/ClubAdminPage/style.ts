@@ -10,14 +10,19 @@ type ModalProps = {
     isModal: boolean;
 }
 
+type BtnProps = {
+    isModal: boolean;
+    club: any;
+}
+
 export const Wrapper = styled.div<ModalProps>`
     width: 100%;
     margin-top: 4rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: ${props => { return props.isModal ? "calc(100vh - 4rem)" : "none" }};
-    overflow: ${props => { return props.isModal ? "hidden" : "none" }};
+    height: ${props => props.isModal ? "calc(100vh - 4rem)" : "none"};
+    overflow: ${props => props.isModal ? "hidden" : "none"};
 
     *{
         font-family: 'Noto Sans';
@@ -139,7 +144,7 @@ export const ListWrapper = styled.li<StyledProps>`
     button{
         width: 82px;
         height: 54px;
-        background: ${props => { return props.bgcolor ? "#ED6666" : "#5959FF" }};
+        background: ${props => props.bgcolor ? "#ED6666" : "#5959FF"};
         border: none;
         border-radius: 5px;
         color: #fff;
@@ -207,14 +212,14 @@ export const ModifyLayout = styled.div`
 
 export const ModifyBox = styled.div<ModalProps>`
     position: fixed;
-    width: ${props => { return props.isModal ? "846px" : "700px" }};
-    height: ${props => { return props.isModal ? "610px" : "780px" }};
+    width: ${props => props.isModal ? "846px" : "700px"};
+    height: ${props => props.isModal ? "610px" : "780px"};
     background: #1E1E1C;
     display: flex;
     flex-direction: column;
     align-items: center;
     z-index: 200;
-    padding: ${props => { return props.isModal ? "30px 172px" : "20px 110px" }};
+    padding: ${props => props.isModal ? "30px 172px" : "20px 110px"};
     transition: width .5s, height 0s, gap 0s;
     gap: 30px;
     
@@ -235,8 +240,8 @@ export const ModifyBox = styled.div<ModalProps>`
 `
 
 export const ProfileImg = styled.img`
-        border-radius: 100%;
-        width: 100px;
+    border-radius: 100%;
+    width: 100px;
 `
 
 export const ModifyInput = styled.input`
@@ -266,13 +271,13 @@ export const FindBtn = styled.button`
     cursor: pointer;
     `
 
-export const DoneBtn = styled.button<ModalProps>`
+export const DoneBtn = styled.button<BtnProps>`
     color: #fff;
-    background: #4C53FF;
+    background: ${props => props.club !== null && props.club !== undefined ? "#4C53FF" : "#A3A3A3"};
     width: 50%;
     height: 60px;
     border-radius: 10px;
-    gap: ${props => { return (props.isModal ? "30px" : 0) }};
+    gap: ${props => props.isModal ? "30px" : 0};
     font-weight: 600;
     font-size: 26px;
     line-height: 35px;
@@ -297,6 +302,8 @@ export const ClubInfo = styled.div`
     flex-direction: column;
     align-items: center;
     height: 250px;
+    overflow: hidden;
+    position: relative;
 `
 
 export const ClubBanner = styled.img`

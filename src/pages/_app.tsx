@@ -5,9 +5,6 @@ import { Global } from "@emotion/react";
 import { useEffect } from "react";
 
 function MyApp({ Component, pageProps, router }: AppProps) {
-  useEffect(() => {
-    console.log("tlqkf");
-  },[])
   return (
     <motion.div
       key={router.pathname}

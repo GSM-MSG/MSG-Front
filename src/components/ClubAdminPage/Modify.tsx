@@ -1,6 +1,6 @@
 import * as S from "./style";
 import * as SVG from "../../SVG";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Club, ClubMembersType } from "../../types";
 import { clubData } from "./DummyData";
 
@@ -8,14 +8,17 @@ import { clubData } from "./DummyData";
 export default function Modify({ item, onClose }: { item: ClubMembersType, onClose: (e: any) => void }) {
     const [isFind, setFind] = useState<boolean>(false);
     const [clubList, setClubList] = useState<Array<Club>>(clubData);
-    const [search, setSearch] = useState<string>("");
+    const [search, setSearch] = useState<string>(item.club);
     const [values, setValues] = useState({
         name: item.name,
         stuNum: item.grade * 1000 + item.class * 100 + item.num,
         club: item.club,
         role: item.role,
     });
+    const [club, setClub] = useState<boolean>(false);
+
     const outside: any = useRef();
+    const changeClub: any = useRef();
 
     const ModalClose = () => {
         onClose({
@@ -29,8 +32,27 @@ export default function Modify({ item, onClose }: { item: ClubMembersType, onClo
         });
     }
 
+    const onList = () => {
+        return (
+            clubList.filter((item: any) => {
+                if (search !== "" && item.title.toLowerCase() === search.toLowerCase()) {
+                    return item;
+                }
+            }).map((item: any, idx: number) => (
+                <>
+                    <S.ClubBanner src={item.bannerUrl} />
+                    <S.ClubName key={idx} ref={changeClub}>{item.title}</S.ClubName>
+                </>
+            ))
+        )
+    }
+
+    useEffect(() => {
+        setClub(changeClub.current !== null && changeClub.current !== undefined ? true : false);
+    })
+
     return (
-        <S.ModifyLayout ref={outside} onClick={(e: MouseEvent) => { outside.current === e.target && onClose(null) }}>
+        <S.ModifyLayout ref={outside} onClick={(e: any) => { outside.current === e.target && onClose(null) }}>
             <S.ModifyBox isModal={isFind}>
                 {isFind ?
                     <>
@@ -40,10 +62,9 @@ export default function Modify({ item, onClose }: { item: ClubMembersType, onClo
                             <SVG.ReadingGlasses />
                         </S.InputWrapper>
                         <S.ClubInfo>
-                            <S.ClubBanner src="png/404.png" />
-                            <S.ClubName>MSG</S.ClubName>
+                            {onList()}
                         </S.ClubInfo>
-                        <S.DoneBtn isModal={isFind} onClick={() => setFind(false)}>선택</S.DoneBtn>
+                        <S.DoneBtn isModal={isFind} club={club} onClick={() => { setFind(false); /*setValues({...values, club:})*/ }}>선택</S.DoneBtn>
                     </> : <>
                         <h2>학생정보 수정</h2>
                         <S.ProfileImg src="png/Loading.png" />
@@ -59,7 +80,7 @@ export default function Modify({ item, onClose }: { item: ClubMembersType, onClo
                                 </li>
                                 <li>
                                     <p>동아리</p>
-                                    <S.ModifyInput value={values.club} onChange={(e: any) => setValues({ ...values, club: e.target.value })} />
+                                    <S.ModifyInput value={values.club} onChange={(e: any) => setValues({ ...values, club: e.target.value })} readOnly />
                                     <S.FindBtn onClick={() => setFind(true)}>찾아보기</S.FindBtn>
                                 </li>
                                 <li>
@@ -68,10 +89,10 @@ export default function Modify({ item, onClose }: { item: ClubMembersType, onClo
                                 </li>
                             </ul>
                         </div>
-                        <S.DoneBtn isModal={isFind} onClick={() => ModalClose()}>완료</S.DoneBtn>
+                        <S.DoneBtn isModal={isFind} club={true} onClick={() => ModalClose()}>완료</S.DoneBtn>
                     </>
                 }
             </S.ModifyBox>
-        </S.ModifyLayout>
+        </S.ModifyLayout >
     );
 }
