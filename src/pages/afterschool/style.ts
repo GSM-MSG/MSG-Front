@@ -8,28 +8,24 @@ type FilterProps = {
   filter: string;
 };
 
+export const AfterSchool = styled.div`
+  height: none;
+`;
+
 export const AfterSchoolBox = styled.div<FilterProps>`
   background-color: #1e1e1c;
-  animation: fadeInDown 1s;
   animation: ${(props) => {
     return props.filter === "true" ? "fadeInDown 1s" : "fadeInUp 1s";
   }};
-
   @keyframes fadeInDown {
     0% {
-      transform: translate3d(0, -20%, 0);
-    }
-    to {
-      transform: translateZ(0);
+      opacity: calc(0);
     }
   }
 
   @keyframes fadeInUp {
     0% {
-      transform: translate3d(0, 20%, 0);
-    }
-    to {
-      transform: translateZ(0);
+      opacity: calc(0);
     }
   }
 `;
@@ -84,17 +80,16 @@ export const CurseList = styled.div`
   span {
     width: 4rem;
     text-align: center;
-    margin-left: 4rem;
-    margin-right: 2rem;
+    margin-left: 8rem;
     @media (max-width: 55rem) {
-      margin-left: 7vw;
+      margin-left: 13vw;
       margin-right: 4vw;
       white-space: nowrap;
     }
     @media (max-width: 30rem) {
       font-size: 3.5vw;
-      margin-left: 7vw;
-      margin-right: 4vw;
+      margin-left: 8vw;
+      margin-right: 6vw;
       white-space: nowrap;
     }
   }
@@ -127,11 +122,15 @@ export const Enrolment = styled.div`
   p {
     width: 4.5rem;
     text-align: center;
-    margin-right: 1.5rem;
-    margin-left: 4rem;
+    margin-left: 7.6rem;
     @media (max-width: 55rem) {
+      margin-left: 12vw;
+      margin-right: 5vw;
+      white-space: nowrap;
+    }
+    @media (max-width: 30rem) {
       margin-left: 7vw;
-      margin-right: 3vw;
+      margin-right: 5vw;
       white-space: nowrap;
     }
   }
@@ -161,6 +160,24 @@ export const SelectButton = styled.button<StlyedProps>`
         break;
     }
   }};
+  position: relative;
+  overflow: hidden;
+  &:hover:after {
+    right: -10%;
+    border-radius: 5rem;
+  }
+
+  ::after {
+    content: "";
+    display: block;
+    width: 120%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 100%;
+    background: rgba(0, 0, 0, 0.1);
+    transition: 0.5s cubic-bezier(0.23, 0.56, 0.68, 0.38);
+  }
   @media (max-width: 55rem) {
     display: block;
     width: 85vw;
@@ -208,18 +225,20 @@ export const FilterElement = styled.div<StlyedProps>`
   align-items: center;
   justify-content: center;
   margin: 0 auto;
-  /* margin-right: 15px; */
   margin-bottom: 5px;
   width: 6em;
   padding: 7px 10px;
   border-radius: 23px;
-  /* p {
-    display: flex;
-    margin: 0;
-  } */
-  /* svg {
-    cursor: pointer;
-    margin-left: 15px;
-  } */
   background-color: ${({ state }) => (state ? "#A5A5FE" : "transparent")};
+`;
+
+export const NotFilter = styled.div`
+  text-align: center;
+  margin-top: 5rem;
+  svg {
+    transform: scaleX(-1);
+  }
+  p {
+    font-size: 20px;
+  }
 `;

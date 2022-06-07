@@ -1,5 +1,4 @@
 import Header from "../../components/Header";
-import { SmallX, SearchFilter, SearchIcon } from "../../SVG";
 import React, { MouseEvent, useEffect, useState } from "react";
 import * as S from "./style";
 import { list } from "./dummyData";
@@ -7,6 +6,12 @@ import { GoAfter } from "../../components/GoAfter";
 import { AlarmAfterSchool } from "../../components/AlarmAfterSchool";
 import * as Type from "../../types/AfterSchoolType";
 import { type } from "os";
+import { AfterAdmin } from "../../components/Detail/Excomponent";
+import { FixClub } from "../../components/Detail/FixClub";
+import { Admin } from "../../components/Detail/Admin";
+import { AfterSchoolAdmin } from "../../components/Detail/AfterSchollAdmin";
+// import ProfilePageY from "../../components/ProfilePage";
+import * as SVG from "../../SVG";
 
 export default function AfterSchool() {
   type FilterDayType = {
@@ -49,11 +54,12 @@ export default function AfterSchool() {
   ]);
   const [filter, setFilter] = useState<boolean>(false);
   const [search, setSearch] = useState<string>("");
-  const [afterList, setAfterList] = useState<Type.PropListType[]>(list);
+  const [afterList, setAfterList] = useState<Type.PropListType[]>([]);
 
   const ChangeAfterList = () => {
     if (search === "") {
-      return list;
+      return [];
+      // return list;
     } else {
       const MakeList = list.filter(
         (e) =>
@@ -172,23 +178,25 @@ export default function AfterSchool() {
     if (CheckDay.length === 0 && CheckGrade.length === 0) {
       setAfterList(ChangeAfterList());
     } else if (CheckDay.length === 0 && CheckGrade.length === 1) {
-      // ChangeAfterList();
-      kakoList = ChangeAfterList().filter(
+      kakoList = list.filter(
+        // kakoList = ChangeAfterList().filter(
         (e) => e.grade === CheckGrade[0].grade
       );
       setAfterList(kakoList);
     } else if (CheckDay.length === 1 && CheckGrade.length === 0) {
-      // ChangeAfterList();
-      kakoList = ChangeAfterList().filter((e) => e.week === CheckDay[0].day);
+      kakoList = list.filter((e) => e.week === CheckDay[0].day);
+      // kakoList = ChangeAfterList().filter((e) => e.week === CheckDay[0].day);
       setAfterList(kakoList);
     } else if (CheckDay.length === 1 && CheckGrade.length === 1) {
-      // ChangeAfterList();
-      kakoList = ChangeAfterList().filter(
+      kakoList = list.filter(
+        // kakoList = ChangeAfterList().filter(
         (e) => e.week === CheckDay[0].day && e.grade === CheckGrade[0].grade
       );
       setAfterList(kakoList);
     }
   };
+
+  const [closeDetail, setCloseDetail] = useState<boolean>(true);
 
   useEffect(() => {
     setAfterList(ChangeAfterList());
@@ -199,7 +207,7 @@ export default function AfterSchool() {
   }, [grade, day]);
 
   return (
-    <>
+    <S.AfterSchool>
       <Header />
       <S.Search>
         <S.Input
@@ -213,10 +221,10 @@ export default function AfterSchool() {
           }}
         />
         <i onClick={ChangeAfterList}>
-          <SearchIcon />
+          <SVG.SearchIcon />
         </i>
         <i onClick={() => setFilter(!filter)}>
-          <SearchFilter />
+          <SVG.SearchFilter />
         </i>
       </S.Search>
       {filter ? (
@@ -258,26 +266,39 @@ export default function AfterSchool() {
           <span>강좌</span>
           <span>강의시간</span>
           <span>대상학년</span>
-          <span>수강인원</span>
         </S.CurseList>
-        <S.ScollBox>
-          {afterList.map((e: Type.PropListType, i) => (
-            <S.Enrolment key={i}>
-              <div>
-                <p>{e.lecture}</p>
-                <p>{changeWeek(e.week)} 8,9교시</p>
-                <p>{e.grade}</p>
-                <p>
-                  {e.personnel}/{e.maxPersonnel}
-                </p>
-              </div>
-              {makeSelectButton(e)}
-            </S.Enrolment>
-          ))}
-        </S.ScollBox>
+        {afterList.length === 0 ? (
+          <S.NotFilter>
+            <SVG.Whale />
+            <p>
+              검색이나 필터를 사용해서
+              <br />
+              방과후를 검색해주세요.
+            </p>
+          </S.NotFilter>
+        ) : (
+          <>
+            <S.ScollBox>
+              {afterList.map((e: Type.PropListType, i) => (
+                <S.Enrolment key={i}>
+                  <div>
+                    <p>{e.lecture}</p>
+                    <p>{changeWeek(e.week)}</p>
+                    <p>{e.grade}</p>
+                  </div>
+                  {makeSelectButton(e)}
+                </S.Enrolment>
+              ))}
+            </S.ScollBox>
+          </>
+        )}
       </S.AfterSchoolBox>
+      {closeDetail && <AfterSchoolAdmin fun={setCloseDetail} />}
+      {/* <Admin /> */}
+      {/* <FixClub /> */}
+      {/* {detail ? "" : <AfterAdmin />} */}
       {/* <GoAfter /> */}
       {/* <AlarmAfterSchool /> */}
-    </>
+    </S.AfterSchool>
   );
 }

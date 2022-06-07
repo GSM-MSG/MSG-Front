@@ -49,6 +49,24 @@ export const AfterMoveBt = styled.button`
   border-radius: 5px;
   margin-top: 2rem;
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  &:hover:after {
+    right: -10%;
+    border-radius: 5rem;
+  }
+
+  ::after {
+    content: "";
+    display: block;
+    width: 120%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 100%;
+    background: rgba(0, 0, 0, 0.1);
+    transition: 0.5s cubic-bezier(0.23, 0.56, 0.68, 0.38);
+  }
 `;
 export const NotToDay = styled.div`
   display: flex;
