@@ -117,6 +117,30 @@ export const UserCardWrapper = styled.div`
   background: #fdfdfd;
   border-radius: 0.5rem;
   box-sizing: border-box;
-  padding-top: 2.5rem;
   color: #000;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+`;
+
+export const UserCardImg = styled.img`
+  width: 5rem;
+  height: 5rem;
+  object-fit: cover;
+  border-radius: 100%;
+`;
+
+export const UserInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const UserName = styled.h3`
+  margin: 0;
+`;
+
+export const UserData = styled.p`
+  margin: 0;
 `;

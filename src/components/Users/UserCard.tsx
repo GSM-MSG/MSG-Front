@@ -1,15 +1,30 @@
 import { NextPage } from "next";
-import { ApplicantsType } from "../../types/ApplicantsType";
-import { MemberType } from "../../types/MemberType";
 import * as S from "./styles";
 
 interface UserCardProps {
-  user: MemberType | ApplicantsType;
+  user: {
+    email: string;
+    name: string;
+    grade: number;
+    class: number;
+    num: number;
+    userImg: string;
+  };
 }
 
 const UserCard: NextPage<UserCardProps> = ({ user }) => {
-  if (user instanceof MemberType)
-    return <S.UserCardWrapper></S.UserCardWrapper>;
+  console.log(user);
+  return (
+    <S.UserCardWrapper>
+      <S.UserCardImg src={user.userImg} />
+      <S.UserInfo>
+        <S.UserName>{user.name}</S.UserName>
+        <S.UserData>
+          {user.grade}학년 {user.class}반 {user.num}번
+        </S.UserData>
+      </S.UserInfo>
+    </S.UserCardWrapper>
+  );
 };
 
 export default UserCard;

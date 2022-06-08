@@ -2,10 +2,8 @@
 import { useState } from "react";
 import * as S from "./styles";
 import { Tag, Tags } from "../ClubAll/styles";
-import ApplicationCard from "./ApplicationCard";
 import MemberCard from "./MemberCard";
-import { ApplicantsType } from "../../types/ApplicantsType";
-import { MemberType } from "../../types/MemberType";
+import { MemberType, Member } from "../../types/MemberType";
 import { NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -13,17 +11,15 @@ import { ClubKind } from "../CreatePage/types/ClubKind";
 import UserCard from "./UserCard";
 
 interface UsersProps {
-  users?: MemberType[];
-  applications?: ApplicantsType[];
+  users: MemberType;
   page: boolean;
   type: ClubKind;
 }
 
-const Users: NextPage<UsersProps> = ({ users, applications, page, type }) => {
+const Users: NextPage<UsersProps> = ({ users, page, type }) => {
   const router = useRouter();
-  const [member, setMember] = useState<MemberType[] | undefined>(users);
-  const [application, setApplication] = useState<ApplicantsType[] | undefined>(
-    applications
+  const [member, setMember] = useState<Member[] | undefined>(
+    users?.requestUser
   );
 
   return (
@@ -46,19 +42,11 @@ const Users: NextPage<UsersProps> = ({ users, applications, page, type }) => {
         </Tags>
         <S.Hr />
       </div>
-      {page ? (
-        <S.CardList>
-          {member?.map((user) => (
-            <UserCard key={user.id} user={user} />
-          ))}
-        </S.CardList>
-      ) : (
-        <S.CardList>
-          {application?.map((user) => (
-            <ApplicationCard key={user.userId} user={user} />
-          ))}
-        </S.CardList>
-      )}
+      <S.CardList>
+        {member?.map((user) => (
+          <MemberCard key={user.id} user={user.user} />
+        ))}
+      </S.CardList>
     </S.UsersWrapper>
   );
 };

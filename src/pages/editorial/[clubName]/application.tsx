@@ -2,7 +2,7 @@ import { GetServerSideProps, NextPage } from "next";
 import Users from "../../../components/Users";
 import api from "../../../lib/api";
 import userCheck from "../../../lib/userCheck";
-import { ApplicantsType } from "../../../types/ApplicantsType";
+import { MemberType } from "../../../types/MemberType";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   try {
@@ -26,11 +26,11 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 };
 
 interface ApplicationProps {
-  users: ApplicantsType[];
+  users: MemberType;
 }
 
 const Application: NextPage<ApplicationProps> = ({ users }) => {
-  return <Users applications={users} page={false} type="EDITORIAL" />;
+  return <Users users={users} page={false} type="EDITORIAL" />;
 };
 
 export default Application;

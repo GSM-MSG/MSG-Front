@@ -1,20 +1,26 @@
 import { NextPage } from "next";
-import { MemberType } from "../../types/MemberType";
 import * as S from "./styles";
 
 interface MemberCardProps {
-  user: MemberType;
+  user: {
+    email: string;
+    name: string;
+    grade: number;
+    class: number;
+    num: number;
+    userImg: string;
+  };
 }
 
 const MemberCard: NextPage<MemberCardProps> = ({ user }) => {
   return (
     <S.MemberWrapper>
-      <S.UserImg src={user.user.userImg} />
+      <S.UserImg src={user.userImg} />
       <S.Info>
         <div>
-          <S.Name>{user.user.name}</S.Name>
+          <S.Name>{user.name}</S.Name>
           <S.Description>
-            {user.user.grade}학년 {user.user.class}반 {user.user.num}번
+            {user.grade}학년 {user.class}반 {user.num}번
           </S.Description>
         </div>
         <S.Bottom>

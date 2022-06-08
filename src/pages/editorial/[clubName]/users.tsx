@@ -27,10 +27,11 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 };
 
 interface UsersProps {
-  users: MemberType[];
+  users: MemberType;
 }
 
 const users: NextPage<UsersProps> = ({ users }) => {
+  console.log(users);
   return (
     <>
       <Header />

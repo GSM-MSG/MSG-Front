@@ -1,4 +1,9 @@
 export interface MemberType {
+  userScope: "HEAD" | "MEMBER";
+  requestUser: Member[];
+}
+
+export interface Member {
   id: number;
   scope: "MEMBER" | "HEAD";
   user: {
