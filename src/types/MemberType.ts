@@ -4,14 +4,11 @@ export interface MemberType {
 }
 
 export interface Member {
-  id: number;
-  scope: "MEMBER" | "HEAD";
-  user: {
-    email: string;
-    name: string;
-    grade: number;
-    class: number;
-    num: number;
-    userImg: string;
-  };
+  email: string;
+  name: string;
+  grade: number;
+  class: number;
+  num: number;
+  userImg: string;
+  scope?: "HEAD" | "MEMBER";
 }

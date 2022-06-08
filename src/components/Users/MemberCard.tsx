@@ -1,15 +1,9 @@
 import { NextPage } from "next";
+import { Member } from "../../types/MemberType";
 import * as S from "./styles";
 
 interface MemberCardProps {
-  user: {
-    email: string;
-    name: string;
-    grade: number;
-    class: number;
-    num: number;
-    userImg: string;
-  };
+  user: Member;
 }
 
 const MemberCard: NextPage<MemberCardProps> = ({ user }) => {

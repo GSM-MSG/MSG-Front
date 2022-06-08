@@ -1,19 +1,12 @@
 import { NextPage } from "next";
+import { Member } from "../../types/MemberType";
 import * as S from "./styles";
 
 interface UserCardProps {
-  user: {
-    email: string;
-    name: string;
-    grade: number;
-    class: number;
-    num: number;
-    userImg: string;
-  };
+  user: Member;
 }
 
 const UserCard: NextPage<UserCardProps> = ({ user }) => {
-  console.log(user);
   return (
     <S.UserCardWrapper>
       <S.UserCardImg src={user.userImg} />

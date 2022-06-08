@@ -30,7 +30,7 @@ interface ApplicationProps {
 }
 
 const Application: NextPage<ApplicationProps> = ({ users }) => {
-  return <Users users={users} page={false} type="EDITORIAL" />;
+  return <Users users={users} type="APPLICATION" />;
 };
 
 export default Application;

@@ -1,12 +1,16 @@
 import * as S from "./styles";
 import { ClubDetail } from "../../types/ClubDetail";
 import Link from "next/link";
+import * as SVG from "../../SVG";
+import { useRouter } from "next/router";
 
 interface InfoPageProps {
   clubData: ClubDetail;
 }
 
 export default function InfoPage({ clubData }: InfoPageProps) {
+  const router = useRouter();
+
   return (
     <S.Wrapper>
       <S.CoverImg src={clubData.club.bannerUrl || "/png/Loading.png"} />
@@ -34,6 +38,16 @@ export default function InfoPage({ clubData }: InfoPageProps) {
               <S.UserName>{i.name}</S.UserName>
             </S.User>
           ))}
+          {clubData.scope === "HEAD" && (
+            <Link href={`${router.asPath}/users`}>
+              <a style={{ cursor: "pointer" }}>
+                <S.User>
+                  <SVG.EditUser />
+                  <S.UserName>관리하기</S.UserName>
+                </S.User>
+              </a>
+            </Link>
+          )}
         </S.Users>
       </S.Contents>
       <S.Info>
