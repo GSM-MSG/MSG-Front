@@ -12,6 +12,13 @@ export const CoverImg = styled.img`
 
 export const Contents = styled.div`
   padding: 0 5rem;
+
+  @media (max-width: 1030px) {
+    text-align: center;
+  }
+  @media (max-width: 640px) {
+    padding: 0 2rem;
+  }
 `;
 
 export const ClubName = styled.h1`
@@ -28,6 +35,9 @@ export const Users = styled.div`
 
   ::-webkit-scrollbar {
     width: 0;
+  }
+  @media (max-width: 1030px) {
+    justify-content: center;
   }
 `;
 
@@ -66,83 +76,72 @@ export const UserName = styled.div`
 
 export const Info = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   padding: 0 5rem;
-  flex: 1;
-  gap: 2rem;
+  gap: 10rem;
 
-  @media (max-width: 1250px) {
+  @media (max-width: 1030px) {
+    display: flex;
+    justify-content: center;
+    gap: 5rem;
+  }
+  @media (max-width: 640px) {
+    padding: 0 1rem;
+  }
+`;
+
+export const Left = styled.div`
+  flex: 1;
+  max-width: 55%;
+`;
+
+export const Introduce = styled.div`
+  margin-bottom: 5rem;
+`;
+
+export const Title = styled.h2`
+  margin-bottom: 5rem;
+`;
+
+export const ContactMeans = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  @media (max-width: 811px) {
     flex-wrap: wrap;
-    padding: 0 2rem;
+    gap: 5rem;
+    width: 100%;
+  }
+`;
+
+export const ContactUser = styled.div`
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+`;
+
+export const Contact = styled.div`
+  font-weight: bold;
+  font-size: 1.2rem;
+`;
+
+export const NotionLink = styled.div`
+  @media (max-width: 400px) {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
   }
 `;
 
-export const AllInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 5rem;
-`;
-
-export const Introduce = styled.div`
-  max-width: 60rem;
-`;
-
-export const SubInfo = styled.div`
-  display: flex;
-  justify-content: space-between;
-  gap: 2rem;
-  align-items: center;
-
-  @media (max-width: 1250px) {
-    justify-content: space-around;
-  }
-  @media (max-width: 790px) {
-    flex-wrap: wrap;
-  }
-`;
-
-export const Imgs = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  width: 22rem;
-  gap: 2rem;
-`;
-
-export const Img = styled.img`
-  width: 10rem;
-  height: 10rem;
-  border-radius: 10px;
-`;
-
-export const Contect = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-`;
-
-export const UserContact = styled.div`
-  h3 {
-    margin: 0;
-  }
-  p {
-    margin: 0;
-  }
-`;
-
-export const Link = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-`;
-
-export const LinkButton = styled.a`
+export const Link = styled.a`
   background: #fff;
-  padding: 1rem;
-  border-radius: 1rem;
-  max-width: 60rem;
   color: #5169e8;
-  height: 3.3rem;
+  text-decoration: none;
+  border-radius: 1rem;
+  text-align: center;
+  padding: 0.8rem 1rem;
   overflow: hidden;
 
   :hover {
@@ -150,31 +149,28 @@ export const LinkButton = styled.a`
   }
 `;
 
-export const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+export const Right = styled.div``;
+
+export const ImgTitle = styled.h2`
+  @media (max-width: 383px) {
+    text-align: center;
+  }
 `;
 
-export const Button = styled.a`
-  margin-top: 3rem;
-  font-size: 1.5rem;
-  font-weight: bold;
-  font-family: inherit;
-  border-radius: 1rem;
-  outline: none;
-  border: none;
-  color: #fff;
-  padding: 1rem 10rem;
-  transition: 0.2s;
-  ${(props: { isDeadline?: boolean }) =>
-    props.isDeadline
-      ? `background: #646464;`
-      : `box-shadow: -4px 10px 10px rgba(76, 83, 255, 0.5);
-background: #4c53ff;
-cursor: pointer;
-:hover {
-    transform: scale(1.1);
+export const Images = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  max-width: 22rem;
+
+  @media (max-width: 1030px) {
+    justify-content: center;
   }
-`}
+`;
+
+export const Img = styled.img`
+  width: 10rem;
+  height: 10rem;
+  border-radius: 0.5rem;
+  object-fit: cover;
 `;

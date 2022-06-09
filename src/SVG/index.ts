@@ -15,3 +15,4 @@ export * from "./Pen";
 export * from "./X";
 export * from "./Google";
 export * from "./EditUser";
+export * from "./Teacher";

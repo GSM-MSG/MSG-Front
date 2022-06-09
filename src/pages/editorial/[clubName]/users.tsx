@@ -31,7 +31,6 @@ interface UsersProps {
 }
 
 const users: NextPage<UsersProps> = ({ users }) => {
-  console.log(users);
   return (
     <>
       <Header />
