@@ -77,14 +77,16 @@ export default function InfoPage({ clubData }: InfoPageProps) {
             </S.NotionLink>
           </S.ContactMeans>
         </S.Left>
-        <S.Right>
-          <S.ImgTitle>홍보 사진</S.ImgTitle>
-          <S.Images>
-            {clubData.activityurls.map((url, idx) => (
-              <S.Img key={idx} src={url} />
-            ))}
-          </S.Images>
-        </S.Right>
+        {clubData.activityurls[0] && (
+          <S.Right>
+            <S.ImgTitle>홍보 사진</S.ImgTitle>
+            <S.Images>
+              {clubData.activityurls.map((url, idx) => (
+                <S.Img key={idx} src={url} />
+              ))}
+            </S.Images>
+          </S.Right>
+        )}
       </S.Info>
     </S.Wrapper>
   );

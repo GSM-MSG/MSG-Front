@@ -105,6 +105,7 @@ export const Title = styled.h2`
 export const ContactMeans = styled.div`
   display: flex;
   justify-content: space-between;
+  gap: 1rem;
 
   @media (max-width: 811px) {
     flex-wrap: wrap;
@@ -150,7 +151,7 @@ export const Link = styled.a`
 export const Right = styled.div``;
 
 export const ImgTitle = styled.h2`
-  @media (max-width: 383px) {
+  @media (max-width: 415px) {
     text-align: center;
   }
 `;
