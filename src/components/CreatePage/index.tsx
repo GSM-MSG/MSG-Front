@@ -8,9 +8,8 @@ import { UserType } from "../../types/UsersType";
 import { TextsType } from "./types/TextsType";
 import { ClubKind } from "./types/ClubKind";
 import { InfoType } from "./types/InfoType";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
-import "react-toastify/dist/ReactToastify.css";
 import api from "../../lib/api";
 import checkQuery from "../../lib/checkQuery";
 import { useRouter } from "next/router";
@@ -118,18 +117,7 @@ const CreatePage: NextPage = () => {
         <S.SubmitButton onClick={onSubmit}>등록하기</S.SubmitButton>
       </S.ButtonCenter>
 
-      <ToastContainer
-        position="top-right"
-        theme="dark"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss={false}
-        draggable={false}
-        pauseOnHover={false}
-      />
+      
     </S.Wrapper>
   );
 };

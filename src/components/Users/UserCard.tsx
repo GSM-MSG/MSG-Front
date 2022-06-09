@@ -7,6 +7,7 @@ interface UserCardProps {
 }
 
 const UserCard: NextPage<UserCardProps> = ({ user }) => {
+  if (!user) return <></>;
   return (
     <S.UserCardWrapper>
       <S.UserCardImg src={user.userImg} />

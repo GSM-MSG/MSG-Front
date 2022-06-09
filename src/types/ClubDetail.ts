@@ -6,7 +6,7 @@ export interface ClubDetail {
     description: string;
     contact: string;
     teacher?: string;
-    isOpened: true;
+    isOpened: boolean;
     notionLink: string;
   };
   activityurls: string[];

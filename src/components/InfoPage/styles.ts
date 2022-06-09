@@ -21,8 +21,26 @@ export const Contents = styled.div`
   }
 `;
 
+export const Top = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin: 0 0 1rem;
+`;
+
 export const ClubName = styled.h1`
   font-size: 3rem;
+`;
+
+export const AllMember = styled.a`
+  color: #00a8fe;
+  text-decoration: none;
+  cursor: pointer;
+
+  :hover {
+    text-decoration: underline;
+  }
 `;
 
 export const Users = styled.div`
@@ -148,8 +166,6 @@ export const Link = styled.a`
   }
 `;
 
-export const Right = styled.div``;
-
 export const ImgTitle = styled.h2`
   @media (max-width: 415px) {
     text-align: center;
@@ -172,4 +188,48 @@ export const Img = styled.img`
   height: 10rem;
   border-radius: 0.5rem;
   object-fit: cover;
+`;
+
+export const Buttons = styled.div`
+  display: flex;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+`;
+
+interface ButtonProps {
+  position: string;
+  background: string;
+}
+
+export const Button = styled.div<ButtonProps>`
+  background: ${({ background }) => background};
+  border-top-${({ position }) => position}-radius: 0.5rem;
+  border-bottom-${({ position }) => position}-radius: 0.5rem;  
+  padding: 0.8rem 0;
+  text-align: center;
+  width: 16rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+  transition: .2s;
+  cursor: pointer;
+
+  :hover {
+    filter: brightness(80%);
+  }
+`;
+
+export const RedButton = styled.button`
+  background: #ff8181;
+  border-radius: 0.5rem;
+  padding: 0.8rem 7rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+  transition: 0.2s;
+  cursor: pointer;
+
+  :hover {
+    filter: brightness(80%);
+  }
 `;

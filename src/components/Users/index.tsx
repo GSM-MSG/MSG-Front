@@ -20,11 +20,14 @@ const Users: NextPage<UsersProps> = ({ users, type }) => {
         {type === "MANAGE" ? "구성원 관리" : "신청자 명단 관리"}
       </S.Title>
 
-      {users.userScope === "HEAD" ? (
+      {users.userScope === "HEAD" && member !== undefined ? (
         <S.CardList>
-          {member?.map((user) => (
-            <MemberCard key={user.email} user={user} />
-          ))}
+          <UserCard user={member?.filter((user) => user.scope === "HEAD")[0]} />
+          {member
+            ?.filter((user) => user.scope !== "HEAD")
+            ?.map((user) => (
+              <MemberCard key={user.email} user={user} />
+            ))}
         </S.CardList>
       ) : (
         <S.CardList>
