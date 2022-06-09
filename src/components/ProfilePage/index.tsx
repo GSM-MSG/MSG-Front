@@ -3,8 +3,6 @@ import Card from "../Card";
 import * as S from "./styles";
 import { Global } from "@emotion/react";
 import api from "../../lib/api";
-import ExitPopup from "./ExitPopup";
-import { useState } from "react";
 import { MyPageType } from "../../types";
 import checkQuery from "../../lib/checkQuery";
 import { toast } from "react-toastify";
@@ -16,8 +14,6 @@ interface ProfilePageProps {
 }
 
 export default function ProfilePage({ username, user }: ProfilePageProps) {
-  console.log(user.clubs);
-  const [isShow, setIsShow] = useState(false);
   const router = useRouter();
   const Logout = async () => {
     try {
@@ -93,16 +89,8 @@ export default function ProfilePage({ username, user }: ProfilePageProps) {
               )}
             </S.Combine>
           </S.Clubs>
-          {user.clubs[0] && (
-            <S.ButtonWrapper>
-              <S.ExitButton onClick={() => setIsShow(true)}>
-                탈퇴하기
-              </S.ExitButton>
-            </S.ButtonWrapper>
-          )}
         </S.Main>
       </S.Wrapper>
-      {isShow && <ExitPopup user={user} setIsShow={setIsShow} />}
     </>
   );
 }
