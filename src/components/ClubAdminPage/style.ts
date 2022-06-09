@@ -15,19 +15,20 @@ type BtnProps = {
     club: any;
 }
 
+type BeingProps = {
+    isBeing: boolean;
+}
+
+
 export const Wrapper = styled.div<ModalProps>`
     width: 100%;
     margin-top: 4rem;
+    top: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: ${props => props.isModal ? "calc(100vh - 4rem)" : "none"};
-    overflow: ${props => props.isModal ? "hidden" : "none"};
-
-    *{
-        font-family: 'Noto Sans';
-        font-style: normal;
-    }
+    height: ${props => props.isModal ? "calc(100vh - 4rem)" : "auto"};
+    overflow: ${props => props.isModal ? "hidden" : "auto"};
 `
 export const InputContainer = styled.div`
     display: flex;
@@ -320,4 +321,37 @@ export const ClubName = styled.p`
     text-align: center;
     border-radius: 10px;
     border-top-right-radius: 0;
+`
+
+export const Arrow = styled.span`
+    width: 100px;
+    height: 3px;
+    display: inline-block;
+    background: #5959FF;
+    position: relative;
+    transform: rotate(0deg);
+    
+    &:after{
+        content: "";
+        display: inline-block;
+        position: absolute;
+        border-bottom: 7.5px solid transparent;
+        border-top: 7.5px solid transparent;
+        border-left: 12px solid #5959FF;
+        right: -12px;
+        top: -6px;
+    }
+`
+
+export const IntroduceLayout = styled.div`
+    position: fixed;
+    top: 0;
+    z-index: 999;
+    background: rgba(0, 0, 0, 0.8);
+    width: 100vw;
+    height: 100vh;
+`
+
+export const IntroduceWrapper = styled.div<BeingProps>`
+    display: ${props => props.isBeing ? "auto" : "none"};
 `

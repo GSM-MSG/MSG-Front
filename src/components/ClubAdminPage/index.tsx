@@ -5,11 +5,14 @@ import Modify from "./Modify";
 import { ClubMembersType } from "../../types";
 import { userData } from "./DummyData";
 import Link from "next/link";
+import Introduce from "./Introduce";
 
 
 export default function ClubAdminPage() {
     const [userList, setUserList] = useState<Array<ClubMembersType>>(userData);
     const [isModifying, setModifying] = useState<boolean>(false);
+    const [isModify, setModify] = useState<any>(true);
+    const [isSecession, setSecession] = useState<any>(true);
     const [modalNum, setModalNum] = useState<ClubMembersType | null>(null);
     const [search, setSearch] = useState<string>("");
 
@@ -32,7 +35,7 @@ export default function ClubAdminPage() {
         return (
             userList.filter((item: any) => {
                 const stuNum: string = item.grade + "학년" + item.class + "반" + item.num + "번";
-                if (item.name.toLowerCase().includes(search.toLowerCase()) || stuNum.includes(search.replace(/\s/gi, "")) || search === "") {
+                if (search === "" || item.name.toLowerCase().includes(search.toLowerCase()) || stuNum.includes(search.replace(/\s/gi, ""))) {
                     return item;
                 }
             }).map((item: any, idx: number) => (
@@ -63,10 +66,21 @@ export default function ClubAdminPage() {
             onRemove(stuNum);
         }
         localStorage.removeItem('stuNum');
+        localStorage.removeItem('Modify');
+        localStorage.removeItem('Secession');
     }, [])
 
+    useEffect(() => {
+        if (localStorage.getItem('Modify') !== null) {
+            setModify(false);
+        }
+        if (localStorage.getItem('Secession') !== null) {
+            setSecession(false);
+        }
+    })
+
     return (
-        <S.Wrapper isModal={modalNum !== null ? true : false}>
+        <S.Wrapper isModal={modalNum !== null || isModify || (isSecession && isModifying) ? true : false}>
             <S.InputContainer>
                 <S.Title>학생정보 수정</S.Title>
                 <S.InputWrapper>
@@ -79,10 +93,12 @@ export default function ClubAdminPage() {
                     {onList()}
                 </ul>
             </S.ListContainer>
-            <S.WithdrawalBtn onClick={() => setModifying(!isModifying)} bgcolor={isModifying}>
+            <S.WithdrawalBtn onClick={() => { setModifying(!isModifying) }} bgcolor={isModifying}>
                 {isModifying ? <SVG.ModifyPen /> : <SVG.TrashCan />}
             </S.WithdrawalBtn>
             {modalNum !== null && <Modify item={modalNum} onClose={(e) => onDone(e, 0)} />}
+            {isModify && <Introduce onClose={setModify} name="Modify" />}
+            {isModifying && isSecession && <Introduce onClose={setSecession} name="Secession" />}
         </S.Wrapper>
     );
 }
