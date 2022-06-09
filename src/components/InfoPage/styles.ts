@@ -32,12 +32,10 @@ export const Users = styled.div`
   display: flex;
   overflow: auto;
   gap: 5rem;
+  width: 100%;
 
   ::-webkit-scrollbar {
     width: 0;
-  }
-  @media (max-width: 1030px) {
-    justify-content: center;
   }
 `;
 
@@ -87,7 +85,7 @@ export const Info = styled.div`
     gap: 5rem;
   }
   @media (max-width: 640px) {
-    padding: 0 1rem;
+    padding: 0 2rem;
   }
 `;
 
