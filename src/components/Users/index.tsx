@@ -26,7 +26,7 @@ const Users: NextPage<UsersProps> = ({ users, type }) => {
           {member
             ?.filter((user) => user.scope !== "HEAD")
             ?.map((user) => (
-              <MemberCard key={user.email} user={user} />
+              <MemberCard key={user.email} user={user} type={type} />
             ))}
         </S.CardList>
       ) : (

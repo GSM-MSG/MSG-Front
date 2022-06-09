@@ -85,6 +85,7 @@ export const Approve = styled.button`
   font-weight: bold;
   cursor: pointer;
   transition: 0.2s;
+  outline: none;
 
   :hover {
     background: #3a41f9;
@@ -103,6 +104,7 @@ export const Refuse = styled.button`
   font-weight: bold;
   cursor: pointer;
   transition: 0.2s;
+  outline: none;
 
   :hover {
     background: #4c4c4c;
