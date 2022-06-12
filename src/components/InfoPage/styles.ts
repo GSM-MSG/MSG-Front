@@ -220,14 +220,21 @@ export const Button = styled.div<ButtonProps>`
   }
 `;
 
-export const RedButton = styled.button`
-  background: #ff8181;
+interface FuncButtonProps {
+  background: string;
+}
+
+export const FuncButton = styled.button<FuncButtonProps>`
+  background: ${({ background }) => background};
   border-radius: 0.5rem;
   padding: 0.8rem 7rem;
   font-weight: bold;
   font-size: 1.2rem;
   transition: 0.2s;
   cursor: pointer;
+  color: #fff;
+  outline: none;
+  border: none;
 
   :hover {
     filter: brightness(80%);

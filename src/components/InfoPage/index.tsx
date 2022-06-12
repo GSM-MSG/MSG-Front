@@ -110,7 +110,7 @@ export default function InfoPage({ clubData }: InfoPageProps) {
             <S.NotionLink>
               <S.Title>노션 링크</S.Title>
               <S.Link href={club.club.notionLink}>
-                {club.club.notionLink}
+                {club.club.notionLink.slice(1, 30)}
               </S.Link>
             </S.NotionLink>
           </S.ContactMeans>
@@ -136,10 +136,21 @@ export default function InfoPage({ clubData }: InfoPageProps) {
           </S.Button>
         </S.Buttons>
       )}
+
       {club.scope === "MEMBER" && (
         <S.Buttons>
-          <S.RedButton>탈퇴하기</S.RedButton>
+          <S.FuncButton background="#FF8181">탈퇴하기</S.FuncButton>
         </S.Buttons>
+      )}
+
+      {club.scope === "USER" && club.club.isOpened && (
+        <S.Buttons>
+          <S.FuncButton background="#4C53FF">신청하기</S.FuncButton>
+        </S.Buttons>
+      )}
+
+      {club.isApplied && club.scope === "USER" && club.club.isOpened && (
+        <S.FuncButton background="#FF8181">신청 취소하기</S.FuncButton>
       )}
     </S.Wrapper>
   );
