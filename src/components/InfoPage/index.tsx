@@ -24,7 +24,7 @@ export default function InfoPage({ clubData }: InfoPageProps) {
     }
 
     try {
-      checkQuery(async () =>
+      await checkQuery(async () =>
         api.put(`club/web/open`, {
           q: clubData.club.title,
           type: clubData.club.type,
@@ -38,6 +38,27 @@ export default function InfoPage({ clubData }: InfoPageProps) {
       );
     } catch (e) {
       toast.error("동아리 신청 열기에 실패했습니다.");
+    }
+  };
+
+  const ApplyOrCancel = async (type: "apply" | "cancel") => {
+    try {
+      await checkQuery(async () =>
+        api.post(`/club/web/${type}`, {
+          q: clubData.club.title,
+          type: clubData.club.type,
+        })
+      );
+      setClub(
+        produce(club, (draft) => {
+          draft.isApplied = true;
+        })
+      );
+      toast.success(
+        `동아리 신청${type === "cancel" && " 취소"}에 성공했습니다.`
+      );
+    } catch (e) {
+      toast.error(`동아리 신청${type === "cancel" && " 취소"}에 실패했습니다.`);
     }
   };
 
@@ -143,14 +164,26 @@ export default function InfoPage({ clubData }: InfoPageProps) {
         </S.Buttons>
       )}
 
-      {club.scope === "USER" && club.club.isOpened && (
+      {club.scope === "USER" && club.club.isOpened && !club.isApplied && (
         <S.Buttons>
-          <S.FuncButton background="#4C53FF">신청하기</S.FuncButton>
+          <S.FuncButton
+            onClick={() => ApplyOrCancel("apply")}
+            background="#4C53FF"
+          >
+            신청하기
+          </S.FuncButton>
         </S.Buttons>
       )}
 
       {club.isApplied && club.scope === "USER" && club.club.isOpened && (
-        <S.FuncButton background="#FF8181">신청 취소하기</S.FuncButton>
+        <S.Buttons>
+          <S.FuncButton
+            onClick={() => ApplyOrCancel("cancel")}
+            background="#FF8181"
+          >
+            신청 취소하기
+          </S.FuncButton>
+        </S.Buttons>
       )}
     </S.Wrapper>
   );

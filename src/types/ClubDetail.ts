@@ -20,7 +20,7 @@ export interface ClubDetail {
   };
   member: Member[];
   scope: "HEAD" | "MEMBER" | "USER";
-  isApplied: true;
+  isApplied: boolean;
 }
 
 interface Member {
