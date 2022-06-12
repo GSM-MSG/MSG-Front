@@ -4,7 +4,14 @@ import { useEffect } from "react";
 import * as SVG from "../../SVG";
 import * as S from "./styles";
 
-export default function Header() {
+export default function Header({
+  turn = true,
+  fn,
+}: // link = "/create",
+{
+  turn?: boolean;
+  fn?: any;
+}) {
   useEffect(() => {}, []);
 
   return (
@@ -13,11 +20,13 @@ export default function Header() {
         <S.Logo>GCMS</S.Logo>
       </Link>
       <S.Icons>
-        <Link href="/create">
-          <a>
-            <SVG.Plus />
-          </a>
-        </Link>
+        {turn && (
+          <Link href={fn ? "/afterschooladmin" : "/create"}>
+            <a onClick={() => fn(true)}>
+              <SVG.Plus />
+            </a>
+          </Link>
+        )}
         <Link href="/my">
           <a>
             <SVG.UserIcon />

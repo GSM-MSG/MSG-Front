@@ -1,3 +1,5 @@
+import { format } from "path";
+
 export * from "./Plus";
 export * from "./Speaker";
 export * from "./Alarm";
@@ -18,5 +20,9 @@ export * from "./Google";
 export * from "./SearchIcon";
 export * from "./SeachFilter";
 export * from "./SmallX";
-export * from "./Letter";
+export * from "./letter";
 export * from "./LeftArrow";
+export * from "./UpArrow";
+export * from "./Fix";
+export * from "./Delete";
+export * from "./Graph";

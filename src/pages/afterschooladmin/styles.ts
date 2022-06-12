@@ -151,12 +151,10 @@ export const SelectButton = styled.button<StlyedProps>`
   margin-right: 2rem;
   background-color: ${({ state }) => {
     switch (state) {
-      case "null":
+      case "blue":
         return "#4C53FF";
-      case "true":
+      case "red":
         return "#ED6666";
-      case "false":
-        return "transparent";
       default:
         break;
     }
@@ -201,8 +199,6 @@ export const FilterBox = styled.div`
   width: 28rem;
   display: flex;
   justify-content: space-between;
-  /* animation-delay: 2s; */
-  /* animation: fadeInDown 1s; */
 
   @media (max-width: 62rem) {
     width: 45vw;

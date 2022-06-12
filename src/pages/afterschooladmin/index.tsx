@@ -1,10 +1,13 @@
 import Header from "../../components/Header";
 import React, { MouseEvent, useEffect, useState } from "react";
-import * as S from "./style";
+import * as S from "./styles";
 import { list } from "./dummyData";
 import * as Type from "../../types/AfterSchoolType";
 import { Detail } from "../../components/Detail/AllDetail";
 import * as SVG from "../../SVG";
+import SelectButton from "../../components/SelectButton";
+import { AdminFix } from "../../components/AdminFix";
+import { CreateAfterSchool } from "../../components/CreateAfterSchool";
 
 export default function AfterSchool() {
   type FilterDayType = {
@@ -15,7 +18,8 @@ export default function AfterSchool() {
     grade: number;
     check: boolean;
   };
-
+  const [category, setCategory] = useState(4);
+  console.log(category);
   const [day, setDay] = useState<FilterDayType[]>([
     {
       day: "MON",
@@ -51,7 +55,7 @@ export default function AfterSchool() {
 
   const ChangeAfterList = () => {
     if (search === "") {
-      return [];
+      return list;
     } else {
       const MakeList = list.filter(
         (e) =>
@@ -76,12 +80,36 @@ export default function AfterSchool() {
   };
 
   const makeSelectButton = (e: Type.PropListType) => {
-    if (!e.isApplied && e.isEnabled) {
-      return <S.SelectButton state={"null"}>신청</S.SelectButton>;
-    } else if (e.isApplied && e.isEnabled) {
-      return <S.SelectButton state={"true"}>취소</S.SelectButton>;
+    if (category === 0) {
+      return (
+        <S.SelectButton
+          onClick={() => {
+            setFix(true);
+            setFixState(e);
+          }}
+          state={"blue"}
+        >
+          수정하기
+        </S.SelectButton>
+      );
+    } else if (category === 1) {
+      return (
+        <S.SelectButton onClick={() => console.log("삭제하기")} state={"red"}>
+          삭제하기
+        </S.SelectButton>
+      );
+    } else if (category === 2) {
+      return (
+        <S.SelectButton onClick={() => console.log("통계보기")} state={"blue"}>
+          통계보기
+        </S.SelectButton>
+      );
     } else {
-      return <S.SelectButton state={"false"}></S.SelectButton>;
+      return (
+        <S.SelectButton onClick={() => console.log("명단보기")} state={"blue"}>
+          명단보기
+        </S.SelectButton>
+      );
     }
   };
 
@@ -179,6 +207,13 @@ export default function AfterSchool() {
   };
 
   const [closeDetail, setCloseDetail] = useState<boolean>(true);
+  const [fix, setFix] = useState(false);
+  const [create, setCreate] = useState(false);
+
+  const [after, setAfter] = useState(false);
+
+  const [fixState, setFixState] = useState({});
+  const [afterState, setAfterState] = useState({});
 
   useEffect(() => {
     setAfterList(ChangeAfterList());
@@ -190,7 +225,7 @@ export default function AfterSchool() {
 
   return (
     <S.AfterSchool>
-      <Header turn={false} />
+      <Header fn={setCreate} />
       <S.Search>
         <S.Input
           type="text"
@@ -249,33 +284,25 @@ export default function AfterSchool() {
           <span>강의시간</span>
           <span>대상학년</span>
         </S.CurseList>
-        {afterList.length === 0 ? (
-          <S.NotFilter>
-            <SVG.Whale />
-            <p>
-              검색이나 필터를 사용해서
-              <br />
-              방과후를 검색해주세요.
-            </p>
-          </S.NotFilter>
-        ) : (
-          <>
-            <S.ScollBox>
-              {afterList.map((e: Type.PropListType, i) => (
-                <S.Enrolment key={i}>
-                  <div>
-                    <p>{e.afterSchool.title}</p>
-                    <p>{changeWeek(e.afterSchool.week[0])}</p>
-                    <p>{e.afterSchool.grade}</p>
-                  </div>
-                  {makeSelectButton(e)}
-                </S.Enrolment>
-              ))}
-            </S.ScollBox>
-          </>
-        )}
+        <S.ScollBox>
+          {afterList.map((e: Type.PropListType, i) => {
+            return (
+              <S.Enrolment key={i}>
+                <div>
+                  <p>{e.afterSchool.title}</p>
+                  <p>{changeWeek(e.afterSchool.week[0])}</p>
+                  <p>{e.afterSchool.grade}</p>
+                </div>
+                {makeSelectButton(e)}
+              </S.Enrolment>
+            );
+          })}
+        </S.ScollBox>
       </S.AfterSchoolBox>
       {/* {closeDetail && <Detail fun={setCloseDetail} name="Excomponentm" />} */}
+      <SelectButton fn={setCategory} />
+      {create && <CreateAfterSchool fn={setCreate} />}
+      {fix && <AdminFix fn={setFix} state={fixState} />}
     </S.AfterSchool>
   );
 }

@@ -9,13 +9,19 @@ export type UserState = {
   maxPersonnel: number;
   isApplied: boolean;
 };
-
+export type weekType = "MON" | "TUE" | "WED";
 export type PropListType = {
-  lecture: string;
-  week: "MON" | "TUE" | "WED";
-  grade: number;
-  personnel: number;
-  maxPersonnel: number;
+  afterSchool: {
+    id: number;
+    title: string;
+    week: [weekType, weekType] | [weekType];
+    grade: number;
+    personnel: number;
+    maxPersonnel: number;
+    isOpend: boolean;
+  };
+  isApplied: boolean;
+  isEnabled: boolean;
 };
 
 export type ChangeWeekType = (e: "MON" | "TUE" | "WED") => any;

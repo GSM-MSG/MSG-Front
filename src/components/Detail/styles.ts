@@ -1,6 +1,10 @@
 import styled from "@emotion/styled";
 import { type } from "os";
 
+type ButtonColor = {
+  color: string;
+};
+
 //------------------All-------------------
 
 export const BackGround = styled.div`
@@ -44,6 +48,26 @@ export const ExSearch = styled.div`
     background-color: #fff;
   }
 `;
+
+export const LoginText = styled.div<ButtonColor>`
+  color: ${(prop) => prop.color};
+  font-size: 1.3rem;
+`;
+
+export const Button = styled.a<ButtonColor>`
+  max-width: 30rem;
+  max-height: 4rem;
+  width: 90%;
+  background: ${(prop) => prop.color};
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 2rem 1rem;
+  margin-top: 2rem;
+`;
+
 //------------------FixClub-------------------
 
 export const ExClubSearch = styled.div`
@@ -98,8 +122,22 @@ export const ExManageButton = styled.div``;
 
 //------------------Admin-------------------
 
-export const ClubAdmin = styled.div``;
-export const AfterSchollAdmin = styled.div``;
+export const FirstButtonOne = styled.div`
+  a {
+    position: fixed;
+    width: 90%;
+    left: 625px;
+    bottom: 300px;
+  }
+`;
+export const FirstButtonTwo = styled.div`
+  a {
+    position: fixed;
+    width: 90%;
+    left: 625px;
+    bottom: 202px;
+  }
+`;
 
 //------------------TriAngel-------------------
 
@@ -146,9 +184,11 @@ export const ExBox = styled.div<ExBox>`
   @keyframes fadeInDown {
     0% {
       transform: translate3d(0, 100%, 0);
+      opacity: 0;
     }
     to {
       transform: translateZ(0);
+      opacity: 1;
     }
   }
 `;
@@ -177,4 +217,12 @@ export const Enter = styled.input`
   :focus {
     outline: none;
   }
+`;
+
+type BeingProps = {
+  isBeing: boolean;
+};
+
+export const Sibal = styled.div<BeingProps>`
+  display: ${(props) => (props.isBeing ? "auto" : "none")};
 `;
