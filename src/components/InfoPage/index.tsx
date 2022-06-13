@@ -23,6 +23,9 @@ export default function InfoPage({ clubData }: InfoPageProps) {
       return;
     }
 
+    if (!confirm(`정말 "${clubData.club.title}"동아리 신청을 여시겠습니까?`))
+      return;
+
     try {
       await checkQuery(async () =>
         api.put(`club/web/open`, {
@@ -42,6 +45,15 @@ export default function InfoPage({ clubData }: InfoPageProps) {
   };
 
   const ApplyOrCancel = async (type: "apply" | "cancel") => {
+    if (
+      !confirm(
+        `정말 "${clubData.club.title}"동아리를 신청${
+          type === "cancel" ? " 취소" : ""
+        }하시겠습니까?`
+      )
+    )
+      return;
+
     try {
       await checkQuery(async () =>
         api.post(`/club/web/${type}`, {
@@ -61,6 +73,24 @@ export default function InfoPage({ clubData }: InfoPageProps) {
       toast.error(
         `동아리 신청${type === "cancel" ? " 취소" : ""}에 실패했습니다.`
       );
+    }
+  };
+
+  const exit = async () => {
+    if (!confirm(`정말 "${clubData.club.title}"동아리를 탈퇴하시겠습니까?`))
+      return;
+
+    try {
+      await checkQuery(async () =>
+        api.post("/user/exit", {
+          name: clubData.club.title,
+          type: clubData.club.type,
+        })
+      );
+      toast.success("동아리 탈퇴에 성공했습니다.");
+      router.push("/");
+    } catch (e) {
+      toast.error("동아리 탈퇴에 실패했습니다.");
     }
   };
 
@@ -162,7 +192,9 @@ export default function InfoPage({ clubData }: InfoPageProps) {
 
       {club.scope === "MEMBER" && (
         <S.Buttons>
-          <S.FuncButton background="#FF8181">탈퇴하기</S.FuncButton>
+          <S.FuncButton onClick={exit} background="#FF8181">
+            탈퇴하기
+          </S.FuncButton>
         </S.Buttons>
       )}
 

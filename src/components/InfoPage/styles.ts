@@ -238,7 +238,7 @@ export const FuncButton = styled.button<FuncButtonProps>`
   outline: none;
   border: none;
   height: 3.5rem;
-  max-width: 16rem;
+  max-width: 20rem;
   width: 90%;
 
   :hover {
