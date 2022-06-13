@@ -6,7 +6,6 @@ const checkQuery = async (query: () => Promise<AxiosResponse>) => {
     const { data } = await query();
     return data;
   } catch (e) {
-    console.log(e);
     await api.post("/auth/refresh/web");
     const { data } = await query();
     return data;

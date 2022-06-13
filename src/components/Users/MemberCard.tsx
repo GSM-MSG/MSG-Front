@@ -66,6 +66,24 @@ const MemberCard: NextPage<MemberCardProps> = ({
     }
   };
 
+  const exitOrRefuse = async () => {
+    try {
+      await checkQuery(async () =>
+        api.post(`/club/web/${type === "APPLICATION" ? "kick" : "reject"}`, {
+          q: decodeURI(urlArray[2]),
+          type: urlArray[1].toUpperCase(),
+          userId: user.email,
+        })
+      );
+
+      if (type === "APPLICATION") toast.success("멤버 방출에 성공했습니다.");
+      else toast.success("거절에 성공했습니다.");
+    } catch (e) {
+      if (type === "APPLICATION") toast.error("멤버 방출에 실패했습니다.");
+      else toast.error("거절에 실패했습니다.");
+    }
+  };
+
   return (
     <S.MemberWrapper>
       <S.UserImg src={user.userImg} />
@@ -80,7 +98,9 @@ const MemberCard: NextPage<MemberCardProps> = ({
           <S.Approve onClick={Allow}>
             {type === "MANAGE" ? "위임" : "승인"}
           </S.Approve>
-          <S.Refuse>{type === "MANAGE" ? "강퇴" : "거절"}</S.Refuse>
+          <S.Refuse onClick={exitOrRefuse}>
+            {type === "MANAGE" ? "강퇴" : "거절"}
+          </S.Refuse>
         </S.Bottom>
       </S.Info>
     </S.MemberWrapper>

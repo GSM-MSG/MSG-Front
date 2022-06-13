@@ -63,7 +63,7 @@ export default function InfoPage({ clubData }: InfoPageProps) {
       );
       setClub(
         produce(club, (draft) => {
-          draft.isApplied = true;
+          draft.isApplied = type === "apply";
         })
       );
       toast.success(
