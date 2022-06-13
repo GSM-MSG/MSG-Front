@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { Dispatch, SetStateAction, useRef } from "react";
+import { ChangeEvent, Dispatch, SetStateAction, useRef } from "react";
 import * as S from "./styles";
 import * as SVG from "../../SVG";
 import { ClubKind } from "./types/ClubKind";
@@ -17,6 +17,7 @@ interface RightFormProps {
   info: InfoType;
   setInfo: Dispatch<SetStateAction<InfoType>>;
   setUsers: Dispatch<SetStateAction<UserType[]>>;
+  isEdit: boolean;
 }
 
 const RightForm: NextPage<RightFormProps> = ({
@@ -25,6 +26,9 @@ const RightForm: NextPage<RightFormProps> = ({
   kind,
   setKind,
   setUsers,
+  info,
+  setInfo,
+  isEdit,
 }) => {
   const ImgRef = useRef<HTMLInputElement>(null);
   const ChangeKind = (e: any) => {
@@ -49,6 +53,12 @@ const RightForm: NextPage<RightFormProps> = ({
       toast.error("이미지 업로드에 실패했습니다.");
     }
   };
+
+  const onChange = (e: ChangeEvent<HTMLInputElement>) =>
+    setInfo({
+      ...info,
+      [e.target.name]: e.target.value,
+    });
 
   return (
     <S.RightFormWrapper>
@@ -75,40 +85,52 @@ const RightForm: NextPage<RightFormProps> = ({
           )}
         </S.Imgs>
       </div>
-      <div>
-        <S.SubTitle>동아리 종류</S.SubTitle>
-        <S.ClubButton
-          onClick={ChangeKind}
-          active={kind === "MAJOR"}
-          position="left"
-          name="MAJOR"
-        >
-          전공
-        </S.ClubButton>
-        <S.ClubButton
-          onClick={ChangeKind}
-          active={kind === "FREEDOM"}
-          name="FREEDOM"
-        >
-          자율
-        </S.ClubButton>
-        <S.ClubButton
-          onClick={ChangeKind}
-          active={kind === "EDITORIAL"}
-          position="right"
-          name="EDITORIAL"
-        >
-          사설
-        </S.ClubButton>
-      </div>
+      {!isEdit && (
+        <div>
+          <S.SubTitle>동아리 종류</S.SubTitle>
+          <S.ClubButton
+            onClick={ChangeKind}
+            active={kind === "MAJOR"}
+            position="left"
+            name="MAJOR"
+          >
+            전공
+          </S.ClubButton>
+          <S.ClubButton
+            onClick={ChangeKind}
+            active={kind === "FREEDOM"}
+            name="FREEDOM"
+          >
+            자율
+          </S.ClubButton>
+          <S.ClubButton
+            onClick={ChangeKind}
+            active={kind === "EDITORIAL"}
+            position="right"
+            name="EDITORIAL"
+          >
+            사설
+          </S.ClubButton>
+        </div>
+      )}
       <div>
         <S.SubTitle>연락처</S.SubTitle>
         <h3>
-          선생님<S.Choice>(선택)</S.Choice>
+          선생님 성함<S.Choice>(선택)</S.Choice>
         </h3>
-        <S.InfoInput placeholder="이름을 입력해 주세요" />
+        <S.InfoInput
+          value={info.teacher}
+          name="teacher"
+          onChange={onChange}
+          placeholder="이름을 입력해 주세요"
+        />
         <h3>부장</h3>
-        <S.InfoInput placeholder="연락처를 입력해 주세요" />
+        <S.InfoInput
+          value={info.contact}
+          name="contact"
+          onChange={onChange}
+          placeholder="연락처를 입력해 주세요"
+        />
       </div>
     </S.RightFormWrapper>
   );

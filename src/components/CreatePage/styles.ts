@@ -53,6 +53,7 @@ export const ButtonCenter = styled.div`
   justify-content: center;
   width: 100%;
   margin: 2rem 0;
+  padding: 0 5%;
 `;
 
 export const SubmitButton = styled.button`
@@ -69,6 +70,44 @@ export const SubmitButton = styled.button`
   font-family: inherit;
   cursor: pointer;
   box-shadow: 0 5px 10px rgba(76, 83, 255, 50%);
+`;
+
+export const EditButton = styled.button`
+  border-bottom-left-radius: 0.5rem;
+  border-top-left-radius: 0.5rem;
+  color: #fff;
+  background: #4c53ff;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  font-family: inherit;
+  cursor: pointer;
+  width: 15rem;
+  height: 3.5rem;
+  transition: 0.2s;
+
+  :hover {
+    filter: brightness(80%);
+  }
+`;
+
+export const BoomButton = styled.button`
+  border-bottom-right-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  background: #ff8181;
+  color: #fff;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  font-family: inherit;
+  cursor: pointer;
+  width: 15rem;
+  height: 3.5rem;
+  transition: 0.2s;
+
+  :hover {
+    filter: brightness(80%);
+  }
 `;
 
 //-------------------LeftForm--------------------

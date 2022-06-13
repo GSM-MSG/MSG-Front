@@ -184,7 +184,11 @@ export default function InfoPage({ clubData }: InfoPageProps) {
           <S.Button onClick={leftClick} position="left" background="#FF8181">
             {club.club.isOpened ? "명단 관리하기" : "신청 받기"}
           </S.Button>
-          <S.Button position="right" background="#4c53ff">
+          <S.Button
+            onClick={() => router.push(`${router.asPath}/edit`)}
+            position="right"
+            background="#4c53ff"
+          >
             수정하기
           </S.Button>
         </S.Buttons>

@@ -9,24 +9,33 @@ import { TextsType } from "./types/TextsType";
 import { ClubKind } from "./types/ClubKind";
 import { InfoType } from "./types/InfoType";
 import { toast } from "react-toastify";
-
 import api from "../../lib/api";
 import checkQuery from "../../lib/checkQuery";
 import { useRouter } from "next/router";
+import { ClubDetail } from "../../types/ClubDetail";
 
-const CreatePage: NextPage = () => {
+interface CreatePageProps {
+  clubData?: ClubDetail;
+}
+
+const CreatePage: NextPage<CreatePageProps> = ({ clubData }) => {
   const router = useRouter();
   const bannerRef = useRef<HTMLInputElement | null>(null);
   const [texts, setTexts] = useState<TextsType>({
-    title: "",
-    description: "",
-    notionLink: "",
+    title: clubData?.club.title || "",
+    description: clubData?.club.description || "",
+    notionLink: clubData?.club.notionLink || "",
   });
-  const [users, setUsers] = useState<UserType[]>([]);
-  const [images, setImages] = useState<string[]>([]);
+  const [users, setUsers] = useState<UserType[]>(clubData?.member || []);
+  const [images, setImages] = useState<string[]>(clubData?.activityurls || []);
   const [type, setType] = useState<ClubKind>("MAJOR");
-  const [info, setInfo] = useState<InfoType>({ teacher: "", contact: "" });
-  const [bannerUrl, setBannerUrl] = useState<string>("");
+  const [info, setInfo] = useState<InfoType>({
+    teacher: clubData?.club.teacher || "",
+    contact: clubData?.club.contact || "",
+  });
+  const [bannerUrl, setBannerUrl] = useState<string>(
+    clubData?.club.bannerUrl || ""
+  );
 
   const UploadImg = async () => {
     if (!bannerRef.current?.files || !bannerRef.current?.files[0]) return;
@@ -51,22 +60,42 @@ const CreatePage: NextPage = () => {
       toast.info("제목에 특수문자를 넣을 수 없습니다.");
       return;
     }
+
+    if (!confirm(`정말로 동아리를 ${clubData ? "수정" : "생성"}하시겠습니까?`))
+      return;
+
     try {
       await checkQuery(() =>
         api.post("/club/web", {
+          q: clubData?.club.title,
           activityUrls: images,
           type,
           ...texts,
           notionLink: texts.notionLink ? texts.notionLink : undefined,
           ...info,
-          member: users.map((i) => i.email),
+          member: users.map((i) => i.email) || [],
           bannerUrl,
         })
       );
 
       router.push("/");
     } catch (e) {
-      toast.error("동아리 생성 실패");
+      toast.error(`동아리 ${clubData ? "수정" : "생성"} 실패`);
+    }
+  };
+
+  const onBoom = async () => {
+    try {
+      await checkQuery(async () =>
+        api.post("/club/web", {
+          q: clubData?.club.title,
+          type: clubData?.club.type,
+        })
+      );
+      toast.success("동아리 폭파에 성공했습니다.");
+      router.push("/");
+    } catch (e) {
+      toast.error("동아리 폭파에 실패했습니다.");
     }
   };
 
@@ -103,6 +132,7 @@ const CreatePage: NextPage = () => {
           type={type}
         />
         <RightForm
+          isEdit={!!clubData}
           images={images}
           setImages={setImages}
           kind={type}
@@ -114,10 +144,15 @@ const CreatePage: NextPage = () => {
       </S.Forms>
 
       <S.ButtonCenter>
-        <S.SubmitButton onClick={onSubmit}>등록하기</S.SubmitButton>
+        {clubData ? (
+          <>
+            <S.EditButton onClick={onSubmit}>수정하기</S.EditButton>
+            <S.BoomButton onClick={onBoom}>폭파하기</S.BoomButton>
+          </>
+        ) : (
+          <S.SubmitButton onClick={onSubmit}>등록하기</S.SubmitButton>
+        )}
       </S.ButtonCenter>
-
-      
     </S.Wrapper>
   );
 };
