@@ -1,17 +1,26 @@
+import produce from "immer";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
+import { Dispatch, SetStateAction } from "react";
 import { toast } from "react-toastify";
 import api from "../../lib/api";
 import checkQuery from "../../lib/checkQuery";
-import { Member } from "../../types/MemberType";
+import { Member, MemberType } from "../../types/MemberType";
 import * as S from "./styles";
 
 interface MemberCardProps {
+  member: MemberType;
+  setMember: Dispatch<SetStateAction<MemberType>>;
   user: Member;
   type: "MANAGE" | "APPLICATION";
 }
 
-const MemberCard: NextPage<MemberCardProps> = ({ user, type }) => {
+const MemberCard: NextPage<MemberCardProps> = ({
+  member,
+  setMember,
+  user,
+  type,
+}) => {
   const router = useRouter();
 
   const urlArray = router.asPath.split("/");
@@ -24,6 +33,11 @@ const MemberCard: NextPage<MemberCardProps> = ({ user, type }) => {
             q: decodeURI(urlArray[2]),
             type: urlArray[1].toUpperCase(),
             userId: user.email,
+          })
+        );
+        setMember(
+          produce(member, (draft) => {
+            draft;
           })
         );
         toast.success("승인에 성공했습니다.");
@@ -39,6 +53,11 @@ const MemberCard: NextPage<MemberCardProps> = ({ user, type }) => {
           q: decodeURI(urlArray[2]),
           type: urlArray[1].toUpperCase(),
           userId: user.email,
+        })
+      );
+      setMember(
+        produce(member, (draft) => {
+          draft.userScope = "MEMBER";
         })
       );
       toast.success("위임에 성공했습니다!!");

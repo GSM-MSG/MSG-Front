@@ -141,6 +141,7 @@ export const ContactUser = styled.div`
 export const Contact = styled.div`
   font-weight: bold;
   font-size: 1.2rem;
+  width: max-content;
 `;
 
 export const NotionLink = styled.div`

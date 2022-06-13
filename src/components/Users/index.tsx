@@ -2,7 +2,7 @@
 import { useState } from "react";
 import * as S from "./styles";
 import MemberCard from "./MemberCard";
-import { MemberType, Member } from "../../types/MemberType";
+import { MemberType } from "../../types/MemberType";
 import { NextPage } from "next";
 import UserCard from "./UserCard";
 
@@ -12,7 +12,7 @@ interface UsersProps {
 }
 
 const Users: NextPage<UsersProps> = ({ users, type }) => {
-  const [member, setMember] = useState<Member[] | undefined>(users.requestUser);
+  const [member, setMember] = useState<MemberType>(users);
 
   return (
     <S.UsersWrapper>
@@ -22,16 +22,26 @@ const Users: NextPage<UsersProps> = ({ users, type }) => {
 
       {users.userScope === "HEAD" && member !== undefined ? (
         <S.CardList>
-          <UserCard user={member?.filter((user) => user.scope === "HEAD")[0]} />
-          {member
+          <UserCard
+            user={
+              member.requestUser?.filter((user) => user.scope === "HEAD")[0]
+            }
+          />
+          {member.requestUser
             ?.filter((user) => user.scope !== "HEAD")
             ?.map((user) => (
-              <MemberCard key={user.email} user={user} type={type} />
+              <MemberCard
+                key={user.email}
+                member={member}
+                setMember={setMember}
+                user={user}
+                type={type}
+              />
             ))}
         </S.CardList>
       ) : (
         <S.CardList>
-          {member?.map((user) => (
+          {member?.requestUser.map((user) => (
             <UserCard key={user.email} user={user} />
           ))}
         </S.CardList>

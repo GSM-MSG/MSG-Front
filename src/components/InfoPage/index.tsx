@@ -55,10 +55,12 @@ export default function InfoPage({ clubData }: InfoPageProps) {
         })
       );
       toast.success(
-        `동아리 신청${type === "cancel" && " 취소"}에 성공했습니다.`
+        `동아리 신청${type === "cancel" ? " 취소" : ""}에 성공했습니다.`
       );
     } catch (e) {
-      toast.error(`동아리 신청${type === "cancel" && " 취소"}에 실패했습니다.`);
+      toast.error(
+        `동아리 신청${type === "cancel" ? " 취소" : ""}에 실패했습니다.`
+      );
     }
   };
 
