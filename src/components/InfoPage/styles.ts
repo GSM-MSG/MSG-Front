@@ -161,6 +161,7 @@ export const Link = styled.a`
   text-align: center;
   padding: 0.8rem 1rem;
   overflow: hidden;
+  max-width: max-content;
 
   :hover {
     text-decoration: underline;
@@ -210,7 +211,8 @@ export const Button = styled.div<ButtonProps>`
   border-bottom-${({ position }) => position}-radius: 0.5rem;  
   padding: 0.8rem 0;
   text-align: center;
-  width: 16rem;
+  max-width: 16rem;
+  width: 90%;
   font-weight: bold;
   font-size: 1.2rem;
   transition: .2s;
@@ -228,7 +230,6 @@ interface FuncButtonProps {
 export const FuncButton = styled.button<FuncButtonProps>`
   background: ${({ background }) => background};
   border-radius: 0.5rem;
-  padding: 0.8rem 7rem;
   font-weight: bold;
   font-size: 1.2rem;
   transition: 0.2s;
@@ -236,6 +237,9 @@ export const FuncButton = styled.button<FuncButtonProps>`
   color: #fff;
   outline: none;
   border: none;
+  height: 3.5rem;
+  max-width: 16rem;
+  width: 90%;
 
   :hover {
     filter: brightness(80%);
