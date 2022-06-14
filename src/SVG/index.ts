@@ -26,3 +26,5 @@ export * from "./UpArrow";
 export * from "./Fix";
 export * from "./Delete";
 export * from "./Graph";
+export * from "./Open";
+export * from "./UnderTryAngle";

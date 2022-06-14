@@ -3,16 +3,25 @@ import * as SVG from "../../SVG";
 import { useEffect, useState } from "react";
 
 export default function SelectButton({ fn }: any) {
+  //버튼 on,off관리
   const [on, setOn] = useState(false);
-  const list: Array<any> = [<SVG.Fix />, <SVG.Delete />, <SVG.Graph />];
+  //각 버튼 SVG정보 배열
+  const list: Array<any> = [
+    <SVG.Fix />,
+    <SVG.Delete />,
+    <SVG.Graph />,
+    <SVG.Open />,
+  ];
+  //클릭시 바뀌는 버튼 오브젝트 배열 값 관리 state
   const [newList, setNweList] = useState<any[]>(list);
+  //선택한 SVG인덱스 찾아주는 람수
   const Select = (select: number) => {
     if (list.length === newList.length) {
       setNweList(list.filter((e, index) => index === select));
       fn(select);
     } else {
       setNweList(list);
-      fn(4);
+      fn();
     }
   };
 

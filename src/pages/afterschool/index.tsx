@@ -7,15 +7,19 @@ import { Detail } from "../../components/Detail/AllDetail";
 import * as SVG from "../../SVG";
 
 export default function AfterSchool() {
+  //요일 오브젝트 타입
   type FilterDayType = {
     day: "MON" | "TUE" | "WED";
     check: boolean;
   };
+
+  //학년 오브젝트 타입
   type FilterGradeType = {
     grade: number;
     check: boolean;
   };
 
+  //요일 오브젝트
   const [day, setDay] = useState<FilterDayType[]>([
     {
       day: "MON",
@@ -31,6 +35,7 @@ export default function AfterSchool() {
     },
   ]);
 
+  //학년 오브젝트
   const [grade, setGrade] = useState<FilterGradeType[]>([
     {
       grade: 1,
@@ -45,10 +50,15 @@ export default function AfterSchool() {
       check: false,
     },
   ]);
+
+  //필터 모달 관리 state
   const [filter, setFilter] = useState<boolean>(false);
+  //검색 값 관리 state
   const [search, setSearch] = useState<string>("");
+  //검색||필터가 적용된 리스트
   const [afterList, setAfterList] = useState<Type.PropListType[]>([]);
 
+  //검색 리스트 생성 함수
   const ChangeAfterList = () => {
     if (search === "") {
       return [];
@@ -65,16 +75,7 @@ export default function AfterSchool() {
     }
   };
 
-  const userState: Type.UserState = {
-    id: 1,
-    title: undefined,
-    grade: 1,
-    week: "MON",
-    personnel: 13,
-    maxPersonnel: 25,
-    isApplied: false,
-  };
-
+  //번튼 생성 함수
   const makeSelectButton = (e: Type.PropListType) => {
     if (!e.isApplied && e.isEnabled) {
       return <S.SelectButton state={"null"}>신청</S.SelectButton>;
@@ -85,6 +86,22 @@ export default function AfterSchool() {
     }
   };
 
+  //요일 변경 함수
+  const changeWeek: Type.ChangeWeekType = (e) => {
+    switch (e) {
+      case "MON":
+        return "월";
+      case "TUE":
+        return "화";
+      case "WED":
+        return "수";
+      default:
+        console.error("Week Error");
+        break;
+    }
+  };
+
+  //날짜 오브젝트 생성 함수
   const changeCheckDay = (e: MouseEvent) => {
     const findCheckIndex: number = day.findIndex(
       (element) =>
@@ -111,6 +128,7 @@ export default function AfterSchool() {
     setDay(newList);
   };
 
+  // 학년 오브젝트 생성 함수
   const changeCheckGrade = (e: MouseEvent) => {
     const findCheckIndex: number = grade.findIndex(
       (element) =>
@@ -136,54 +154,38 @@ export default function AfterSchool() {
     setGrade(newList);
   };
 
-  const changeWeek: Type.ChangeWeekType = (e) => {
-    switch (e) {
-      case "MON":
-        return "월";
-      case "TUE":
-        return "화";
-      case "WED":
-        return "수";
-      default:
-        console.error("Week Error");
-        break;
-    }
-  };
-
+  //새 필터 생성 함수
   const MakeFilter = () => {
     const CheckDay = day.filter((e) => e.check === true);
     const CheckGrade = grade.filter((e) => e.check === true);
 
-    let kakoList: Type.PropListType[] = [];
+    let newList: Type.PropListType[] = [];
 
     if (CheckDay.length === 0 && CheckGrade.length === 0) {
       setAfterList(ChangeAfterList());
     } else if (CheckDay.length === 0 && CheckGrade.length === 1) {
-      kakoList = list.filter(
-        (e) => e.afterSchool.grade === CheckGrade[0].grade
-      );
-      setAfterList(kakoList);
+      newList = list.filter((e) => e.afterSchool.grade === CheckGrade[0].grade);
+      setAfterList(newList);
     } else if (CheckDay.length === 1 && CheckGrade.length === 0) {
-      kakoList = list.filter((e) =>
+      newList = list.filter((e) =>
         e.afterSchool.week.includes(CheckDay[0].day)
       );
-      setAfterList(kakoList);
+      setAfterList(newList);
     } else if (CheckDay.length === 1 && CheckGrade.length === 1) {
-      kakoList = list.filter(
+      newList = list.filter(
         (e) =>
           e.afterSchool.week.includes(CheckDay[0].day) &&
           e.afterSchool.grade === CheckGrade[0].grade
       );
-      setAfterList(kakoList);
+      setAfterList(newList);
     }
   };
 
-  const [closeDetail, setCloseDetail] = useState<boolean>(true);
-
+  //실시간검색 리스트 생성
   useEffect(() => {
     setAfterList(ChangeAfterList());
   }, [search]);
-
+  //필터 변경체크
   useEffect(() => {
     MakeFilter();
   }, [grade, day]);
@@ -275,7 +277,6 @@ export default function AfterSchool() {
           </>
         )}
       </S.AfterSchoolBox>
-      {/* {closeDetail && <Detail fun={setCloseDetail} name="Excomponentm" />} */}
     </S.AfterSchool>
   );
 }

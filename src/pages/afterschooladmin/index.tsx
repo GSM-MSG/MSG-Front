@@ -8,18 +8,24 @@ import * as SVG from "../../SVG";
 import SelectButton from "../../components/SelectButton";
 import { AdminFix } from "../../components/AdminFix";
 import { CreateAfterSchool } from "../../components/CreateAfterSchool";
+import Link from "next/link";
+import SelectSeason from "../../components/SelectSeason";
+import { AlarmAfterSchool } from "../../components/AlarmAfterSchool";
 
 export default function AfterSchool() {
+  //요일 오브벡트 타입
   type FilterDayType = {
     day: "MON" | "TUE" | "WED";
     check: boolean;
   };
+  //학년 오브젝트 타입
   type FilterGradeType = {
     grade: number;
     check: boolean;
   };
-  const [category, setCategory] = useState(4);
-  console.log(category);
+  //선택한 버튼의 상태 관리
+  const [category, setCategory] = useState<number>();
+  //요일 오브젝트
   const [day, setDay] = useState<FilterDayType[]>([
     {
       day: "MON",
@@ -34,7 +40,7 @@ export default function AfterSchool() {
       check: false,
     },
   ]);
-
+  //학년 오브젝트
   const [grade, setGrade] = useState<FilterGradeType[]>([
     {
       grade: 1,
@@ -49,10 +55,24 @@ export default function AfterSchool() {
       check: false,
     },
   ]);
+  //필터 모달 관리 state
   const [filter, setFilter] = useState<boolean>(false);
+  //검색 값 관리 state
   const [search, setSearch] = useState<string>("");
+  //검색||필터가 적용된 리스트
   const [afterList, setAfterList] = useState<Type.PropListType[]>([]);
+  //Detail 모달 관리
+  const [closeDetail, setCloseDetail] = useState<boolean>(true);
+  //수정하기 모달 관리 state
+  const [fix, setFix] = useState(false);
+  //방과후ㅜ생성하기 모달 관리 state
+  const [create, setCreate] = useState(false);
+  //수정할 리스트 정보 관리 state
+  const [fixState, setFixState] = useState({});
+  //신청 받기 마감 모달 관리 state
+  const [allSelect, setAllSelect] = useState(false);
 
+  //검색 리스트 생성 함수
   const ChangeAfterList = () => {
     if (search === "") {
       return list;
@@ -68,17 +88,7 @@ export default function AfterSchool() {
       return MakeList;
     }
   };
-
-  const userState: Type.UserState = {
-    id: 1,
-    title: undefined,
-    grade: 1,
-    week: "MON",
-    personnel: 13,
-    maxPersonnel: 25,
-    isApplied: false,
-  };
-
+  //번튼 생성 함수
   const makeSelectButton = (e: Type.PropListType) => {
     if (category === 0) {
       return (
@@ -104,15 +114,53 @@ export default function AfterSchool() {
           통계보기
         </S.SelectButton>
       );
+    } else if (category === 3) {
+      switch (e.isApplied) {
+        case true:
+          return (
+            <S.SelectButton
+              onClick={() => console.log("마감하기")}
+              state={"red"}
+            >
+              마감하기
+            </S.SelectButton>
+          );
+        case false:
+          return (
+            <S.SelectButton
+              onClick={() => console.log("신청받기")}
+              state={"blue"}
+            >
+              신청받기
+            </S.SelectButton>
+          );
+        default:
+          return;
+      }
     } else {
       return (
-        <S.SelectButton onClick={() => console.log("명단보기")} state={"blue"}>
-          명단보기
-        </S.SelectButton>
+        <Link href="/adminpeople">
+          <S.SelectButton state={"blue"}>명단보기</S.SelectButton>
+        </Link>
       );
     }
   };
+  //요일 변경 함수
 
+  const changeWeek: Type.ChangeWeekType = (e) => {
+    switch (e) {
+      case "MON":
+        return "월";
+      case "TUE":
+        return "화";
+      case "WED":
+        return "수";
+      default:
+        console.error("Week Error");
+        break;
+    }
+  };
+  //날짜 오브젝트 생성 함수
   const changeCheckDay = (e: MouseEvent) => {
     const findCheckIndex: number = day.findIndex(
       (element) =>
@@ -138,7 +186,7 @@ export default function AfterSchool() {
     });
     setDay(newList);
   };
-
+  //요일 변경 함수
   const changeCheckGrade = (e: MouseEvent) => {
     const findCheckIndex: number = grade.findIndex(
       (element) =>
@@ -163,62 +211,38 @@ export default function AfterSchool() {
     });
     setGrade(newList);
   };
-
-  const changeWeek: Type.ChangeWeekType = (e) => {
-    switch (e) {
-      case "MON":
-        return "월";
-      case "TUE":
-        return "화";
-      case "WED":
-        return "수";
-      default:
-        console.error("Week Error");
-        break;
-    }
-  };
-
+  //새 필터 생성 함수
   const MakeFilter = () => {
     const CheckDay = day.filter((e) => e.check === true);
     const CheckGrade = grade.filter((e) => e.check === true);
 
-    let kakoList: Type.PropListType[] = [];
+    let newList: Type.PropListType[] = [];
 
     if (CheckDay.length === 0 && CheckGrade.length === 0) {
       setAfterList(ChangeAfterList());
     } else if (CheckDay.length === 0 && CheckGrade.length === 1) {
-      kakoList = list.filter(
-        (e) => e.afterSchool.grade === CheckGrade[0].grade
-      );
-      setAfterList(kakoList);
+      newList = list.filter((e) => e.afterSchool.grade === CheckGrade[0].grade);
+      setAfterList(newList);
     } else if (CheckDay.length === 1 && CheckGrade.length === 0) {
-      kakoList = list.filter((e) =>
+      newList = list.filter((e) =>
         e.afterSchool.week.includes(CheckDay[0].day)
       );
-      setAfterList(kakoList);
+      setAfterList(newList);
     } else if (CheckDay.length === 1 && CheckGrade.length === 1) {
-      kakoList = list.filter(
+      newList = list.filter(
         (e) =>
           e.afterSchool.week.includes(CheckDay[0].day) &&
           e.afterSchool.grade === CheckGrade[0].grade
       );
-      setAfterList(kakoList);
+      setAfterList(newList);
     }
   };
 
-  const [closeDetail, setCloseDetail] = useState<boolean>(true);
-  const [fix, setFix] = useState(false);
-  const [create, setCreate] = useState(false);
-
-  const [after, setAfter] = useState(false);
-
-  const [fixState, setFixState] = useState({});
-  const [afterState, setAfterState] = useState({});
-
+  //실시간검색 리스트 생성
   useEffect(() => {
     setAfterList(ChangeAfterList());
   }, [search]);
-
+  //필터 변경체크
   useEffect(() => {
     MakeFilter();
   }, [grade, day]);
@@ -284,6 +308,17 @@ export default function AfterSchool() {
           <span>강의시간</span>
           <span>대상학년</span>
         </S.CurseList>
+        {category === 3 && (
+          <S.AllButtonBox>
+            <S.AllButton color="blue" onClick={() => setAllSelect(true)}>
+              전체 신청받기
+            </S.AllButton>
+            <S.AllButton color="red" onClick={() => setAllSelect(true)}>
+              <SVG.UnderTryAngle />
+              전체 신청마감
+            </S.AllButton>
+          </S.AllButtonBox>
+        )}
         <S.ScollBox>
           {afterList.map((e: Type.PropListType, i) => {
             return (
@@ -299,10 +334,10 @@ export default function AfterSchool() {
           })}
         </S.ScollBox>
       </S.AfterSchoolBox>
-      {/* {closeDetail && <Detail fun={setCloseDetail} name="Excomponentm" />} */}
       <SelectButton fn={setCategory} />
       {create && <CreateAfterSchool fn={setCreate} />}
       {fix && <AdminFix fn={setFix} state={fixState} />}
+      {allSelect && <SelectSeason fn={setAllSelect} />}
     </S.AfterSchool>
   );
 }

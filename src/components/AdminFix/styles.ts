@@ -25,6 +25,12 @@ export const box = styled.div`
   @media (max-width: 75rem) {
     width: 73vw;
   }
+  animation: fadeInDown 0.5s;
+  @keyframes fadeInDown {
+    0% {
+      opacity: calc(0);
+    }
+  }
 `;
 
 export const title = styled.h1`

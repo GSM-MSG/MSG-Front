@@ -102,7 +102,6 @@ export const lectureInput = styled.input`
   font-weight: 100;
   :focus {
     outline: none;
-    /* border: none; */
   }
 `;
 export const dayAndGrade = styled.div`
