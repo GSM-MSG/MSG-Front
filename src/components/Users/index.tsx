@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useState } from "react";
 import * as S from "./styles";
 import MemberCard from "./MemberCard";
@@ -6,6 +5,10 @@ import { MemberType } from "../../types/MemberType";
 import { NextPage } from "next";
 import UserCard from "./UserCard";
 import Header from "../Header";
+import checkQuery from "../../lib/checkQuery";
+import api from "../../lib/api";
+import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 
 interface UsersProps {
   users: MemberType;
@@ -13,7 +16,26 @@ interface UsersProps {
 }
 
 const Users: NextPage<UsersProps> = ({ users, type }) => {
+  const router = useRouter();
   const [member, setMember] = useState<MemberType>(users);
+
+  const urlArray = router.asPath.split("/");
+
+  const onClick = async () => {
+    try {
+      await checkQuery(async () =>
+        api.put("/club/web/close", {
+          q: decodeURI(urlArray[2]),
+          type: urlArray[1].toUpperCase(),
+        })
+      );
+
+      toast.success("동아리 마감에 성공했습니다.");
+      router.push(`/${urlArray[1]}/${urlArray[2]}`);
+    } catch (e) {
+      toast.error("동아리 마감에 실패했습니다.");
+    }
+  };
 
   return (
     <>
@@ -44,7 +66,7 @@ const Users: NextPage<UsersProps> = ({ users, type }) => {
                 ))}
             </S.CardList>
             <S.ButtonWrapper>
-              <S.CloseButton>신청 마감하기</S.CloseButton>
+              <S.CloseButton onClick={onClick}>신청 마감하기</S.CloseButton>
             </S.ButtonWrapper>
           </>
         ) : (
