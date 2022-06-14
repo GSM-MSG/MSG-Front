@@ -12,10 +12,35 @@ export const CoverImg = styled.img`
 
 export const Contents = styled.div`
   padding: 0 5rem;
+
+  @media (max-width: 1030px) {
+    text-align: center;
+  }
+  @media (max-width: 640px) {
+    padding: 0 2rem;
+  }
+`;
+
+export const Top = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin: 0 0 1rem;
 `;
 
 export const ClubName = styled.h1`
   font-size: 3rem;
+`;
+
+export const AllMember = styled.a`
+  color: #00a8fe;
+  text-decoration: none;
+  cursor: pointer;
+
+  :hover {
+    text-decoration: underline;
+  }
 `;
 
 export const Users = styled.div`
@@ -25,6 +50,7 @@ export const Users = styled.div`
   display: flex;
   overflow: auto;
   gap: 5rem;
+  width: 100%;
 
   ::-webkit-scrollbar {
     width: 0;
@@ -66,114 +92,156 @@ export const UserName = styled.div`
 
 export const Info = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   padding: 0 5rem;
-  flex: 1;
-  gap: 2rem;
+  gap: 10rem;
 
-  @media (max-width: 1250px) {
-    flex-wrap: wrap;
+  @media (max-width: 1030px) {
+    display: flex;
+    justify-content: center;
+    gap: 5rem;
+  }
+  @media (max-width: 640px) {
     padding: 0 2rem;
+  }
+`;
+
+export const Left = styled.div`
+  flex: 1;
+  max-width: 55%;
+`;
+
+export const Introduce = styled.div`
+  margin-bottom: 5rem;
+`;
+
+export const Title = styled.h2`
+  margin-bottom: 5rem;
+`;
+
+export const ContactMeans = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+
+  @media (max-width: 811px) {
+    flex-wrap: wrap;
+    gap: 5rem;
+    width: 100%;
+  }
+`;
+
+export const ContactUser = styled.div`
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+`;
+
+export const Contact = styled.div`
+  font-weight: bold;
+  font-size: 1.2rem;
+  width: max-content;
+`;
+
+export const NotionLink = styled.div`
+  @media (max-width: 400px) {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
   }
 `;
 
-export const AllInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 5rem;
-`;
-
-export const Introduce = styled.div`
-  max-width: 60rem;
-`;
-
-export const SubInfo = styled.div`
-  display: flex;
-  justify-content: space-between;
-  gap: 2rem;
-  align-items: center;
-
-  @media (max-width: 1250px) {
-    justify-content: space-around;
-  }
-  @media (max-width: 790px) {
-    flex-wrap: wrap;
-  }
-`;
-
-export const Imgs = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  width: 22rem;
-  gap: 2rem;
-`;
-
-export const Img = styled.img`
-  width: 10rem;
-  height: 10rem;
-  border-radius: 10px;
-`;
-
-export const Contect = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-`;
-
-export const UserContact = styled.div`
-  h3 {
-    margin: 0;
-  }
-  p {
-    margin: 0;
-  }
-`;
-
-export const Link = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-`;
-
-export const LinkButton = styled.a`
+export const Link = styled.a`
   background: #fff;
-  padding: 1rem;
-  border-radius: 1rem;
-  max-width: 60rem;
   color: #5169e8;
-  height: 3.3rem;
+  text-decoration: none;
+  border-radius: 1rem;
+  text-align: center;
+  padding: 0.8rem 1rem;
   overflow: hidden;
+  max-width: max-content;
 
   :hover {
     text-decoration: underline;
   }
 `;
 
-export const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+export const ImgTitle = styled.h2`
+  @media (max-width: 415px) {
+    text-align: center;
+  }
 `;
 
-export const Button = styled.button`
-  font-size: 1.5rem;
+export const Images = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  max-width: 22rem;
+
+  @media (max-width: 1030px) {
+    justify-content: center;
+  }
+`;
+
+export const Img = styled.img`
+  width: 10rem;
+  height: 10rem;
+  border-radius: 0.5rem;
+  object-fit: cover;
+`;
+
+export const Buttons = styled.div`
+  display: flex;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+`;
+
+interface ButtonProps {
+  position: string;
+  background: string;
+}
+
+export const Button = styled.div<ButtonProps>`
+  background: ${({ background }) => background};
+  border-top-${({ position }) => position}-radius: 0.5rem;
+  border-bottom-${({ position }) => position}-radius: 0.5rem;  
+  padding: 0.8rem 0;
+  text-align: center;
+  max-width: 16rem;
+  width: 90%;
   font-weight: bold;
-  font-family: inherit;
-  border-radius: 1rem;
+  font-size: 1.2rem;
+  transition: .2s;
+  cursor: pointer;
+
+  :hover {
+    filter: brightness(80%);
+  }
+`;
+
+interface FuncButtonProps {
+  background: string;
+}
+
+export const FuncButton = styled.button<FuncButtonProps>`
+  background: ${({ background }) => background};
+  border-radius: 0.5rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+  transition: 0.2s;
+  cursor: pointer;
+  color: #fff;
   outline: none;
   border: none;
-  color: #fff;
-  padding: 1rem 10rem;
-  transition: 0.2s;
-  ${(props: { isDeadline?: boolean }) =>
-    props.isDeadline
-      ? `background: #646464;`
-      : `box-shadow: -4px 10px 10px rgba(76, 83, 255, 0.5);
-background: #4c53ff;
-cursor: pointer;
-:hover {
-    transform: scale(1.1);
+  height: 3.5rem;
+  max-width: 20rem;
+  width: 90%;
+
+  :hover {
+    filter: brightness(80%);
   }
-`}
 `;

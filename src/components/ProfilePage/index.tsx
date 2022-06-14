@@ -3,10 +3,10 @@ import Card from "../Card";
 import * as S from "./styles";
 import { Global } from "@emotion/react";
 import api from "../../lib/api";
-import * as SVG from "../../SVG";
-import ExitPopup from "./ExitPopup";
-import { useState } from "react";
 import { MyPageType } from "../../types";
+import checkQuery from "../../lib/checkQuery";
+import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 interface ProfilePageProps {
   username: string;
@@ -14,8 +14,15 @@ interface ProfilePageProps {
 }
 
 export default function ProfilePage({ username, user }: ProfilePageProps) {
-  const [isShow, setIsShow] = useState(false);
-  const Logout = async () => {};
+  const router = useRouter();
+  const Logout = async () => {
+    try {
+      await checkQuery(async () => api.post("/auth/web/logout"));
+      router.push("/login");
+    } catch (e) {
+      toast.error("로그아웃 실패");
+    }
+  };
 
   return (
     <>
@@ -32,9 +39,9 @@ export default function ProfilePage({ username, user }: ProfilePageProps) {
           <S.User>
             <S.UserImgWrapper>
               <S.UserImg src={user.userData.userImg} />
-              <S.EditButton>
-                <SVG.Pen />
-              </S.EditButton>
+              {/* <S.EditButton> */}
+              {/*   <SVG.Pen /> */}
+              {/* </S.EditButton> */}
             </S.UserImgWrapper>
             <h1>{username}</h1>
             <h3>{user.userData.email}</h3>
@@ -82,16 +89,8 @@ export default function ProfilePage({ username, user }: ProfilePageProps) {
               )}
             </S.Combine>
           </S.Clubs>
-          {user.clubs[0] && (
-            <S.ButtonWrapper>
-              <S.ExitButton onClick={() => setIsShow(true)}>
-                탈퇴하기
-              </S.ExitButton>
-            </S.ButtonWrapper>
-          )}
         </S.Main>
       </S.Wrapper>
-      {isShow && <ExitPopup user={user} setIsShow={setIsShow} />}
     </>
   );
 }

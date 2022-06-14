@@ -1,8 +1,8 @@
+import { GetServerSideProps, NextPage } from "next";
+import CreatePage from "../../../components/CreatePage";
 import Header from "../../../components/Header";
-import InfoPage from "../../../components/InfoPage";
 import api from "../../../lib/api";
 import userCheck from "../../../lib/userCheck";
-import { GetServerSideProps, NextPage } from "next";
 import { ClubDetail } from "../../../types/ClubDetail";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
@@ -11,7 +11,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
     const { cookies, accessToken } = await userCheck(ctx);
 
-    const { data } = await api.get(
+    const { data } = await api.get<ClubDetail>(
       `/club/web/detail?type=EDITORIAL&q=${encodeURI(clubName as string)}`,
       {
         headers: { cookie: `accessToken=${accessToken}` },
@@ -19,6 +19,14 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     );
 
     if (cookies) ctx.res.setHeader("set-cookie", cookies);
+
+    if (data.scope !== "HEAD")
+      return {
+        props: {},
+        redirect: {
+          destination: `/editorial/${encodeURI(clubName as string)}`,
+        },
+      };
 
     return { props: { clubData: data } };
   } catch (e: any) {
@@ -35,17 +43,17 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   }
 };
 
-interface ClubInfo {
+interface ClubEditProps {
   clubData: ClubDetail;
 }
 
-const ClubInfo: NextPage<ClubInfo> = ({ clubData }) => {
+const EditPage: NextPage<ClubEditProps> = ({ clubData }) => {
   return (
     <>
       <Header />
-      <InfoPage clubData={clubData} />
+      <CreatePage clubData={clubData} />
     </>
   );
 };
 
-export default ClubInfo;
+export default EditPage;

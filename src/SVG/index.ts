@@ -16,7 +16,6 @@ export * from "./ReadingGlasses";
 export * from "./Pen";
 export * from "./X";
 export * from "./Google";
-//Youngjae
 export * from "./SearchIcon";
 export * from "./SeachFilter";
 export * from "./SmallX";
@@ -28,3 +27,5 @@ export * from "./Delete";
 export * from "./Graph";
 export * from "./Open";
 export * from "./UnderTryAngle";
+export * from "./EditUser";
+export * from "./Teacher";

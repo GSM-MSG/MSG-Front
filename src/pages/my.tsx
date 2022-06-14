@@ -4,6 +4,8 @@ import api from "../lib/api";
 import { MyPageType } from "../types";
 import { GetServerSideProps, NextPage } from "next";
 import userCheck from "../lib/userCheck";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   try {
@@ -35,6 +37,18 @@ const MyProfile: NextPage<MyPageProps> = ({ user }) => {
     <>
       <Header />
       <ProfilePage user={user} username={user.userData.name} />
+      <ToastContainer
+        position="top-right"
+        theme="dark"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable={false}
+        pauseOnHover={false}
+      />
     </>
   );
 };

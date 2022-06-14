@@ -6,11 +6,8 @@ export interface ClubDetail {
     description: string;
     contact: string;
     teacher?: string;
-    isOpened: true;
-    relatedLink: {
-      name: string;
-      url: string;
-    };
+    isOpened: boolean;
+    notionLink: string;
   };
   activityurls: string[];
   head: {
@@ -23,7 +20,7 @@ export interface ClubDetail {
   };
   member: Member[];
   scope: "HEAD" | "MEMBER" | "USER";
-  isApplied: true;
+  isApplied: boolean;
 }
 
 interface Member {
