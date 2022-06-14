@@ -53,7 +53,7 @@ export const ButtonCenter = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  margin: 2rem 0;
+  margin: 4rem 0 2rem;
   padding: 0 5%;
 `;
 
@@ -118,9 +118,11 @@ export const LeftFormWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 3rem;
+  width: 100%;
+  @media (max-width: 1100px) {
+    text-align: center;
+  }
 `;
-
-export const SubTitle = styled.h2``;
 
 export const Choice = styled.span`
   color: #646464;
@@ -145,6 +147,9 @@ export const Users = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 3rem;
+  @media (max-width: 1100px) {
+    justify-content: center;
+  }
 `;
 
 export const UserBox = styled.div`
@@ -185,6 +190,7 @@ export const Textarea = styled.textarea`
 export const LinkWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 `;
 
 export const LinkTitle = styled.h3``;
@@ -209,12 +215,21 @@ export const RightFormWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5rem;
+  width: 100%;
+
+  @media (max-width: 1100px) {
+    text-align: center;
+  }
 `;
 
 export const Imgs = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
+
+  @media (max-width: 1100px) {
+    justify-content: center;
+  }
 `;
 
 export const Img = styled.img`

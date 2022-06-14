@@ -35,7 +35,7 @@ const LeftForm: NextPage<LeftFormProps> = ({
     <>
       <S.LeftFormWrapper>
         <div>
-          <S.SubTitle>동아리 이름</S.SubTitle>
+          <h2>동아리 이름</h2>
           <S.TitleInput
             name="title"
             value={texts.title}
@@ -45,7 +45,7 @@ const LeftForm: NextPage<LeftFormProps> = ({
         </div>
         {!isEdit && (
           <div>
-            <S.SubTitle>동아리 구성원</S.SubTitle>
+            <h2>동아리 구성원</h2>
             <S.Users>
               {users?.map((i) => (
                 <S.UserBox key={i.email}>
@@ -53,7 +53,10 @@ const LeftForm: NextPage<LeftFormProps> = ({
                   <h3>{i.name}</h3>
                 </S.UserBox>
               ))}
-              <S.UserBox onClick={() => setIsShow(true)}>
+              <S.UserBox
+                style={{ cursor: "pointer" }}
+                onClick={() => setIsShow(true)}
+              >
                 <SVG.PlusUser />
                 <h3>추가하기</h3>
               </S.UserBox>
@@ -61,7 +64,7 @@ const LeftForm: NextPage<LeftFormProps> = ({
           </div>
         )}
         <div>
-          <S.SubTitle>동아리 소개</S.SubTitle>
+          <h2>동아리 소개</h2>
           <S.Textarea
             name="description"
             value={texts.description}
@@ -69,7 +72,7 @@ const LeftForm: NextPage<LeftFormProps> = ({
           ></S.Textarea>
         </div>
         <div>
-          <S.SubTitle>노션 링크</S.SubTitle>
+          <h2>노션 링크</h2>
           <S.LinkWrapper>
             <S.Link
               name="notionLink"

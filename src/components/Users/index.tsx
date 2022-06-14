@@ -65,9 +65,11 @@ const Users: NextPage<UsersProps> = ({ users, type }) => {
                   />
                 ))}
             </S.CardList>
-            <S.ButtonWrapper>
-              <S.CloseButton onClick={onClick}>신청 마감하기</S.CloseButton>
-            </S.ButtonWrapper>
+            {type === "APPLICATION" && (
+              <S.ButtonWrapper>
+                <S.CloseButton onClick={onClick}>신청 마감하기</S.CloseButton>
+              </S.ButtonWrapper>
+            )}
           </>
         ) : (
           <S.CardList>

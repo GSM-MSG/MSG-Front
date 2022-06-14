@@ -82,8 +82,8 @@ export default function InfoPage({ clubData }: InfoPageProps) {
 
     try {
       await checkQuery(async () =>
-        api.post("/user/exit", {
-          name: clubData.club.title,
+        api.post("/user/web/exit", {
+          q: clubData.club.title,
           type: clubData.club.type,
         })
       );

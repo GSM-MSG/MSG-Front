@@ -66,9 +66,9 @@ const RightForm: NextPage<RightFormProps> = ({
   return (
     <S.RightFormWrapper>
       <div>
-        <S.SubTitle>
+        <h2>
           동아리 홍보 사진<S.Choice>(선택)</S.Choice>
-        </S.SubTitle>
+        </h2>
         <input
           style={{ display: "none" }}
           type="file"
@@ -94,7 +94,7 @@ const RightForm: NextPage<RightFormProps> = ({
       </div>
       {!isEdit && (
         <div>
-          <S.SubTitle>동아리 종류</S.SubTitle>
+          <h2>동아리 종류</h2>
           <S.ClubButton
             onClick={ChangeKind}
             active={kind === "MAJOR"}
@@ -121,7 +121,7 @@ const RightForm: NextPage<RightFormProps> = ({
         </div>
       )}
       <div>
-        <S.SubTitle>연락처</S.SubTitle>
+        <h2>연락처</h2>
         <h3>
           선생님 성함<S.Choice>(선택)</S.Choice>
         </h3>
