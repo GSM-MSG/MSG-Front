@@ -37,7 +37,9 @@ const MemberCard: NextPage<MemberCardProps> = ({
         );
         setMember(
           produce(member, (draft) => {
-            draft;
+            draft.requestUser = draft.requestUser.filter(
+              (i) => i.email !== user.email
+            );
           })
         );
         toast.success("승인에 성공했습니다.");
@@ -67,20 +69,37 @@ const MemberCard: NextPage<MemberCardProps> = ({
   };
 
   const exitOrRefuse = async () => {
+    if (
+      !confirm(
+        type === "MANAGE"
+          ? `정말로 ${user.name}님을 강퇴하시겠습니까?`
+          : `${user.name}님의 가입을 거절하시겠습니까?`
+      )
+    )
+      return;
+
     try {
       await checkQuery(async () =>
-        api.post(`/club/web/${type === "APPLICATION" ? "kick" : "reject"}`, {
+        api.post(`/club/web/${type === "APPLICATION" ? "reject" : "kick"}`, {
           q: decodeURI(urlArray[2]),
           type: urlArray[1].toUpperCase(),
           userId: user.email,
         })
       );
 
-      if (type === "APPLICATION") toast.success("멤버 방출에 성공했습니다.");
-      else toast.success("거절에 성공했습니다.");
+      setMember(
+        produce(member, (draft) => {
+          draft.requestUser = draft.requestUser.filter(
+            (i) => i.email !== user.email
+          );
+        })
+      );
+
+      if (type === "APPLICATION") toast.success("가입 거절에 성공했습니다.");
+      else toast.success("멤버 방출에 성공했습니다.");
     } catch (e) {
-      if (type === "APPLICATION") toast.error("멤버 방출에 실패했습니다.");
-      else toast.error("거절에 실패했습니다.");
+      if (type === "APPLICATION") toast.error("가입 거절에 실패했습니다.");
+      else toast.error("멤버 방출에 실패했습니다.");
     }
   };
 
