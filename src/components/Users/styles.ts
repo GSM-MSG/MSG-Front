@@ -2,8 +2,11 @@ import styled from "@emotion/styled";
 
 export const UsersWrapper = styled.div`
   margin: 0 auto;
-  margin-top: 5rem;
   width: 90%;
+  height: 100vh;
+  padding-top: 5rem;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const Title = styled.h1`
@@ -16,12 +19,38 @@ export const Hr = styled.hr`
   width: 90%;
 `;
 
-export const CardList = styled.span`
+export const CardList = styled.div`
   margin: 5rem 0 2rem 0;
   display: flex;
   gap: 5rem;
   flex-wrap: wrap;
   justify-content: center;
+  flex: 1;
+`;
+
+export const ButtonWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+`;
+
+export const CloseButton = styled.button`
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: #fff;
+  background: #ff8181;
+  width: 20rem;
+  height: 3.5rem;
+  border-radius: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: 0.2s;
+
+  :hover {
+    filter: brightness(80%);
+  }
 `;
 
 //---------------------ApplicationCard | MemberCard--------------------
