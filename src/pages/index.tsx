@@ -15,19 +15,19 @@ interface MainProps {
 
 const Home: NextPage<MainProps> = ({ clubs }) => {
   const router = useRouter();
-  useEffect(() => {
-    (async () => {
-      try {
-        await api.get("/auth/check", { withCredentials: true });
-      } catch (e) {
-        try {
-          await api.post("/auth/refresh", {}, { withCredentials: true });
-        } catch (e) {
-          router.push("/login");
-        }
-      }
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     try {
+  //       await api.get("/auth/check", { withCredentials: true });
+  //     } catch (e) {
+  //       try {
+  //         await api.post("/auth/refresh", {}, { withCredentials: true });
+  //       } catch (e) {
+  //         router.push("/login");
+  //       }
+  //     }
+  //   })();
+  // }, []);
   return <ClubAll clubs={clubs} type="major" />;
 };
 

@@ -31,7 +31,7 @@ export default function () {
                 </S.Check>
                 <p>위에 사항을 확인했으며, 동의합니다.</p>
             </S.CheckBox>
-            <S.SecessionBtn onClick={() => { check === true && localStorage.setItem('stuNum', JSON.stringify(router.query)); router.push('/admin') }}>탈퇴하기</S.SecessionBtn>
+            <S.SecessionBtn onClick={() => { check === true && localStorage.setItem('stuNum', JSON.stringify(router.query)); router.push('/clubadmin/stuinfo') }}>탈퇴하기</S.SecessionBtn>
         </S.SecessionPage >
     );
 }

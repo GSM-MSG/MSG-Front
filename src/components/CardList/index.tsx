@@ -10,7 +10,7 @@ interface CardListProps {
 export default function CardList({ kind }: CardListProps) {
   return (
     <S.CardList>
-      <Card link={`/${kind}/동아리입니다`} />
+      <Card link={`/${kind}/MSG`} />
       <Card link={`/${kind}/동아리입니다`} />
       <Card link={`/${kind}/동아리입니다`} />
       <Card link={`/${kind}/동아리입니다`} />

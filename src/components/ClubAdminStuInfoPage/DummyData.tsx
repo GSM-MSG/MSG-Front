@@ -40,9 +40,9 @@ export const userData: Array<ClubMembersType> = [
         role: "부원"
     },
     {
-        name: "강경민",
+        name: "김시훈",
         grade: 2,
-        class: 2,
+        class: 1,
         num: 1,
         img: img.src,
         club: "MSG",

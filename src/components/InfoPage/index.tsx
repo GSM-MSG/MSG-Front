@@ -1,11 +1,28 @@
 import * as S from "./styles";
 import { ServerUrl } from "../../config/config";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import Modify from "./Modify";
+import { clubData } from "./DummyData";
 
 interface InfoPageProps {
   clubName: string;
 }
 
 export default function InfoPage({ clubName }: InfoPageProps) {
+  const router = useRouter();
+  const [isModify, setModify] = useState(false);
+  const data = clubData.filter((item: any) => {
+    if (clubName !== undefined && item.name.toLowerCase().includes(clubName.toLowerCase())) {
+      return item;
+    }
+  })[0];
+
+  useEffect(() => {
+    // console.log(router);
+    // console.log(data);
+  }, [])
+
   return (
     <S.Wrapper>
       <S.CoverImg src="https://bit.ly/3hA8mg3" />
@@ -86,7 +103,9 @@ export default function InfoPage({ clubName }: InfoPageProps) {
       </S.Info>
       <S.ButtonWrapper>
         {/* 동아리 부장인지 조건식까지 */}
-        {/* <S.Button>{ "동아리 신청 명단" : "신청하기"}</S.Button> */}
+        {/* <S.Button>{"동아리 신청 명단" : "신청하기"}</S.Button> */}
+        <S.Button onClick={() => setModify(true)}>수정하기</S.Button>
+        {isModify && <Modify onClose={setModify} data={data} />}
       </S.ButtonWrapper>
     </S.Wrapper>
   );

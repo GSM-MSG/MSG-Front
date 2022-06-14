@@ -1,5 +1,15 @@
 import styled from "@emotion/styled";
 
+type ModalProps = {
+  isModal: boolean;
+}
+
+type BtnProps = {
+  isModal: boolean;
+  club: any;
+}
+
+
 export const Wrapper = styled.div`
   margin: 4rem 0;
 `;
@@ -177,3 +187,195 @@ cursor: pointer;
   }
 `}
 `;
+
+export const ListWrapper = styled.div`
+    width: 23vw;
+    height: 100px;
+    background: #fff;
+    border-radius: 5px;
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    text-align: center;
+
+    @media (max-width: 1300px){
+        width: 36vw;
+    }
+    @media (max-width: 800px){
+        width: 50vw;
+    }
+
+    img{
+        height: 75%;
+        border-radius: 100%;
+    }
+
+    div{
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    p{
+        font-size:20px;
+        margin: 0;
+    }
+`
+
+export const ModifyLayout = styled.div`
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(3px);
+    background: rgba(0, 0, 0, 0.5);
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: animate .5s;
+    
+    @keyframes animate {
+        0%{
+            opacity: 0;
+            margin-top: -100px;
+            height: calc(100vh + 100px);
+        }
+        100%{
+            opacity: 1;
+            margin-bottom: 0px;
+            height: 100vh;
+        }
+    }
+`
+
+export const ModifyBox = styled.div<ModalProps>`
+    position: fixed;
+    width: ${props => props.isModal ? "846px" : "700px"};
+    height: ${props => props.isModal ? "610px" : "780px"};
+    background: #1E1E1C;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 200;
+    padding: ${props => props.isModal ? "30px 172px" : "20px 110px"};
+    transition: width .5s, height 0s, gap 0s;
+    gap: 30px;
+    
+    ul{
+        padding: 0;
+    }
+
+    p{
+        width: 65%;
+        margin-bottom: 2px;
+    }
+
+    > div{
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+    }
+`
+
+export const ProfileImg = styled.img`
+    border-radius: 100%;
+    width: 100px;
+`
+
+export const ModifyInput = styled.input`
+    background: none;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    height: 40px;
+    color: #fff;
+    text-align: center;
+    font-size: 22px;
+
+    :focus {
+        outline: none;
+    }
+`
+
+export const InputWrapper = styled.div`
+    border-bottom: 2px solid #fff;
+    display: flex;
+    align-items: center;
+    padding-right: 5px;
+
+    input{
+        width: 35vw;
+        border: none;
+        background: transparent;
+        padding: 14px 35px;
+        font-family: 'Noto Sans KR';
+        font-style: normal;
+        font-weight: 100;
+        font-size: 20px;
+        line-height: 29px;
+        color: #fff;
+        margin-right: -30px;
+        text-align: center;
+
+        @media (max-width: 1300px) {
+            width: 450px;   
+        }
+        
+        ::placeholder {
+            position: relative;
+        }
+        :focus {
+            outline: none;
+        }
+    }
+`
+
+export const FindBtn = styled.button`
+    position: relative;
+    color: #fff;
+    background: #5959FF;
+    top: -4px;
+    right: 0;
+    width: 100px;
+    height: 50px;
+    margin-left: 14px;
+    z-index: 300;
+    cursor: pointer;
+    `
+
+export const DoneBtn = styled.button<BtnProps>`
+    color: #fff;
+    background: ${props => props.club !== null && props.club !== undefined ? "#4C53FF" : "#A3A3A3"};
+    width: 50%;
+    height: 60px;
+    border-radius: 10px;
+    gap: ${props => props.isModal ? "30px" : 0};
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 35px;
+    cursor: pointer;
+    
+`
+
+export const FindClubBox = styled.div`
+    position: fixed;
+    width: 846px;
+    height: 610px;
+    background: #1E1E1C;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 200;
+    padding: 20px 110px;
+`
+
+export const ClubInfo = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 250px;
+    overflow: hidden;
+    position: relative;
+`

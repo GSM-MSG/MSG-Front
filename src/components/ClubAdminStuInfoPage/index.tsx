@@ -1,4 +1,4 @@
-import * as S from "./style";
+import * as S from "./styles";
 import * as SVG from "../../SVG";
 import { useState, useEffect } from "react";
 import Modify from "./Modify";
@@ -49,7 +49,7 @@ export default function ClubAdminPage() {
                         isModifying ?
                             <Link
                                 href={{
-                                    pathname: '/admin/secession',
+                                    pathname: '/clubadmin/stuinfo/secession',
                                     query: { grade: item.grade, class: item.class, num: item.num }
                                 }}>
                                 <button>탈퇴</button></Link> :

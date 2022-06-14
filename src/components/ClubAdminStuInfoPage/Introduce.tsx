@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Excomponent from "../Introduce";
 import { descriptionData } from "./DummyData";
-import * as S from "./style";
+import * as S from "./styles";
 
 export default function Introduce({ onClose, name }: any) {
     const [ID, setID] = useState<number>(0);

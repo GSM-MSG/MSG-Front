@@ -4,6 +4,7 @@ import * as SVG from "../../SVG";
 
 type StyledProps = {
     bgcolor: boolean;
+    isModal: boolean;
 }
 
 type ModalProps = {
@@ -109,7 +110,7 @@ export const ListContainer = styled.div`
 `
 
 export const ListWrapper = styled.li<StyledProps>`
-    width: 23vw;
+    width: ${props => props.isModal ? "300px" : "23vw"};
     height: 100px;
     background: #fff;
     border-radius: 5px;
@@ -120,10 +121,10 @@ export const ListWrapper = styled.li<StyledProps>`
     text-align: center;
 
     @media (max-width: 1300px){
-        width: 36vw;
+        width: ${props => props.isModal ? "300px" : "36vw"};
     }
     @media (max-width: 800px){
-        width: 50vw;
+        width: ${props => props.isModal ? "300px" : "50vw"};
     }
 
     img{
@@ -138,6 +139,7 @@ export const ListWrapper = styled.li<StyledProps>`
     }
 
     p{
+        width: ${props => props.isModal ? "130px" : "auto"};
         font-size:20px;
         margin: 0;
     }
@@ -220,7 +222,7 @@ export const ModifyBox = styled.div<ModalProps>`
     flex-direction: column;
     align-items: center;
     z-index: 200;
-    padding: ${props => props.isModal ? "30px 172px" : "20px 110px"};
+    padding: ${props => props.isModal ? "30px 172px" : "20px 98px"};
     transition: width .5s, height 0s, gap 0s;
     gap: 30px;
     
@@ -236,7 +238,7 @@ export const ModifyBox = styled.div<ModalProps>`
     > div{
         width: 100%;
         display: flex;
-        justify-content: flex-end;
+        justify-content: ${props => props.isModal ? "center" : "flex-end"};
     }
 `
 
@@ -274,7 +276,7 @@ export const FindBtn = styled.button`
 
 export const DoneBtn = styled.button<BtnProps>`
     color: #fff;
-    background: ${props => props.club !== null && props.club !== undefined ? "#4C53FF" : "#A3A3A3"};
+    background: ${props => props.club !== undefined ? "#4C53FF" : "#A3A3A3"};
     width: 50%;
     height: 60px;
     border-radius: 10px;
@@ -282,8 +284,7 @@ export const DoneBtn = styled.button<BtnProps>`
     font-weight: 600;
     font-size: 26px;
     line-height: 35px;
-    cursor: pointer;
-    
+    cursor: ${props => props.club ? "pointer" : "auto"};
 `
 
 export const FindClubBox = styled.div`

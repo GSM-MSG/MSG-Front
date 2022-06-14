@@ -1,4 +1,4 @@
-import * as S from "./style";
+import * as S from "./styles";
 import * as SVG from "../../SVG";
 import React, { useEffect, useRef, useState } from "react";
 import { Club, ClubMembersType } from "../../types";
@@ -67,7 +67,7 @@ export default function Modify({ item, onClose }: { item: ClubMembersType, onClo
                         <S.DoneBtn isModal={isFind} club={club} onClick={() => { setFind(false); /*setValues({...values, club:})*/ }}>선택</S.DoneBtn>
                     </> : <>
                         <h2>학생정보 수정</h2>
-                        <S.ProfileImg src="png/Loading.png" />
+                        <S.ProfileImg src="/png/Loading.png" />
                         <div>
                             <ul>
                                 <li>

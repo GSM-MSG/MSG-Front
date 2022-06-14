@@ -1,5 +1,5 @@
-import Header from "../../../components/Header";
-import SecessionPage from "../../../components/SecessionPage";
+import Header from "../../../../components/Header";
+import SecessionPage from "../../../../components/SecessionPage";
 
 export default function ClubAdmin() {
     return (
