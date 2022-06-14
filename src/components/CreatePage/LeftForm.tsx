@@ -13,6 +13,7 @@ interface LeftFormProps {
   users: UserType[];
   setUsers: Dispatch<SetStateAction<UserType[]>>;
   type: ClubKind;
+  isEdit: boolean;
 }
 
 const LeftForm: NextPage<LeftFormProps> = ({
@@ -21,6 +22,7 @@ const LeftForm: NextPage<LeftFormProps> = ({
   texts,
   setTexts,
   type,
+  isEdit,
 }) => {
   const [isShow, setIsShow] = useState<boolean>(false);
 
@@ -41,21 +43,23 @@ const LeftForm: NextPage<LeftFormProps> = ({
             placeholder="동아리 이름을 입력해주세요"
           />
         </div>
-        <div>
-          <S.SubTitle>동아리 구성원</S.SubTitle>
-          <S.Users>
-            {users?.map((i) => (
-              <S.UserBox key={i.email}>
-                <S.UserImg src={i.userImg} alt="profile" />
-                <h3>{i.name}</h3>
+        {!isEdit && (
+          <div>
+            <S.SubTitle>동아리 구성원</S.SubTitle>
+            <S.Users>
+              {users?.map((i) => (
+                <S.UserBox key={i.email}>
+                  <S.UserImg src={i.userImg} alt="profile" />
+                  <h3>{i.name}</h3>
+                </S.UserBox>
+              ))}
+              <S.UserBox onClick={() => setIsShow(true)}>
+                <SVG.PlusUser />
+                <h3>추가하기</h3>
               </S.UserBox>
-            ))}
-            <S.UserBox onClick={() => setIsShow(true)}>
-              <SVG.PlusUser />
-              <h3>추가하기</h3>
-            </S.UserBox>
-          </S.Users>
-        </div>
+            </S.Users>
+          </div>
+        )}
         <div>
           <S.SubTitle>동아리 소개</S.SubTitle>
           <S.Textarea

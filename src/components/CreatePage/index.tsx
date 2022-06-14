@@ -73,7 +73,7 @@ const CreatePage: NextPage<CreatePageProps> = ({ clubData }) => {
           ...texts,
           notionLink: texts.notionLink ? texts.notionLink : undefined,
           ...info,
-          member: users.map((i) => i.email) || [],
+          member: !clubData ? users.map((i) => i.email) : undefined,
           bannerUrl,
         })
       );
@@ -125,6 +125,7 @@ const CreatePage: NextPage<CreatePageProps> = ({ clubData }) => {
       )}
       <S.Forms>
         <LeftForm
+          isEdit={!!clubData}
           users={users}
           setUsers={setUsers}
           texts={texts}

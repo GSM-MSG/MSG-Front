@@ -21,6 +21,7 @@ export const BannerView = styled.img`
   height: 400px;
   object-fit: cover;
   background-position: center;
+  cursor: pointer;
 `;
 
 export const Comment = styled.p`
@@ -221,6 +222,7 @@ export const Img = styled.img`
   width: 10rem;
   height: 10rem;
   object-fit: cover;
+  cursor: pointer;
 `;
 
 export const ImgAddBox = styled.div`

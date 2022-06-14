@@ -60,6 +60,9 @@ const RightForm: NextPage<RightFormProps> = ({
       [e.target.name]: e.target.value,
     });
 
+  const deleteActivityUrl = (idx: number) =>
+    setImages(images.filter((_, i) => i !== idx));
+
   return (
     <S.RightFormWrapper>
       <div>
@@ -75,7 +78,11 @@ const RightForm: NextPage<RightFormProps> = ({
         />
         <S.Imgs>
           {images?.map((i: string, idx: number) => (
-            <S.Img src={i} key={idx} />
+            <S.Img
+              src={i}
+              key={idx}
+              onDoubleClick={() => deleteActivityUrl(idx)}
+            />
           ))}
           {images.length < 4 && (
             <S.ImgAddBox onClick={() => ImgRef.current?.click()}>
