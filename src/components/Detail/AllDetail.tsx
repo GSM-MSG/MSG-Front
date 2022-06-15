@@ -1,5 +1,4 @@
-import { current } from "immer";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import * as S from "./styles";
 import { Excomponent } from "./TriAngle";
 import * as SVG from "../../SVG";

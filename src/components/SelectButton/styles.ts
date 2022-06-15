@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
-import { type } from "os";
 
-type On = {
+type SelectButtonType = {
   trun: boolean;
 };
 
@@ -57,7 +56,7 @@ export const Button = styled.div<placedprop>`
   cursor: pointer;
 `;
 
-export const BtBox = styled.div<On>`
+export const BtBox = styled.div<SelectButtonType>`
   position: fixed;
   bottom: 12rem;
   right: 15rem;

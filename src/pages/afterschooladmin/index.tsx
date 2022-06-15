@@ -3,14 +3,12 @@ import React, { MouseEvent, useEffect, useState } from "react";
 import * as S from "./styles";
 import { list } from "./dummyData";
 import * as Type from "../../types/AfterSchoolType";
-import { Detail } from "../../components/Detail/AllDetail";
 import * as SVG from "../../SVG";
 import SelectButton from "../../components/SelectButton";
 import { AdminFix } from "../../components/AdminFix";
 import { CreateAfterSchool } from "../../components/CreateAfterSchool";
 import Link from "next/link";
 import SelectSeason from "../../components/SelectSeason";
-import { AlarmAfterSchool } from "../../components/AlarmAfterSchool";
 
 export default function AfterSchool() {
   //요일 오브벡트 타입
@@ -61,8 +59,6 @@ export default function AfterSchool() {
   const [search, setSearch] = useState<string>("");
   //검색||필터가 적용된 리스트
   const [afterList, setAfterList] = useState<Type.PropListType[]>([]);
-  //Detail 모달 관리
-  const [closeDetail, setCloseDetail] = useState<boolean>(true);
   //수정하기 모달 관리 state
   const [fix, setFix] = useState(false);
   //방과후ㅜ생성하기 모달 관리 state
@@ -79,11 +75,11 @@ export default function AfterSchool() {
     } else {
       const MakeList = list.filter(
         (e) =>
-          e.afterSchool.title.includes(search) ||
-          `${e.afterSchool.grade}` === search ||
-          `${e.afterSchool.grade}학년` === search ||
-          changeWeek(e.afterSchool.week[0]).includes(search) ||
-          `${changeWeek(e.afterSchool.week[0])}요일`.includes(search)
+          e.title.includes(search) ||
+          `${e.grade}` === search ||
+          `${e.grade}학년` === search ||
+          changeWeek(e.week[0]).includes(search) ||
+          `${changeWeek(e.week[0])}요일`.includes(search)
       );
       return MakeList;
     }
@@ -221,18 +217,15 @@ export default function AfterSchool() {
     if (CheckDay.length === 0 && CheckGrade.length === 0) {
       setAfterList(ChangeAfterList());
     } else if (CheckDay.length === 0 && CheckGrade.length === 1) {
-      newList = list.filter((e) => e.afterSchool.grade === CheckGrade[0].grade);
+      newList = list.filter((e) => e.grade === CheckGrade[0].grade);
       setAfterList(newList);
     } else if (CheckDay.length === 1 && CheckGrade.length === 0) {
-      newList = list.filter((e) =>
-        e.afterSchool.week.includes(CheckDay[0].day)
-      );
+      newList = list.filter((e) => e.week.includes(CheckDay[0].day));
       setAfterList(newList);
     } else if (CheckDay.length === 1 && CheckGrade.length === 1) {
       newList = list.filter(
         (e) =>
-          e.afterSchool.week.includes(CheckDay[0].day) &&
-          e.afterSchool.grade === CheckGrade[0].grade
+          e.week.includes(CheckDay[0].day) && e.grade === CheckGrade[0].grade
       );
       setAfterList(newList);
     }
@@ -249,7 +242,7 @@ export default function AfterSchool() {
 
   return (
     <S.AfterSchool>
-      <Header fn={setCreate} />
+      <Header clickModal={setCreate} />
       <S.Search>
         <S.Input
           type="text"
@@ -324,9 +317,9 @@ export default function AfterSchool() {
             return (
               <S.Enrolment key={i}>
                 <div>
-                  <p>{e.afterSchool.title}</p>
-                  <p>{changeWeek(e.afterSchool.week[0])}</p>
-                  <p>{e.afterSchool.grade}</p>
+                  <p>{e.title}</p>
+                  <p>{changeWeek(e.week[0])}</p>
+                  <p>{e.grade}</p>
                 </div>
                 {makeSelectButton(e)}
               </S.Enrolment>
@@ -334,10 +327,10 @@ export default function AfterSchool() {
           })}
         </S.ScollBox>
       </S.AfterSchoolBox>
-      <SelectButton fn={setCategory} />
-      {create && <CreateAfterSchool fn={setCreate} />}
-      {fix && <AdminFix fn={setFix} state={fixState} />}
-      {allSelect && <SelectSeason fn={setAllSelect} />}
+      <SelectButton setCategory={setCategory} />
+      {create && <CreateAfterSchool setCreate={setCreate} />}
+      {fix && <AdminFix setFix={setFix} state={fixState} />}
+      {allSelect && <SelectSeason setAllSelect={setAllSelect} />}
     </S.AfterSchool>
   );
 }

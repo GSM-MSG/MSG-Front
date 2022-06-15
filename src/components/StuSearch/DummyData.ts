@@ -1,6 +1,6 @@
 import img from "../../../public/png/Loading.png";
 
-type DD = {
+type userDumyDataType = {
   name: string;
   grade: number;
   class: number;
@@ -10,7 +10,7 @@ type DD = {
   role: string;
 };
 
-export const userData: DD[] = [
+export const userData: userDumyDataType[] = [
   {
     name: "강경민",
     grade: 2,

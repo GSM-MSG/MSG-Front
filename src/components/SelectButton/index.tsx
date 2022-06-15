@@ -2,9 +2,9 @@ import * as S from "./styles";
 import * as SVG from "../../SVG";
 import { useEffect, useState } from "react";
 
-export default function SelectButton({ fn }: any) {
+export default function SelectButton({ setCategory }: any) {
   //버튼 on,off관리
-  const [on, setOn] = useState(false);
+  const [selectButton, setSelectButton] = useState(false);
   //각 버튼 SVG정보 배열
   const list: Array<any> = [
     <SVG.Fix />,
@@ -18,17 +18,17 @@ export default function SelectButton({ fn }: any) {
   const Select = (select: number) => {
     if (list.length === newList.length) {
       setNweList(list.filter((e, index) => index === select));
-      fn(select);
+      setCategory(select);
     } else {
       setNweList(list);
-      fn();
+      setCategory();
     }
   };
 
   return (
-    <S.BtBox trun={on}>
-      <S.Toggle onClick={() => setOn(!on)}>
-        {on ? <SVG.X width="25" height="25" /> : <SVG.UpArrow />}
+    <S.BtBox trun={selectButton}>
+      <S.Toggle onClick={() => setSelectButton(!selectButton)}>
+        {selectButton ? <SVG.X width="25" height="25" /> : <SVG.UpArrow />}
       </S.Toggle>
       {newList.map((e, index) => {
         return (

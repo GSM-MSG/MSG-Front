@@ -1,6 +1,6 @@
 import * as S from "./styles";
 
-export default function SelectSeason({ fn }: any) {
+export default function SelectSeason({ setAllSelect }: any) {
   const SelectList = ["1학기", "2학기", "여름방학", "겨울방학"];
 
   return (
@@ -22,10 +22,10 @@ export default function SelectSeason({ fn }: any) {
           })}
         </S.RadioBox>
         <S.SelectBox>
-          <S.Button color="grade" onClick={() => fn(false)}>
+          <S.Button color="grade" onClick={() => setAllSelect(false)}>
             취소
           </S.Button>
-          <S.Button color="blue" onClick={() => fn(false)}>
+          <S.Button color="blue" onClick={() => setAllSelect(false)}>
             확인
           </S.Button>
         </S.SelectBox>

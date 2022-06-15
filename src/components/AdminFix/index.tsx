@@ -1,12 +1,11 @@
-import { useEffect, useState } from "react";
-import { text } from "stream/consumers";
+import { useState } from "react";
 import * as S from "./styles";
 
-export function AdminFix({ fn, state }: any) {
+export function AdminFix({ setFix, state }: any) {
   const [afterSchool, setafterSchool] = useState<string>("Normal");
-  const [day, setDay] = useState<string[]>([state.afterSchool.week[0]]);
-  const [grade, setGrade] = useState<string[]>([`${state.afterSchool.grade}`]);
-  const [title, setTitle] = useState<string>(state.afterSchool.title);
+  const [day, setDay] = useState<string[]>([state.week[0]]);
+  const [grade, setGrade] = useState<string[]>([`${state.grade}`]);
+  const [title, setTitle] = useState<string>(state.title);
   const [dayOverlap, setDayOverlap] = useState(false);
   const [gradeOverlap, setGradeOverlap] = useState(false);
 
@@ -152,9 +151,13 @@ export function AdminFix({ fn, state }: any) {
             </div>
           </S.grade>
         </S.dayAndGrade>
-        <S.submit onClick={() => fn(false)} type="submit" value="수정하기" />
+        <S.submit
+          onClick={() => setFix(false)}
+          type="submit"
+          value="수정하기"
+        />
       </S.box>
-      <S.bg onClick={() => fn(false)} />
+      <S.bg onClick={() => setFix(false)} />
     </>
   );
 }

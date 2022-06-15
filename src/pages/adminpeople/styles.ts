@@ -1,6 +1,4 @@
 import styled from "@emotion/styled";
-import exp from "constants";
-import * as SVG from "../../SVG";
 
 export const Wrapper = styled.div`
   width: 100%;

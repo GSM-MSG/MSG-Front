@@ -1,8 +1,7 @@
 import * as S from "./styles";
 import * as SVG from "../../SVG";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { userData } from "./DummyData";
-import Link from "next/link";
 import Header from "../../components/Header";
 import { StuSearch } from "../../components/StuSearch";
 
@@ -46,8 +45,7 @@ export default function adminpeople() {
       <S.Inform>
         <button onClick={() => setSearchTurn(true)}>멤버 추가하기</button>
       </S.Inform>
-      {/* <StuSearch fn={setSearchTurn} /> */}
-      {searchTurn && <StuSearch fn={setSearchTurn} />}
+      {searchTurn && <StuSearch setSearchTurn={setSearchTurn} />}
     </>
   );
 }

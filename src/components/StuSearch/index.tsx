@@ -3,8 +3,8 @@ import { userData } from "./DummyData";
 import * as SVG from "../../SVG";
 import { useEffect, useState } from "react";
 
-export function StuSearch({ fn }: any) {
-  type DD = {
+export function StuSearch({ setSearchTurn }: any) {
+  type afterDummyDaya = {
     name: string;
     grade: number;
     class: number;
@@ -14,7 +14,7 @@ export function StuSearch({ fn }: any) {
     role: string;
   };
   const [search, setSearch] = useState<string>("");
-  const [afterList, setAfterList] = useState<DD[]>([]);
+  const [afterList, setAfterList] = useState<afterDummyDaya[]>([]);
   const ChangeAfterList = () => {
     if (search === "") {
       return setAfterList(userData);
@@ -59,11 +59,11 @@ export function StuSearch({ fn }: any) {
             );
           })}
         </S.ListBox>
-        <S.Choose onClick={() => fn(false)}>
+        <S.Choose onClick={() => setSearchTurn(false)}>
           <button>선택</button>
         </S.Choose>
       </S.Wrapper>
-      <S.bg onClick={() => fn(false)} />
+      <S.bg onClick={() => setSearchTurn(false)} />
     </>
   );
 }

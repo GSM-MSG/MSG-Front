@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
-import { text } from "stream/consumers";
+import { useState } from "react";
 import * as S from "./styles";
 
-export function CreateAfterSchool({ fn }: any) {
+export function CreateAfterSchool({ setCreate }: any) {
   const [afterSchool, setafterSchool] = useState<string>("Normal");
   const [day, setDay] = useState<string[]>(["MON"]);
   const [grade, setGrade] = useState<string[]>(["1"]);
@@ -152,9 +151,13 @@ export function CreateAfterSchool({ fn }: any) {
             </div>
           </S.grade>
         </S.dayAndGrade>
-        <S.submit onClick={() => fn(false)} type="submit" value="개설하기" />
+        <S.submit
+          onClick={() => setCreate(false)}
+          type="submit"
+          value="개설하기"
+        />
       </S.box>
-      <S.bg onClick={() => fn(false)} />
+      <S.bg onClick={() => setCreate(false)} />
     </>
   );
 }

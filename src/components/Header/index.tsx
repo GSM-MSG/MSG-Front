@@ -6,11 +6,10 @@ import * as S from "./styles";
 
 export default function Header({
   turn = true,
-  fn,
-}: // link = "/create",
-{
+  clickModal,
+}: {
   turn?: boolean;
-  fn?: any;
+  clickModal?: any;
 }) {
   useEffect(() => {}, []);
 
@@ -21,8 +20,8 @@ export default function Header({
       </Link>
       <S.Icons>
         {turn && (
-          <Link href={fn ? "/afterschooladmin" : "/create"}>
-            <a onClick={() => fn(true)}>
+          <Link href={clickModal ? "/afterschooladmin" : "/create"}>
+            <a onClick={() => clickModal(true)}>
               <SVG.Plus />
             </a>
           </Link>

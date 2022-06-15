@@ -3,7 +3,6 @@ import React, { MouseEvent, useEffect, useState } from "react";
 import * as S from "./style";
 import { list } from "./dummyData";
 import * as Type from "../../types/AfterSchoolType";
-import { Detail } from "../../components/Detail/AllDetail";
 import * as SVG from "../../SVG";
 
 export default function AfterSchool() {
