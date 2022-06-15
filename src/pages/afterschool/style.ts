@@ -1,7 +1,10 @@
 import styled from "@emotion/styled";
 
 type StlyedProps = {
-  state: string;
+  state?: boolean;
+
+  week?: string;
+  grade?: string;
 };
 
 type FilterProps = {
@@ -151,13 +154,14 @@ export const SelectButton = styled.button<StlyedProps>`
   margin-right: 2rem;
   background-color: ${({ state }) => {
     switch (state) {
-      case "null":
+      case undefined:
         return "#4C53FF";
-      case "true":
+      case true:
         return "#ED6666";
-      case "false":
+      case false:
         return "transparent";
       default:
+        console.error("SelectButton Color Error");
         break;
     }
   }};

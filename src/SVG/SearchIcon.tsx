@@ -1,5 +1,3 @@
-import { cp } from "fs";
-
 export function SearchIcon({ color }: { color?: string }) {
   return (
     <svg

@@ -1,5 +1,3 @@
-import { format } from "path";
-
 export * from "./Plus";
 export * from "./Speaker";
 export * from "./Alarm";

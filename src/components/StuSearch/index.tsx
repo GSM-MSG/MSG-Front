@@ -2,7 +2,6 @@ import * as S from "./styles";
 import { userData } from "./DummyData";
 import * as SVG from "../../SVG";
 import { useEffect, useState } from "react";
-import { type } from "os";
 
 export function StuSearch({ fn }: any) {
   type DD = {

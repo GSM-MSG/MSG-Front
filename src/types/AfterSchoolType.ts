@@ -1,5 +1,3 @@
-import { type } from "os";
-
 export type UserState = {
   id: number;
   title?: string;
@@ -11,15 +9,13 @@ export type UserState = {
 };
 export type weekType = "MON" | "TUE" | "WED";
 export type PropListType = {
-  afterSchool: {
-    id: number;
-    title: string;
-    week: [weekType, weekType] | [weekType];
-    grade: number;
-    personnel: number;
-    maxPersonnel: number;
-    isOpend: boolean;
-  };
+  id: number;
+  title: string;
+  week: [weekType, weekType] | [weekType];
+  grade: number;
+  personnel: number;
+  maxPersonnel: number;
+  isOpend: boolean;
   isApplied: boolean;
   isEnabled: boolean;
 };

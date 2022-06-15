@@ -20,7 +20,7 @@ export default function AfterSchool() {
   };
 
   //요일 오브젝트
-  const [day, setDay] = useState<FilterDayType[]>([
+  const [filterWeek, setFilterWeek] = useState<FilterDayType[]>([
     {
       day: "MON",
       check: false,
@@ -36,7 +36,7 @@ export default function AfterSchool() {
   ]);
 
   //학년 오브젝트
-  const [grade, setGrade] = useState<FilterGradeType[]>([
+  const [filterGrade, setGrade] = useState<FilterGradeType[]>([
     {
       grade: 1,
       check: false,
@@ -65,11 +65,11 @@ export default function AfterSchool() {
     } else {
       const MakeList = list.filter(
         (e) =>
-          e.afterSchool.title.includes(search) ||
-          `${e.afterSchool.grade}` === search ||
-          `${e.afterSchool.grade}학년` === search ||
-          changeWeek(e.afterSchool.week[0]).includes(search) ||
-          `${changeWeek(e.afterSchool.week[0])}요일`.includes(search)
+          e.title.includes(search) ||
+          `${e.grade}` === search ||
+          `${e.grade}학년` === search ||
+          changeWeek(e.week[0]).includes(search) ||
+          `${changeWeek(e.week[0])}요일`.includes(search)
       );
       return MakeList;
     }
@@ -77,12 +77,12 @@ export default function AfterSchool() {
 
   //번튼 생성 함수
   const makeSelectButton = (e: Type.PropListType) => {
-    if (!e.isApplied && e.isEnabled) {
-      return <S.SelectButton state={"null"}>신청</S.SelectButton>;
-    } else if (e.isApplied && e.isEnabled) {
-      return <S.SelectButton state={"true"}>취소</S.SelectButton>;
+    if (e.isApplied && e.isOpend) {
+      return <S.SelectButton state={true}>취소</S.SelectButton>;
+    } else if (!e.isApplied && e.isOpend && e.isEnabled) {
+      return <S.SelectButton>신청</S.SelectButton>;
     } else {
-      return <S.SelectButton state={"false"}></S.SelectButton>;
+      return <S.SelectButton state={false}></S.SelectButton>;
     }
   };
 
@@ -103,12 +103,12 @@ export default function AfterSchool() {
 
   //날짜 오브젝트 생성 함수
   const changeCheckDay = (e: MouseEvent) => {
-    const findCheckIndex: number = day.findIndex(
+    const findCheckIndex: number = filterWeek.findIndex(
       (element) =>
         changeWeek(element.day) + "요일" ===
         (e.target as HTMLSpanElement).outerText
     );
-    const newList = day.map((item, i) => {
+    const newList = filterWeek.map((item, i) => {
       if (i === findCheckIndex) {
         const newItem = {
           day: item.day,
@@ -125,16 +125,16 @@ export default function AfterSchool() {
         return item;
       }
     });
-    setDay(newList);
+    setFilterWeek(newList);
   };
 
   // 학년 오브젝트 생성 함수
   const changeCheckGrade = (e: MouseEvent) => {
-    const findCheckIndex: number = grade.findIndex(
+    const findCheckIndex: number = filterGrade.findIndex(
       (element) =>
         element.grade === parseInt((e.target as HTMLSpanElement).outerText)
     );
-    const newList = grade.map((item, i) => {
+    const newList = filterGrade.map((item, i) => {
       if (i === findCheckIndex) {
         const newItem = {
           grade: item.grade,
@@ -156,26 +156,23 @@ export default function AfterSchool() {
 
   //새 필터 생성 함수
   const MakeFilter = () => {
-    const CheckDay = day.filter((e) => e.check === true);
-    const CheckGrade = grade.filter((e) => e.check === true);
+    const CheckDay = filterWeek.filter((e) => e.check === true);
+    const CheckGrade = filterGrade.filter((e) => e.check === true);
 
     let newList: Type.PropListType[] = [];
 
     if (CheckDay.length === 0 && CheckGrade.length === 0) {
       setAfterList(ChangeAfterList());
     } else if (CheckDay.length === 0 && CheckGrade.length === 1) {
-      newList = list.filter((e) => e.afterSchool.grade === CheckGrade[0].grade);
+      newList = list.filter((e) => e.grade === CheckGrade[0].grade);
       setAfterList(newList);
     } else if (CheckDay.length === 1 && CheckGrade.length === 0) {
-      newList = list.filter((e) =>
-        e.afterSchool.week.includes(CheckDay[0].day)
-      );
+      newList = list.filter((e) => e.week.includes(CheckDay[0].day));
       setAfterList(newList);
     } else if (CheckDay.length === 1 && CheckGrade.length === 1) {
       newList = list.filter(
         (e) =>
-          e.afterSchool.week.includes(CheckDay[0].day) &&
-          e.afterSchool.grade === CheckGrade[0].grade
+          e.week.includes(CheckDay[0].day) && e.grade === CheckGrade[0].grade
       );
       setAfterList(newList);
     }
@@ -188,7 +185,7 @@ export default function AfterSchool() {
   //필터 변경체크
   useEffect(() => {
     MakeFilter();
-  }, [grade, day]);
+  }, [filterGrade, filterWeek]);
 
   return (
     <S.AfterSchool>
@@ -215,7 +212,7 @@ export default function AfterSchool() {
         <S.FilterBox>
           <S.FilterList>
             <p>요일</p>
-            {day.map((e: any, i) => {
+            {filterWeek.map((e: any, i) => {
               return (
                 <S.FilterElement
                   key={i}
@@ -229,7 +226,7 @@ export default function AfterSchool() {
           </S.FilterList>
           <S.FilterList>
             <p>대상학년</p>
-            {grade.map((e: any, i) => {
+            {filterGrade.map((e: any, i) => {
               return (
                 <S.FilterElement
                   key={i}
@@ -266,9 +263,9 @@ export default function AfterSchool() {
               {afterList.map((e: Type.PropListType, i) => (
                 <S.Enrolment key={i}>
                   <div>
-                    <p>{e.afterSchool.title}</p>
-                    <p>{changeWeek(e.afterSchool.week[0])}</p>
-                    <p>{e.afterSchool.grade}</p>
+                    <p>{e.title}</p>
+                    <p>{changeWeek(e.week[0])}</p>
+                    <p>{e.grade}</p>
                   </div>
                   {makeSelectButton(e)}
                 </S.Enrolment>

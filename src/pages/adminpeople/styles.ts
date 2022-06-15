@@ -2,11 +2,7 @@ import styled from "@emotion/styled";
 import exp from "constants";
 import * as SVG from "../../SVG";
 
-type ModalProps = {
-  isModal: boolean;
-};
-
-export const Wrapper = styled.div<ModalProps>`
+export const Wrapper = styled.div`
   width: 100%;
   margin-top: 4rem;
   top: 0;
