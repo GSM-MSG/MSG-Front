@@ -190,7 +190,10 @@ export const Textarea = styled.textarea`
 export const LinkWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+
+  @media (max-width: 1100px) {
+    justify-content: center;
+  }
 `;
 
 export const LinkTitle = styled.h3``;
