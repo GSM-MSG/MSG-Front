@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable jsx-a11y/alt-text */
 import Link from "next/link";
 import { useEffect } from "react";
 
@@ -7,7 +5,7 @@ import * as SVG from "../../SVG";
 import * as S from "./styles";
 
 export default function Header() {
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
 
   return (
     <S.Wrapper>

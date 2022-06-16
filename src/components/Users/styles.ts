@@ -2,8 +2,16 @@ import styled from "@emotion/styled";
 
 export const UsersWrapper = styled.div`
   margin: 0 auto;
+<<<<<<< HEAD
   margin-top: 5rem;
   width: 90%;
+=======
+  width: 90%;
+  height: 100vh;
+  padding-top: 5rem;
+  display: flex;
+  flex-direction: column;
+>>>>>>> d3d64d895a9211ab8d7046f521ec7cc3fd43d1a6
 `;
 
 export const Title = styled.h1`
@@ -16,17 +24,55 @@ export const Hr = styled.hr`
   width: 90%;
 `;
 
+<<<<<<< HEAD
 export const CardList = styled.span`
+=======
+export const CardList = styled.div`
+>>>>>>> d3d64d895a9211ab8d7046f521ec7cc3fd43d1a6
   margin: 5rem 0 2rem 0;
   display: flex;
   gap: 5rem;
   flex-wrap: wrap;
   justify-content: center;
+<<<<<<< HEAD
 `;
 
 //---------------------UserCard--------------------
 
 export const UserCardWrapper = styled.div`
+=======
+  flex: 1;
+`;
+
+export const ButtonWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+`;
+
+export const CloseButton = styled.button`
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: #fff;
+  background: #ff8181;
+  width: 20rem;
+  height: 3.5rem;
+  border-radius: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: 0.2s;
+
+  :hover {
+    filter: brightness(80%);
+  }
+`;
+
+//---------------------ApplicationCard | MemberCard--------------------
+
+export const MemberWrapper = styled.div`
+>>>>>>> d3d64d895a9211ab8d7046f521ec7cc3fd43d1a6
   width: 20rem;
   height: 12rem;
   background: #fdfdfd;
@@ -85,6 +131,10 @@ export const Approve = styled.button`
   font-weight: bold;
   cursor: pointer;
   transition: 0.2s;
+<<<<<<< HEAD
+=======
+  outline: none;
+>>>>>>> d3d64d895a9211ab8d7046f521ec7cc3fd43d1a6
 
   :hover {
     background: #3a41f9;
@@ -103,8 +153,51 @@ export const Refuse = styled.button`
   font-weight: bold;
   cursor: pointer;
   transition: 0.2s;
+<<<<<<< HEAD
+=======
+  outline: none;
+>>>>>>> d3d64d895a9211ab8d7046f521ec7cc3fd43d1a6
 
   :hover {
     background: #4c4c4c;
   }
 `;
+<<<<<<< HEAD
+=======
+
+//------------------UserCard-----------------
+
+export const UserCardWrapper = styled.div`
+  width: 20rem;
+  height: 12rem;
+  background: #fdfdfd;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  color: #000;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+`;
+
+export const UserCardImg = styled.img`
+  width: 5rem;
+  height: 5rem;
+  object-fit: cover;
+  border-radius: 100%;
+`;
+
+export const UserInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const UserName = styled.h3`
+  margin: 0;
+`;
+
+export const UserData = styled.p`
+  margin: 0;
+`;
+>>>>>>> d3d64d895a9211ab8d7046f521ec7cc3fd43d1a6

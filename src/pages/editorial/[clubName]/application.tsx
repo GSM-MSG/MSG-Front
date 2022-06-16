@@ -1,18 +1,4 @@
-<<<<<<< HEAD
-import Header from "../../../components/Header";
-import Users from "../../../components/Users";
-
-export default function users() {
-  return (
-    <>
-      <Header />
-      <Users />
-    </>
-  );
-}
-=======
 import { GetServerSideProps, NextPage } from "next";
-import Header from "../../../components/Header";
 import Users from "../../../components/Users";
 import api from "../../../lib/api";
 import userCheck from "../../../lib/userCheck";
@@ -25,7 +11,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const { clubName } = ctx.query;
 
     const { data } = await api.get(
-      `/club/web/members?q=${encodeURI(clubName as string)}&type=FREEDOM`,
+      `/club/web/applicant?q=${encodeURI(clubName as string)}&type=EDITORIAL`,
       { headers: { cookie: `accessToken=${accessToken}` } }
     );
 
@@ -39,18 +25,12 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   }
 };
 
-interface UsersProps {
+interface ApplicationProps {
   users: MemberType;
 }
 
-const users: NextPage<UsersProps> = ({ users }) => {
-  return (
-    <>
-      <Header />
-      <Users users={users} type="MANAGE" />
-    </>
-  );
+const Application: NextPage<ApplicationProps> = ({ users }) => {
+  return <Users users={users} type="APPLICATION" />;
 };
 
-export default users;
->>>>>>> d3d64d895a9211ab8d7046f521ec7cc3fd43d1a6
+export default Application;
