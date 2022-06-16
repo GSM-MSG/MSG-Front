@@ -1,16 +1,3 @@
-<<<<<<< HEAD
-import Header from "../../../components/Header";
-import Users from "../../../components/Users";
-
-export default function users() {
-  return (
-    <>
-      <Header />
-      <Users />
-    </>
-  );
-}
-=======
 import { GetServerSideProps, NextPage } from "next";
 import Header from "../../../components/Header";
 import Users from "../../../components/Users";
@@ -53,4 +40,3 @@ const users: NextPage<UsersProps> = ({ users }) => {
 };
 
 export default users;
->>>>>>> d3d64d895a9211ab8d7046f521ec7cc3fd43d1a6
