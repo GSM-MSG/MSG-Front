@@ -16,3 +16,5 @@ export * from "./X";
 export * from "./Google";
 export * from "./TrashCan";
 export * from "./ModifyPen"
+export * from "./EditUser";
+export * from "./Teacher";

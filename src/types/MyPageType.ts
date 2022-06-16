@@ -1,25 +1,22 @@
 export interface MyPageType {
-  userId: string;
-  name: string;
-  grade: 1;
-  class: 2;
-  number: 3;
-  profileImageUrl: string;
-  joinedMajorClub: {
-    title: string;
-    type: "MAJOR";
-    bannerUrl: string;
+  userData: {
+    email: string;
+    name: string;
+    grade: number;
+    class: number;
+    num: number;
+    userImg: string;
   };
-  joinedFreedomClub: {
-    title: string;
-    type: "FREEDOM";
-    bannerUrl: string;
-  };
-  joinedEditorialClub: JoinedEditorialClub[];
+  clubs: Club[];
 }
 
-interface JoinedEditorialClub {
-  title: string;
-  type: "EDITORIAL";
+interface Club {
+  id: number;
+  type: "MAJOR" | "FREEDOM" | "EDITORIAL";
   bannerUrl: string;
+  title: string;
+  description: string;
+  contact: string;
+  teacher: null | string;
+  isOpened: boolean;
 }

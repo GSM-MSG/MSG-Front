@@ -1,27 +1,129 @@
+import produce from "immer";
+import { NextPage } from "next";
+import { useRouter } from "next/router";
+import { Dispatch, SetStateAction } from "react";
+import { toast } from "react-toastify";
+import api from "../../lib/api";
+import checkQuery from "../../lib/checkQuery";
+import { Member, MemberType } from "../../types/MemberType";
 import * as S from "./styles";
 
 interface MemberCardProps {
-  name: string;
-  grade: number;
-  class: number;
-  number: number;
-  userImg: string;
+  member: MemberType;
+  setMember: Dispatch<SetStateAction<MemberType>>;
+  user: Member;
+  type: "MANAGE" | "APPLICATION";
 }
 
-export default function MemberCard(user: MemberCardProps) {
+const MemberCard: NextPage<MemberCardProps> = ({
+  member,
+  setMember,
+  user,
+  type,
+}) => {
+  const router = useRouter();
+
+  const urlArray = router.asPath.split("/");
+
+  const Allow = async () => {
+    if (type === "APPLICATION") {
+      try {
+        await checkQuery(() =>
+          api.post("club/web/accept", {
+            q: decodeURI(urlArray[2]),
+            type: urlArray[1].toUpperCase(),
+            userId: user.email,
+          })
+        );
+        setMember(
+          produce(member, (draft) => {
+            draft.requestUser = draft.requestUser.filter(
+              (i) => i.email !== user.email
+            );
+          })
+        );
+        toast.success("승인에 성공했습니다.");
+      } catch (e) {
+        toast.error("승인에 실패했습니다.");
+      }
+      return;
+    }
+
+    try {
+      await checkQuery(() =>
+        api.put("/club/web/delegation", {
+          q: decodeURI(urlArray[2]),
+          type: urlArray[1].toUpperCase(),
+          userId: user.email,
+        })
+      );
+      setMember(
+        produce(member, (draft) => {
+          draft.userScope = "MEMBER";
+        })
+      );
+      toast.success("위임에 성공했습니다!!");
+    } catch (e) {
+      toast.error("위임에 실패했습니다.");
+    }
+  };
+
+  const exitOrRefuse = async () => {
+    if (
+      !confirm(
+        type === "MANAGE"
+          ? `정말로 ${user.name}님을 강퇴하시겠습니까?`
+          : `${user.name}님의 가입을 거절하시겠습니까?`
+      )
+    )
+      return;
+
+    try {
+      await checkQuery(async () =>
+        api.post(`/club/web/${type === "APPLICATION" ? "reject" : "kick"}`, {
+          q: decodeURI(urlArray[2]),
+          type: urlArray[1].toUpperCase(),
+          userId: user.email,
+        })
+      );
+
+      setMember(
+        produce(member, (draft) => {
+          draft.requestUser = draft.requestUser.filter(
+            (i) => i.email !== user.email
+          );
+        })
+      );
+
+      if (type === "APPLICATION") toast.success("가입 거절에 성공했습니다.");
+      else toast.success("멤버 방출에 성공했습니다.");
+    } catch (e) {
+      if (type === "APPLICATION") toast.error("가입 거절에 실패했습니다.");
+      else toast.error("멤버 방출에 실패했습니다.");
+    }
+  };
+
   return (
-    <S.UserCardWrapper>
-      <S.UserImg src="https://bit.ly/3qTeTra" />
+    <S.MemberWrapper>
+      <S.UserImg src={user.userImg} />
       <S.Info>
         <div>
-          <S.Name>김준</S.Name>
-          <S.Description>1학년 4반 6번</S.Description>
+          <S.Name>{user.name}</S.Name>
+          <S.Description>
+            {user.grade}학년 {user.class}반 {user.num}번
+          </S.Description>
         </div>
         <S.Bottom>
-          <S.Approve>위임</S.Approve>
-          <S.Refuse>강퇴</S.Refuse>
+          <S.Approve onClick={Allow}>
+            {type === "MANAGE" ? "위임" : "승인"}
+          </S.Approve>
+          <S.Refuse onClick={exitOrRefuse}>
+            {type === "MANAGE" ? "강퇴" : "거절"}
+          </S.Refuse>
         </S.Bottom>
       </S.Info>
-    </S.UserCardWrapper>
+    </S.MemberWrapper>
   );
-}
+};
+
+export default MemberCard;

@@ -22,21 +22,23 @@ export default function ClubAll({ clubs, type }: MainPageProps) {
           <S.Tag onClick={() => redirect("/")} active={type === "major"}>
             전공동아리
           </S.Tag>
-          <S.Tag
-            onClick={() => redirect("/editorial")}
-            active={type === "editorial"}
-          >
-            사설동아리
-          </S.Tag>
+
           <S.Tag
             onClick={() => redirect("/freedom")}
             active={type === "freedom"}
           >
             자율동아리
           </S.Tag>
+
+          <S.Tag
+            onClick={() => redirect("/editorial")}
+            active={type === "editorial"}
+          >
+            사설동아리
+          </S.Tag>
         </S.Tags>
         <S.Hr />
-        <CardList kind={type} />
+        <CardList clubs={clubs} type={type} />
       </S.Wrapper>
     </>
   );

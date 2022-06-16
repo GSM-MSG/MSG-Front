@@ -63,7 +63,6 @@ a {
 
 * {
   box-sizing: border-box;
-  list-style: none;
 }
 
 ::-webkit-scrollbar {

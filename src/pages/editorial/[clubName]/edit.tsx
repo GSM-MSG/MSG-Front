@@ -1,9 +1,9 @@
+import { GetServerSideProps, NextPage } from "next";
+import CreatePage from "../../../components/CreatePage";
 import Header from "../../../components/Header";
 import api from "../../../lib/api";
-import { GetServerSideProps, NextPage } from "next";
 import userCheck from "../../../lib/userCheck";
 import { ClubDetail } from "../../../types/ClubDetail";
-import InfoPage from "../../../components/InfoPage";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   try {
@@ -11,8 +11,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
     const { cookies, accessToken } = await userCheck(ctx);
 
-    const { data } = await api.get(
-      `/club/web/detail?type=MAJOR&q=${encodeURI(clubName as string)}`,
+    const { data } = await api.get<ClubDetail>(
+      `/club/web/detail?type=EDITORIAL&q=${encodeURI(clubName as string)}`,
       {
         headers: { cookie: `accessToken=${accessToken}` },
       }
@@ -20,9 +20,17 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
     if (cookies) ctx.res.setHeader("set-cookie", cookies);
 
+    if (data.scope !== "HEAD")
+      return {
+        props: {},
+        redirect: {
+          destination: `/editorial/${encodeURI(clubName as string)}`,
+        },
+      };
+
     return { props: { clubData: data } };
   } catch (e: any) {
-    if (!e.response || e.response.status === 401)
+    if (e.response && e.response.status === 402)
       return {
         props: {},
         redirect: { destination: "/login" },
@@ -35,17 +43,17 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   }
 };
 
-interface ClubInfo {
+interface ClubEditProps {
   clubData: ClubDetail;
 }
 
-const ClubInfo: NextPage<ClubInfo> = ({ clubData }) => {
+const EditPage: NextPage<ClubEditProps> = ({ clubData }) => {
   return (
     <>
       <Header />
-      <InfoPage clubData={clubData} />
+      <CreatePage clubData={clubData} />
     </>
   );
 };
 
-export default ClubInfo;
+export default EditPage;

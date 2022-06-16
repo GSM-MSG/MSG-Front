@@ -7,4 +7,8 @@ export const CardList = styled.div`
   row-gap: 4rem;
   column-gap: 2rem;
   margin: 5rem 0;
+
+  @media (max-width: 700px) {
+    justify-content: center;
+  }
 `;
