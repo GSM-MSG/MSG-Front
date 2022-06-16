@@ -2,8 +2,9 @@ import * as S from "./styles";
 import * as SVG from "../../SVG";
 import { useState } from "react";
 import { userData } from "./DummyData";
+import AdminEditModal from "../AdminEditModal";
 
-export default function ClubAdminPage() {
+export default function AdminEdit() {
   type userDumyDataType = {
     name: string;
     grade: number;
@@ -15,7 +16,16 @@ export default function ClubAdminPage() {
   };
   const [userList, setUserList] = useState<Array<userDumyDataType>>(userData);
   const [search, setSearch] = useState<string>("");
-
+  const [user, setUser] = useState<userDumyDataType>({
+    name: "",
+    grade: 0,
+    class: 0,
+    num: 0,
+    img: "",
+    club: "",
+    role: "",
+  });
+  const [modal, setModal] = useState(false);
   const onList = () => {
     return userList
       .filter((item: userDumyDataType) => {
@@ -36,7 +46,14 @@ export default function ClubAdminPage() {
             <p>{item.name}</p>
             <p>{item.grade + "학년 " + item.class + "반 " + item.num + "번"}</p>
           </div>
-          <button>수정</button>
+          <button
+            onClick={() => {
+              setUser(item);
+              setModal(true);
+            }}
+          >
+            수정
+          </button>
         </S.ListWrapper>
       ));
   };
@@ -57,6 +74,7 @@ export default function ClubAdminPage() {
       <S.ListContainer>
         <ul>{onList()}</ul>
       </S.ListContainer>
+      {modal && <AdminEditModal item={user} onClose={setModal} />}
     </S.Wrapper>
   );
 }

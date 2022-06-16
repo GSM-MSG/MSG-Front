@@ -1,4 +1,3 @@
-import Header from "../../components/Header";
 import React, { MouseEvent, useEffect, useState } from "react";
 import * as S from "./styles";
 import { list } from "./dummyData";
@@ -145,7 +144,7 @@ export default function AdminAfterSchool() {
       }
     } else {
       return (
-        <Link href="/admin/stuEdit">
+        <Link href="/admin/stulist">
           <S.SelectButton color={"blue"}>명단보기</S.SelectButton>
         </Link>
       );
@@ -252,7 +251,6 @@ export default function AdminAfterSchool() {
 
   return (
     <S.AfterSchool>
-      <Header clickModal={setCreate} />
       <S.Search>
         <S.Input
           type="text"

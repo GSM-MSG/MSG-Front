@@ -6,13 +6,15 @@ import * as S from "./styles";
 
 export default function Header({
   turn = true,
+  link,
   clickModal,
 }: {
   turn?: boolean;
+  link?: boolean;
   clickModal?: Dispatch<SetStateAction<boolean>>;
 }) {
   useEffect(() => {}, []);
-
+  console.log(link);
   return (
     <S.Wrapper>
       <Link href="/">
@@ -26,7 +28,7 @@ export default function Header({
             </a>
           </Link>
         )}
-        <Link href="/my">
+        <Link href={link ? "/admin/stuEdit" : "/my"}>
           <a>
             <SVG.UserIcon />
           </a>

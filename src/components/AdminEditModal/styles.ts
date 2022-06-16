@@ -1,23 +1,5 @@
 import styled from "@emotion/styled";
 
-type StyledProps = {
-  bgcolor: boolean;
-  isModal: boolean;
-};
-
-type ModalProps = {
-  isModal: boolean;
-};
-
-type BtnProps = {
-  isModal: boolean;
-  club: any;
-};
-
-type BeingProps = {
-  isBeing: boolean;
-};
-
 export const ModifyLayout = styled.div`
   position: fixed;
   width: 100vw;
@@ -45,33 +27,18 @@ export const ModifyLayout = styled.div`
   }
 `;
 
-export const ModifyBox = styled.div<ModalProps>`
+export const ModifyBox = styled.div`
   position: fixed;
-  width: ${(props) => (props.isModal ? "846px" : "700px")};
-  height: ${(props) => (props.isModal ? "610px" : "780px")};
+  width: 700px;
+  height: 880px;
   background: #1e1e1c;
   display: flex;
   flex-direction: column;
   align-items: center;
   z-index: 200;
-  padding: ${(props) => (props.isModal ? "30px 172px" : "20px 98px")};
+  padding: 20px 98px;
   transition: width 0.5s, height 0s, gap 0s;
   gap: 30px;
-
-  ul {
-    padding: 0;
-  }
-
-  p {
-    width: 65%;
-    margin-bottom: 2px;
-  }
-
-  > div {
-    width: 100%;
-    display: flex;
-    justify-content: ${(props) => (props.isModal ? "center" : "flex-end")};
-  }
 `;
 
 export const ProfileImg = styled.img`
@@ -79,42 +46,123 @@ export const ProfileImg = styled.img`
   width: 100px;
 `;
 
+export const DoneBtn = styled.button`
+  color: #fff;
+  background: #4c53ff;
+  width: 70%;
+  border: none;
+  height: 60px;
+  border-radius: 10px;
+  gap: 30px;
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 35px;
+  cursor: pointer;
+`;
+
+export const ClubBanner = styled.img`
+  width: 500px;
+  height: 200px;
+  object-fit: contain;
+`;
+
+export const ClubName = styled.p`
+  width: 270px;
+  height: 30px;
+  line-height: 30px;
+  background: #5169e8;
+  text-align: center;
+  border-radius: 10px;
+  border-top-right-radius: 0;
+`;
+
+export const InformBox = styled.div`
+  width: 100%;
+  height: 30rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+`;
+export const InPutmBox = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  label {
+    display: flex;
+    flex-direction: column;
+  }
+`;
+
 export const ModifyInput = styled.input`
   background: none;
   border: 1px solid #fff;
   border-radius: 5px;
-  height: 40px;
   color: #fff;
   text-align: center;
   font-size: 22px;
-
+  height: 3rem;
   :focus {
     outline: none;
   }
 `;
-
 export const FindBtn = styled.button`
-  position: relative;
   color: #fff;
   background: #5959ff;
-  top: -4px;
-  right: 0;
   width: 100px;
-  height: 50px;
-  margin-left: 14px;
-  z-index: 300;
+  height: 3rem;
+  border-radius: 5px;
+  border: none;
+  position: absolute;
+  right: 15%;
   cursor: pointer;
 `;
 
-export const DoneBtn = styled.button<BtnProps>`
-  color: #fff;
-  background: ${(props) => (props.club !== undefined ? "#4C53FF" : "#A3A3A3")};
-  width: 50%;
-  height: 60px;
-  border-radius: 10px;
-  gap: ${(props) => (props.isModal ? "30px" : 0)};
-  font-weight: 600;
-  font-size: 26px;
-  line-height: 35px;
-  cursor: ${(props) => (props.club ? "pointer" : "auto")};
+export const bg = styled.div`
+  z-index: 200;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(1, 1, 0, 0.6);
+  backdrop-filter: Blur(2px);
+`;
+
+export const errorBox = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 35rem;
+  height: 22rem;
+  background: #fcffff;
+  display: flex;
+  flex: 4 4 2;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 5px;
+  h2 {
+    color: #ff8181;
+    font-size: 2rem;
+    font-weight: 700;
+  }
+  p {
+    color: #000000;
+    text-align: center;
+    font-size: 1.5rem;
+    font-size: 400;
+  }
+  button {
+    width: 100%;
+    height: 4.4rem;
+    border: none;
+    background: #4c53ff;
+    color: #fcffff;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    cursor: pointer;
+  }
 `;
