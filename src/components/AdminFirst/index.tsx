@@ -1,11 +1,7 @@
 import * as S from "./styles";
 import * as SVG from "../../SVG";
-import { Detail } from "../Detail/AllDetail";
-import { useState } from "react";
 
 export default function AdminFirst() {
-  const [closeDetail, setCloseDetail] = useState<boolean>(true);
-
   return (
     <>
       <S.Wrapper>
@@ -24,7 +20,6 @@ export default function AdminFirst() {
           </S.ButtonBox>
         </S.Contents>
       </S.Wrapper>
-      {closeDetail && <Detail fun={setCloseDetail} name="AdminFirst" />}
     </>
   );
 }

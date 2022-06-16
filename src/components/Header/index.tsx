@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useEffect } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 
 import * as SVG from "../../SVG";
 import * as S from "./styles";
@@ -9,7 +9,7 @@ export default function Header({
   clickModal,
 }: {
   turn?: boolean;
-  clickModal?: any;
+  clickModal?: Dispatch<SetStateAction<boolean>>;
 }) {
   useEffect(() => {}, []);
 
@@ -20,8 +20,8 @@ export default function Header({
       </Link>
       <S.Icons>
         {turn && (
-          <Link href={clickModal ? "/afterschooladmin" : "/create"}>
-            <a onClick={() => clickModal(true)}>
+          <Link href={clickModal ? "/admin/afterSchool" : "/create"}>
+            <a onClick={() => clickModal && clickModal(true)}>
               <SVG.Plus />
             </a>
           </Link>

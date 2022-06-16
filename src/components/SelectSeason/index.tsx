@@ -1,6 +1,11 @@
+import { Dispatch, SetStateAction } from "react";
 import * as S from "./styles";
 
-export default function SelectSeason({ setAllSelect }: any) {
+export default function SelectSeason({
+  setAllSelect,
+}: {
+  setAllSelect: Dispatch<SetStateAction<boolean>>;
+}) {
   const SelectList = ["1학기", "2학기", "여름방학", "겨울방학"];
 
   return (

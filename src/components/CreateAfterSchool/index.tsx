@@ -1,7 +1,11 @@
-import { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import * as S from "./styles";
 
-export function CreateAfterSchool({ setCreate }: any) {
+export function CreateAfterSchool({
+  setCreate,
+}: {
+  setCreate: Dispatch<SetStateAction<boolean>>;
+}) {
   const [afterSchool, setafterSchool] = useState<string>("Normal");
   const [day, setDay] = useState<string[]>(["MON"]);
   const [grade, setGrade] = useState<string[]>(["1"]);
@@ -9,26 +13,27 @@ export function CreateAfterSchool({ setCreate }: any) {
   const [dayOverlap, setDayOverlap] = useState(false);
   const [gradeOverlap, setGradeOverlap] = useState(false);
 
-  const ChangeAfter = (e: any) => setafterSchool(e.target.name);
-  const ChangeDay = (e: any) => {
+  const ChangeAfter = (e: React.MouseEvent) =>
+    setafterSchool((e.target as HTMLButtonElement).name);
+  const ChangeDay = (e: React.MouseEvent) => {
     if (dayOverlap) {
       if (day.length === 2) {
         day.shift();
       }
-      setDay([...day, e.target.name]);
+      setDay([...day, (e.target as HTMLButtonElement).name]);
     } else {
-      setDay([e.target.name]);
+      setDay([(e.target as HTMLButtonElement).name]);
     }
   };
 
-  const ChangeGrade = (e: any) => {
+  const ChangeGrade = (e: React.MouseEvent) => {
     if (gradeOverlap) {
       if (grade.length === 2) {
         grade.shift();
       }
-      setGrade([...grade, e.target.name]);
+      setGrade([...grade, (e.target as HTMLButtonElement).name]);
     } else {
-      setGrade([e.target.name]);
+      setGrade([(e.target as HTMLButtonElement).name]);
     }
   };
 

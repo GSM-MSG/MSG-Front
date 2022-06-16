@@ -5,7 +5,7 @@ type userDumyDataType = {
   grade: number;
   class: number;
   num: number;
-  img: any;
+  img: string;
   club: string;
   role: string;
 };

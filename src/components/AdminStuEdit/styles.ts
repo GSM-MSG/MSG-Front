@@ -78,7 +78,6 @@ export const ListContainer = styled.div`
   margin-top: 110px;
   width: auto;
   margin-bottom: 9rem;
-  /* height: auto; */
 
   ul {
     padding: 0;

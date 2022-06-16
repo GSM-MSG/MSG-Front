@@ -1,11 +1,11 @@
-import Header from "../../components/Header";
+import Header from "../Header";
 import React, { MouseEvent, useEffect, useState } from "react";
 import * as S from "./style";
 import { list } from "./dummyData";
 import * as Type from "../../types/AfterSchoolType";
 import * as SVG from "../../SVG";
 
-export default function AfterSchool() {
+export default function NomalAfterSchool() {
   //요일 오브젝트 타입
   type FilterDayType = {
     day: "MON" | "TUE" | "WED";
@@ -188,7 +188,6 @@ export default function AfterSchool() {
 
   return (
     <S.AfterSchool>
-      <Header turn={false} />
       <S.Search>
         <S.Input
           type="text"
@@ -211,7 +210,7 @@ export default function AfterSchool() {
         <S.FilterBox>
           <S.FilterList>
             <p>요일</p>
-            {filterWeek.map((e: any, i) => {
+            {filterWeek.map((e: FilterDayType, i) => {
               return (
                 <S.FilterElement
                   key={i}
@@ -225,7 +224,7 @@ export default function AfterSchool() {
           </S.FilterList>
           <S.FilterList>
             <p>대상학년</p>
-            {filterGrade.map((e: any, i) => {
+            {filterGrade.map((e: FilterGradeType, i) => {
               return (
                 <S.FilterElement
                   key={i}

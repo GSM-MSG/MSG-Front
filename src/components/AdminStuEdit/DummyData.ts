@@ -1,6 +1,16 @@
 import img from "../../../public/png/Loading.png";
 
-export const userData: Array<any> = [
+type userDumyDataType = {
+  name: string;
+  grade: number;
+  class: number;
+  num: number;
+  img: string;
+  club: string;
+  role: string;
+};
+
+export const userData: Array<userDumyDataType> = [
   {
     name: "강경민",
     grade: 2,

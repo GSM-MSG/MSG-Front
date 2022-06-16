@@ -1,14 +1,15 @@
 import styled from "@emotion/styled";
 
 type StlyedProps = {
-  state?: boolean;
-
-  week?: string;
-  grade?: string;
+  state: boolean;
 };
 
 type FilterProps = {
   filter: string;
+};
+
+type ButtonType = {
+  color: string;
 };
 
 export const AfterSchool = styled.div`
@@ -17,6 +18,7 @@ export const AfterSchool = styled.div`
 
 export const AfterSchoolBox = styled.div<FilterProps>`
   background-color: #1e1e1c;
+
   animation: ${(props) => {
     return props.filter === "true" ? "fadeInDown 1s" : "fadeInUp 1s";
   }};
@@ -144,7 +146,7 @@ export const Enrolment = styled.div`
     width: 90vw;
   }
 `;
-export const SelectButton = styled.button<StlyedProps>`
+export const SelectButton = styled.button<ButtonType>`
   width: 6rem;
   height: 2.5rem;
   border: none;
@@ -152,16 +154,13 @@ export const SelectButton = styled.button<StlyedProps>`
   cursor: pointer;
   color: white;
   margin-right: 2rem;
-  background-color: ${({ state }) => {
-    switch (state) {
-      case undefined:
+  background-color: ${({ color }) => {
+    switch (color) {
+      case "blue":
         return "#4C53FF";
-      case true:
+      case "red":
         return "#ED6666";
-      case false:
-        return "transparent";
       default:
-        console.error("SelectButton Color Error");
         break;
     }
   }};
@@ -193,6 +192,7 @@ export const SelectButton = styled.button<StlyedProps>`
 export const ScollBox = styled.div`
   margin: 0 auto;
   width: 60rem;
+  margin-top: 2rem;
   @media (max-width: 61rem) {
     width: 90vw;
   }
@@ -205,8 +205,6 @@ export const FilterBox = styled.div`
   width: 28rem;
   display: flex;
   justify-content: space-between;
-  /* animation-delay: 2s; */
-  /* animation: fadeInDown 1s; */
 
   @media (max-width: 62rem) {
     width: 45vw;
@@ -245,5 +243,61 @@ export const NotFilter = styled.div`
   }
   p {
     font-size: 20px;
+  }
+`;
+
+export const AllButtonBox = styled.div`
+  margin: 0 auto;
+  width: 50rem;
+  height: 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const AllButton = styled.button<ButtonType>`
+  background-color: ${(prop) => {
+    switch (prop.color) {
+      case "blue":
+        return "#4C53FF";
+      case "red":
+        return "#FF8181";
+    }
+  }};
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  color: #fcffff;
+  font-weight: 400;
+  font-size: 0.9rem;
+  width: 8rem;
+  height: 2.5rem;
+  animation: fadeInDown 1s;
+  @keyframes fadeInDown {
+    0% {
+      opacity: calc(0);
+    }
+  }
+  position: relative;
+  overflow: hidden;
+  &:hover:after {
+    right: -10%;
+    border-radius: 5rem;
+  }
+
+  ::after {
+    content: "";
+    display: block;
+    width: 120%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 100%;
+    background: rgba(0, 0, 0, 0.1);
+    transition: 0.5s cubic-bezier(0.23, 0.56, 0.68, 0.38);
   }
 `;

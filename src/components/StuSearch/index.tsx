@@ -1,15 +1,19 @@
 import * as S from "./styles";
 import { userData } from "./DummyData";
 import * as SVG from "../../SVG";
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
-export function StuSearch({ setSearchTurn }: any) {
+export function StuSearch({
+  setSearchTurn,
+}: {
+  setSearchTurn: Dispatch<SetStateAction<boolean>>;
+}) {
   type afterDummyDaya = {
     name: string;
     grade: number;
     class: number;
     num: number;
-    img: any;
+    img: string;
     club: string;
     role: string;
   };

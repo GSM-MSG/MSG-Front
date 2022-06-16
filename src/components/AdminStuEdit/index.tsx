@@ -1,17 +1,23 @@
 import * as S from "./styles";
-import * as SVG from "../../SVG";
 import { useState } from "react";
 import { userData } from "./DummyData";
-import Header from "../../components/Header";
-import { StuSearch } from "../../components/StuSearch";
+import { StuSearch } from "../StuSearch";
 
-export default function adminpeople() {
+export default function AdminStuEdit() {
   //멤버 추가하기 모달 관리 state
-  const [searchTurn, setSearchTurn] = useState(false);
+  const [searchTurn, setSearchTurn] = useState<boolean>(false);
 
+  type userDumyDataType = {
+    name: string;
+    grade: number;
+    class: number;
+    num: number;
+    img: string;
+    club: string;
+    role: string;
+  };
   return (
     <>
-      <Header />
       <S.Wrapper>
         <S.DeleteInform>
           <S.Title>학생정보 수정</S.Title>
@@ -22,7 +28,7 @@ export default function adminpeople() {
         </S.DeleteInform>
         <S.ListContainer>
           <ul>
-            {userData.map((item: any, idx: number) => (
+            {userData.map((item: userDumyDataType, idx: number) => (
               <S.ListWrapper key={idx}>
                 <img src={item.img} />
                 <div>

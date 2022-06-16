@@ -10,7 +10,7 @@ import { CreateAfterSchool } from "../../components/CreateAfterSchool";
 import Link from "next/link";
 import SelectSeason from "../../components/SelectSeason";
 
-export default function AfterSchool() {
+export default function AdminAfterSchool() {
   //요일 오브벡트 타입
   type FilterDayType = {
     day: "MON" | "TUE" | "WED";
@@ -64,7 +64,17 @@ export default function AfterSchool() {
   //방과후ㅜ생성하기 모달 관리 state
   const [create, setCreate] = useState(false);
   //수정할 리스트 정보 관리 state
-  const [fixState, setFixState] = useState({});
+  const [fixState, setFixState] = useState<Type.PropListType>({
+    id: 0,
+    title: "",
+    week: ["MON"],
+    grade: 0,
+    personnel: 0,
+    maxPersonnel: 0,
+    isOpend: true,
+    isApplied: true,
+    isEnabled: true,
+  });
   //신청 받기 마감 모달 관리 state
   const [allSelect, setAllSelect] = useState(false);
 
@@ -93,20 +103,20 @@ export default function AfterSchool() {
             setFix(true);
             setFixState(e);
           }}
-          state={"blue"}
+          color={"blue"}
         >
           수정하기
         </S.SelectButton>
       );
     } else if (category === 1) {
       return (
-        <S.SelectButton onClick={() => console.log("삭제하기")} state={"red"}>
+        <S.SelectButton onClick={() => console.log("삭제하기")} color={"red"}>
           삭제하기
         </S.SelectButton>
       );
     } else if (category === 2) {
       return (
-        <S.SelectButton onClick={() => console.log("통계보기")} state={"blue"}>
+        <S.SelectButton onClick={() => console.log("통계보기")} color={"blue"}>
           통계보기
         </S.SelectButton>
       );
@@ -116,7 +126,7 @@ export default function AfterSchool() {
           return (
             <S.SelectButton
               onClick={() => console.log("마감하기")}
-              state={"red"}
+              color={"red"}
             >
               마감하기
             </S.SelectButton>
@@ -125,7 +135,7 @@ export default function AfterSchool() {
           return (
             <S.SelectButton
               onClick={() => console.log("신청받기")}
-              state={"blue"}
+              color={"blue"}
             >
               신청받기
             </S.SelectButton>
@@ -135,8 +145,8 @@ export default function AfterSchool() {
       }
     } else {
       return (
-        <Link href="/adminpeople">
-          <S.SelectButton state={"blue"}>명단보기</S.SelectButton>
+        <Link href="/admin/stuEdit">
+          <S.SelectButton color={"blue"}>명단보기</S.SelectButton>
         </Link>
       );
     }
@@ -265,7 +275,7 @@ export default function AfterSchool() {
         <S.FilterBox>
           <S.FilterList>
             <p>요일</p>
-            {day.map((e: any, i) => {
+            {day.map((e: FilterDayType, i) => {
               return (
                 <S.FilterElement
                   key={i}
@@ -279,7 +289,7 @@ export default function AfterSchool() {
           </S.FilterList>
           <S.FilterList>
             <p>대상학년</p>
-            {grade.map((e: any, i) => {
+            {grade.map((e: FilterGradeType, i) => {
               return (
                 <S.FilterElement
                   key={i}
