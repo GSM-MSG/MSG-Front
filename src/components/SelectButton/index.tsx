@@ -11,10 +11,10 @@ export default function SelectButton({
   const [selectButton, setSelectButton] = useState(false);
   //각 버튼 SVG정보 배열
   const list: Array<ReactElement> = [
-    <SVG.Fix />,
-    <SVG.Delete />,
-    <SVG.Graph />,
-    <SVG.Open />,
+    <SVG.Fix key="Fix" />,
+    <SVG.Delete key="Delete" />,
+    <SVG.Graph key="Graph" />,
+    <SVG.Open key="Opem" />,
   ];
   //클릭시 바뀌는 버튼 오브젝트 배열 값 관리 state
   const [newList, setNweList] = useState<ReactElement[]>(list);

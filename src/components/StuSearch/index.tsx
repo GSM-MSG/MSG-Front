@@ -19,6 +19,8 @@ export function StuSearch({
   };
   const [search, setSearch] = useState<string>("");
   const [afterList, setAfterList] = useState<afterDummyDaya[]>([]);
+  const [stuInform, setStuInform] = useState<afterDummyDaya>();
+  const [selectCheck, setSelectCheck] = useState<boolean>(false);
   const ChangeAfterList = () => {
     if (search === "") {
       return setAfterList(userData);
@@ -31,6 +33,7 @@ export function StuSearch({
     ChangeAfterList();
   }, [search]);
 
+  console.log(stuInform);
   return (
     <>
       <S.Wrapper>
@@ -44,6 +47,7 @@ export function StuSearch({
             value={search}
             onChange={(e: { target: HTMLInputElement }) => {
               setSearch(e.target.value);
+              setSelectCheck(false);
             }}
           />
           <i onClick={() => ChangeAfterList()}>
@@ -53,7 +57,13 @@ export function StuSearch({
         <S.ListBox>
           {afterList.map((e, index) => {
             return (
-              <S.userBox key={index}>
+              <S.userBox
+                onClick={() => {
+                  setStuInform(e);
+                  setSelectCheck(true);
+                }}
+                key={index}
+              >
                 <img src={e.img} />
                 <div>
                   <p>{e.name}</p>
@@ -63,7 +73,7 @@ export function StuSearch({
             );
           })}
         </S.ListBox>
-        <S.Choose onClick={() => setSearchTurn(false)}>
+        <S.Choose state={selectCheck} onClick={() => setSearchTurn(false)}>
           <button>선택</button>
         </S.Choose>
       </S.Wrapper>

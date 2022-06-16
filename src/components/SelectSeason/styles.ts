@@ -1,6 +1,4 @@
 import styled from "@emotion/styled";
-import exp from "constants";
-import { type } from "os";
 
 export const bg = styled.div`
   z-index: 200;

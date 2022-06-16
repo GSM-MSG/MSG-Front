@@ -1,5 +1,9 @@
 import styled from "@emotion/styled";
 
+type CheckButtonType = {
+  state: boolean;
+};
+
 export const bg = styled.div`
   z-index: 100;
   position: fixed;
@@ -95,7 +99,7 @@ export const userBox = styled.div`
   }
 `;
 
-export const Choose = styled.div`
+export const Choose = styled.div<CheckButtonType>`
   width: 100%;
   position: absolute;
   bottom: 0;
@@ -106,9 +110,9 @@ export const Choose = styled.div`
   button {
     width: 25rem;
     height: 3rem;
+    background-color: ${({ state }) => (state ? "#4C53FF" : "#A3A3A3")};
     border-radius: 6px;
-    background: #4c53ff;
-    color: #fcffff;
+    color: ${({ state }) => (state ? "#FCFFFF" : "#8C8A8A")};
     font-size: 1.5rem;
     border: none;
     cursor: pointer;

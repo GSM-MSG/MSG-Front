@@ -1,11 +1,13 @@
-import AdminStuEdit from "../../components/AdminStuEdit";
+import AdminEditModal from "../../components/AdminEditModal";
+import AdminEdit from "../../components/AdminEditPage";
 import Header from "../../components/Header";
 
 export default function StuEdit() {
   return (
     <>
       <Header />
-      <AdminStuEdit />
+      {/* <AdminEdit /> */}
+      <AdminEditModal />
     </>
   );
 }

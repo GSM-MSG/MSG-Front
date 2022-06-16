@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { keyframes } from "@emotion/react";
 
 export const Wrapper = styled.div`
   margin-top: 4rem;

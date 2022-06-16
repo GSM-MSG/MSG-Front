@@ -3,7 +3,7 @@ import { useState } from "react";
 import { userData } from "./DummyData";
 import { StuSearch } from "../StuSearch";
 
-export default function AdminStuEdit() {
+export default function AdminStuList() {
   //멤버 추가하기 모달 관리 state
   const [searchTurn, setSearchTurn] = useState<boolean>(false);
 

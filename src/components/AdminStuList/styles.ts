@@ -41,39 +41,6 @@ export const Title = styled.h1`
   color: #fff;
 `;
 
-export const InputWrapper = styled.div`
-  border-bottom: 2px solid #fff;
-  display: flex;
-  align-items: center;
-  padding-right: 5px;
-
-  input {
-    width: 35vw;
-    border: none;
-    background: transparent;
-    padding: 14px 35px;
-    font-family: "Noto Sans KR";
-    font-style: normal;
-    font-weight: 100;
-    font-size: 20px;
-    line-height: 29px;
-    color: #fff;
-    margin-right: -30px;
-    text-align: center;
-
-    @media (max-width: 1300px) {
-      width: 450px;
-    }
-
-    ::placeholder {
-      position: relative;
-    }
-    :focus {
-      outline: none;
-    }
-  }
-`;
-
 export const ListContainer = styled.div`
   margin-top: 110px;
   width: auto;
