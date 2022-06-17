@@ -66,7 +66,7 @@ const CreatePage: NextPage<CreatePageProps> = ({ clubData }) => {
 
     try {
       await checkQuery(() =>
-        api.post("/club/web", {
+        api[clubData ? "put" : "post"]("/club/web", {
           q: clubData?.club.title,
           activityUrls: images,
           type,
