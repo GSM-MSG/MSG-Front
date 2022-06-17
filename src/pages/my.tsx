@@ -6,6 +6,7 @@ import { GetServerSideProps, NextPage } from "next";
 import userCheck from "../lib/userCheck";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import SEO from "../components/SEO";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   try {
@@ -35,6 +36,11 @@ interface MyPageProps {
 const MyProfile: NextPage<MyPageProps> = ({ user }) => {
   return (
     <>
+      <SEO
+        title={`GCMS | ${user.userData.name}`}
+        description={`${user.userData.grade}학년 ${user.userData.class}반 ${user.userData.num}번`}
+        img={user.userData.userImg}
+      />
       <Header />
       <ProfilePage user={user} username={user.userData.name} />
       <ToastContainer

@@ -4,6 +4,7 @@ import { GetServerSideProps, NextPage } from "next";
 import userCheck from "../../../lib/userCheck";
 import { ClubDetail } from "../../../types/ClubDetail";
 import InfoPage from "../../../components/InfoPage";
+import SEO from "../../../components/SEO";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   try {

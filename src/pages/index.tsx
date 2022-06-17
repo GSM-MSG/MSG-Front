@@ -1,8 +1,9 @@
-import type { GetServerSideProps, NextPage } from "next";
-import ClubAll from "../components/ClubAll";
-import { Club } from "../types/Clubs";
-import api from "../lib/api";
-import userCheck from "../lib/userCheck";
+import type { GetServerSideProps, NextPage } from 'next';
+import ClubAll from '../components/ClubAll';
+import { Club } from '../types/Clubs';
+import api from '../lib/api';
+import userCheck from '../lib/userCheck';
+import SEO from '../components/SEO';
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   try {
@@ -12,7 +13,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       headers: { cookie: `accessToken=${accessToken}` },
     });
 
-    if (cookies) ctx.res.setHeader("set-cookie", cookies);
+    if (cookies) ctx.res.setHeader('set-cookie', cookies);
 
     return {
       props: {
@@ -23,7 +24,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     return {
       props: {},
       redirect: {
-        destination: "/login",
+        destination: '/login',
       },
     };
   }
@@ -34,7 +35,12 @@ interface MainProps {
 }
 
 const Home: NextPage<MainProps> = ({ clubs }) => {
-  return <ClubAll clubs={clubs} type="major" />;
+  return (
+    <>
+      <SEO title="GCMS" />
+      <ClubAll clubs={clubs} type="major" />
+    </>
+  );
 };
 
 export default Home;

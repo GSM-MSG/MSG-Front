@@ -1,6 +1,7 @@
 import { GetServerSideProps, NextPage } from "next";
 import CreatePage from "../components/CreatePage";
 import Header from "../components/Header";
+import SEO from "../components/SEO";
 import userCheck from "../lib/userCheck";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
@@ -22,6 +23,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 const create: NextPage = () => {
   return (
     <>
+      <SEO title="MCSG | create" />
       <Header />
       <CreatePage />
     </>
